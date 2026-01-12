@@ -34,7 +34,7 @@ All development MUST adhere to the following technology stack:
 
 - **Runtime**: Bun (latest stable version) — Node.js alternatives are prohibited
 - **Framework**: Nuxt 4 (latest) — All pages/components MUST use Nuxt conventions
-- **UI Library**: Nuxt UI v3 (latest compatible) — Custom component libraries prohibited unless extending Nuxt UI
+- **UI Library**: Nuxt UI v4 (v4.3.0+) — Custom component libraries prohibited unless extending Nuxt UI
 - **Styling**: Tailwind CSS (via Nuxt UI) — Raw CSS files prohibited; utility-first approach mandatory
 - **Content Engine**: Nuxt Content v3 — All blog posts and case studies MUST be Markdown/MDX in `/content`
 - **Language**: TypeScript — Strict mode enabled; JavaScript files prohibited in `/src`, `/components`, `/pages`
