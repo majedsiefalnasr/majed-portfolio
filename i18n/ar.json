@@ -2,5 +2,32 @@
   "site": {
     "title": "ماجد سيف النصر - معرض الأعمال",
     "description": "معرض يعرض الأعمال والرؤى"
+  },
+  "nav": {
+    "home": "الرئيسية",
+    "projects": "المشاريع",
+    "about": "عن",
+    "blog": "المدونة",
+    "contact": "تواصل"
+  },
+  "social": {
+    "github": "GitHub",
+    "linkedin": "LinkedIn",
+    "twitter": "Twitter",
+    "email": "البريد الإلكتروني"
+  },
+  "theme": {
+    "toggle": "تبديل المظهر",
+    "light": "الوضع الفاتح",
+    "dark": "الوضع الداكن",
+    "system": "تفضيل النظام"
+  },
+  "language": {
+    "switch": "تبديل اللغة",
+    "english": "English",
+    "arabic": "العربية"
+  },
+  "footer": {
+    "copyright": "© {year} ماجد سيف النصر. جميع الحقوق محفوظة."
   }
 }

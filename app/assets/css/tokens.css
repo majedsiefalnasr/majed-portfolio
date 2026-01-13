@@ -1,0 +1,336 @@
+/**
+ * Color Tokens: UI & Design System
+ * 
+ * Semantic color definitions with light/dark mode variants.
+ * All tokens follow the naming convention: --{category}-{variant}-{state}
+ * 
+ * Total tokens: 100+
+ * Categories: Background (26), Border (5), Button (8), Icon (14), Typography (9), Palettes (50+)
+ */
+
+/* ============================================================================
+   LIGHT MODE THEME
+   ============================================================================ */
+
+.light {
+  /* Background Tokens (26) */
+  --background-blanket: #0223367d;
+  --background-disabled: #0223361a;
+
+  /* Danger */
+  --background-danger-bold: #c9372c;
+  --background-danger-default: #ffeceb;
+
+  /* Dashboard */
+  --background-dashboard-nav: #1a1a1a;
+  --background-dashboard-brand-bold: #546b79;
+  --background-dashboard-brand-default: #eceff0;
+  --background-dashboard-surface-base: #eceff0;
+  --background-dashboard-surface-layer-1: #fafbfb;
+  --background-dashboard-surface-layer-2: #ffffff;
+
+  /* Default surfaces */
+  --background-default-brand-bold: #1b718a;
+  --background-default-brand-default: #d6eef5;
+  --background-default-surface-base: #eceff0;
+  --background-default-surface-layer-1: #fafbfb;
+  --background-default-surface-layer-2: #ffffff;
+
+  /* Discovery, Information, Neutral, Selected, Success, Warning */
+  --background-discovery-bold: #6e5dc6;
+  --background-discovery-default: #f3f0ff;
+  --background-information-bold: #0c66e4;
+  --background-information-default: #e9f2ff;
+  --background-neutral-bold: #173749;
+  --background-neutral-default: #eceff0;
+  --background-selected-bold: #0c66e4;
+  --background-selected-default: #e9f2ff;
+  --background-success-bold: #1f845a;
+  --background-success-default: #dcfff1;
+  --background-warning-bold: #f5cd47;
+  --background-warning-default: #fff7d6;
+
+  /* Border Tokens (5) */
+  --border-default: #e6e6e6;
+  --border-error: #e92c2c;
+  --border-focused: #0085ff;
+  --border-success: #00ba34;
+  --border-warning: #f98600;
+
+  /* Button Tokens (8) */
+  --button-error-default: #e92c2c;
+  --button-error-hover: #ed5656;
+  --button-primary-default: #ffffff;
+  --button-primary-hover: #ffffffcc;
+  --button-primary-inverse-default: #000000;
+  --button-primary-inverse-hover: #000000cc;
+  --button-secondary-default: #00000000;
+  --button-secondary-hover: #ffffff;
+
+  /* Icon Tokens (14) */
+  --icon-brand: #1b718a;
+  --icon-danger: #ae2e24;
+  --icon-default: #173749;
+  --icon-disabled: #0223364d;
+  --icon-discovery: #5e4db2;
+  --icon-information: #0055cc;
+  --icon-inverse: #fafbfb;
+  --icon-link: #0c66e4;
+  --icon-selected: #0c66e4;
+  --icon-subtle: #546b79;
+  --icon-subtle-inverse: #eceff0;
+  --icon-success: #216e4e;
+  --icon-warning: #a54800;
+  --icon-warning-inverse: #173749;
+
+  /* Typography Tokens (9) */
+  --typography-body: #4d4d4d;
+  --typography-brand: #e92c2c;
+  --typography-disabled: #999999;
+  --typography-inverse: #e6e6e6;
+  --typography-link: #0085ff;
+  --typography-subtle: #999999;
+  --typography-subtle-inverse: #4d4d4d;
+  --typography-title: #1a1a1a;
+  --typography-title-inverse: #e6e6e6;
+
+  /* Palette Tokens */
+  /* Grayscale */
+  --palettes-grayscale-100: #1a1a1a;
+  --palettes-grayscale-200: #4d4d4d;
+  --palettes-grayscale-300: #999999;
+  --palettes-grayscale-400: #e6e6e6;
+
+  /* Static Colors */
+  --palettes-static-black: #000000;
+  --palettes-static-white: #ffffff;
+  --palettes-static-blue: #0085ff;
+  --palettes-static-green: #00ba34;
+  --palettes-static-orange: #f98600;
+  --palettes-static-red: #e92c2c;
+  --palettes-static-brand: #e92c2c;
+
+  /* Blue Scale */
+  --palettes-blue-base: #0085ff;
+  --palettes-blue-20: #006acc;
+  --palettes-blue-40: #005099;
+  --palettes-blue-60: #003566;
+
+  /* Green Scale */
+  --palettes-green-base: #00ba34;
+  --palettes-green-20: #00952a;
+  --palettes-green-40: #00701f;
+  --palettes-green-60: #004a15;
+
+  /* Orange Scale */
+  --palettes-orange-base: #f98600;
+  --palettes-orange-20: #c76b00;
+  --palettes-orange-40: #954f00;
+  --palettes-orange-60: #633400;
+
+  /* Red Scale */
+  --palettes-red-base: #e92c2c;
+  --palettes-red-20: #ba2323;
+  --palettes-red-40: #8c1a1a;
+  --palettes-red-60: #5d1212;
+
+  /* Yellow Scale */
+  --palettes-yellow-base: #ffd500;
+  --palettes-yellow-20: #ccaa00;
+  --palettes-yellow-40: #997f00;
+  --palettes-yellow-60: #665500;
+
+  /* Primary Scale */
+  --palettes-primary-100: #f2eee4;
+  --palettes-primary-200: #d6eef5;
+  --palettes-primary-700: #1b718a;
+  --palettes-primary-900: #004f64;
+
+  /* Neutral Scale */
+  --palettes-neutral-100: #fafbfb;
+  --palettes-neutral-200: #eceff0;
+  --palettes-neutral-700: #546b79;
+  --palettes-neutral-900: #173749;
+  --palettes-neutral-1200: #1a1a1a;
+
+  /* Background Palette Helpers */
+  --palettes-background-blue: #c4e3ff;
+  --palettes-background-green: #c5f2d1;
+  --palettes-background-orange: #ffe7ca;
+  --palettes-background-red: #fdcfcf;
+  --palettes-background-primary: #f2eee4;
+  --palettes-background-secondry: #faf7f0;
+  --palettes-background-disabled: #e6e6e6;
+}
+
+/* ============================================================================
+   DARK MODE THEME
+   ============================================================================ */
+
+.dark {
+  /* Background Tokens (26) */
+  --background-blanket: #191d2099;
+  --background-disabled: #ffffff1a;
+
+  /* Danger */
+  --background-danger-bold: #c9372c;
+  --background-danger-default: #2d1212;
+
+  /* Dashboard */
+  --background-dashboard-nav: #0d0d0d;
+  --background-dashboard-brand-bold: #a3b8c2;
+  --background-dashboard-brand-default: #1a2126;
+  --background-dashboard-surface-base: #0d0d0d;
+  --background-dashboard-surface-layer-1: #1a1a1a;
+  --background-dashboard-surface-layer-2: #262626;
+
+  /* Default surfaces */
+  --background-default-brand-bold: #4da6c2;
+  --background-default-brand-default: #0f2b34;
+  --background-default-surface-base: #000000;
+  --background-default-surface-layer-1: #0d0d0d;
+  --background-default-surface-layer-2: #1a1a1a;
+
+  /* Discovery, Information, Neutral, Selected, Success, Warning */
+  --background-discovery-bold: #9181db;
+  --background-discovery-default: #1e1933;
+  --background-information-bold: #4d8fff;
+  --background-information-default: #0a1f4d;
+  --background-neutral-bold: #e5e5e5;
+  --background-neutral-default: #1a1a1a;
+  --background-selected-bold: #4d8fff;
+  --background-selected-default: #0a1f4d;
+  --background-success-bold: #4da67f;
+  --background-success-default: #0f2419;
+  --background-warning-bold: #f8db70;
+  --background-warning-default: #332b0d;
+
+  /* Border Tokens (5) */
+  --border-default: #333333;
+  --border-error: #e92c2c;
+  --border-focused: #0085ff;
+  --border-success: #00ba34;
+  --border-warning: #f98600;
+
+  /* Button Tokens (8) */
+  --button-error-default: #e92c2c;
+  --button-error-hover: #ed5656;
+  --button-primary-default: #262626;
+  --button-primary-hover: #262626cc;
+  --button-primary-inverse-default: #ffffff;
+  --button-primary-inverse-hover: #ffffffcc;
+  --button-secondary-default: #00000000;
+  --button-secondary-hover: #1a1a1a;
+
+  /* Icon Tokens (14) */
+  --icon-brand: #4da6c2;
+  --icon-danger: #e65c50;
+  --icon-default: #e5e5e5;
+  --icon-disabled: #ffffff4d;
+  --icon-discovery: #a393e6;
+  --icon-information: #6fa3ff;
+  --icon-inverse: #262626;
+  --icon-link: #4d8fff;
+  --icon-selected: #4d8fff;
+  --icon-subtle: #a3b8c2;
+  --icon-subtle-inverse: #333333;
+  --icon-success: #5fb88f;
+  --icon-warning: #ffa94d;
+  --icon-warning-inverse: #e5e5e5;
+
+  /* Typography Tokens (9) */
+  --typography-body: #b2b2b2;
+  --typography-brand: #ff5a5a;
+  --typography-disabled: #666666;
+  --typography-inverse: #333333;
+  --typography-link: #6fa3ff;
+  --typography-subtle: #808080;
+  --typography-subtle-inverse: #b2b2b2;
+  --typography-title: #e5e5e5;
+  --typography-title-inverse: #333333;
+
+  /* Palette Tokens */
+  /* Grayscale */
+  --palettes-grayscale-100: #e5e5e5;
+  --palettes-grayscale-200: #b2b2b2;
+  --palettes-grayscale-300: #666666;
+  --palettes-grayscale-400: #333333;
+
+  /* Static Colors (remain same) */
+  --palettes-static-black: #000000;
+  --palettes-static-white: #ffffff;
+  --palettes-static-blue: #0085ff;
+  --palettes-static-green: #00ba34;
+  --palettes-static-orange: #f98600;
+  --palettes-static-red: #e92c2c;
+  --palettes-static-brand: #e92c2c;
+
+  /* Blue Scale */
+  --palettes-blue-base: #6fa3ff;
+  --palettes-blue-20: #4d8fff;
+  --palettes-blue-40: #1a6fff;
+  --palettes-blue-60: #005ae6;
+
+  /* Green Scale */
+  --palettes-green-base: #5fb88f;
+  --palettes-green-20: #4da67f;
+  --palettes-green-40: #3a8f6a;
+  --palettes-green-60: #287854;
+
+  /* Orange Scale */
+  --palettes-orange-base: #ffa94d;
+  --palettes-orange-20: #ff9a1a;
+  --palettes-orange-40: #e68600;
+  --palettes-orange-60: #b36800;
+
+  /* Red Scale */
+  --palettes-red-base: #ff5a5a;
+  --palettes-red-20: #e65c50;
+  --palettes-red-40: #c9372c;
+  --palettes-red-60: #a02923;
+
+  /* Yellow Scale */
+  --palettes-yellow-base: #ffeb70;
+  --palettes-yellow-20: #f8db70;
+  --palettes-yellow-40: #e6c84d;
+  --palettes-yellow-60: #ccaa00;
+
+  /* Primary Scale */
+  --palettes-primary-100: #2b2722;
+  --palettes-primary-200: #0f2b34;
+  --palettes-primary-700: #4da6c2;
+  --palettes-primary-900: #6fc4dd;
+
+  /* Neutral Scale */
+  --palettes-neutral-100: #1a1a1a;
+  --palettes-neutral-200: #262626;
+  --palettes-neutral-700: #a3b8c2;
+  --palettes-neutral-900: #d6e3e8;
+  --palettes-neutral-1200: #e5e5e5;
+
+  /* Background Palette Helpers */
+  --palettes-background-blue: #0a1f4d;
+  --palettes-background-green: #0f2419;
+  --palettes-background-orange: #33210d;
+  --palettes-background-red: #2d1212;
+  --palettes-background-primary: #2b2722;
+  --palettes-background-secondry: #1a1715;
+  --palettes-background-disabled: #333333;
+}
+
+/* ============================================================================
+   THEME TRANSITIONS
+   ============================================================================ */
+
+* {
+  transition-property: background-color, color, border-color;
+  transition-duration: 200ms;
+  transition-timing-function: ease-in-out;
+}
+
+/* Disable transitions during initial page load and for reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+}
