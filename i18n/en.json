@@ -2,5 +2,32 @@
   "site": {
     "title": "Majed Sief Alnasr - Portfolio",
     "description": "Portfolio showcasing work and insights"
+  },
+  "nav": {
+    "home": "Home",
+    "projects": "Projects",
+    "about": "About",
+    "blog": "Blog",
+    "contact": "Contact"
+  },
+  "social": {
+    "github": "GitHub",
+    "linkedin": "LinkedIn",
+    "twitter": "Twitter",
+    "email": "Email"
+  },
+  "theme": {
+    "toggle": "Toggle theme",
+    "light": "Light mode",
+    "dark": "Dark mode",
+    "system": "System preference"
+  },
+  "language": {
+    "switch": "Switch language",
+    "english": "English",
+    "arabic": "العربية"
+  },
+  "footer": {
+    "copyright": "© {year} Majed Sief Alnasr. All rights reserved."
   }
 }

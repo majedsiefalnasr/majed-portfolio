@@ -5,18 +5,34 @@ export default defineNuxtConfig({
 
   modules: [
     '@nuxt/ui',
+    '@nuxt/fonts',
     '@nuxt/content',
     '@nuxt/image',
     '@nuxtjs/i18n',
     '@nuxtjs/seo',
     '@nuxt/a11y',
     '@nuxt/eslint',
-    '@nuxt/hints',
     '@nuxt/scripts',
     '@nuxt/test-utils',
   ],
 
   css: ['~/assets/css/main.css'],
+
+  fonts: {
+    families: [{name: 'Geist', provider: 'google'}],
+    defaults: {
+      fallbacks: {
+        'sans-serif': [
+          'system-ui',
+          '-apple-system',
+          'BlinkMacSystemFont',
+          'Segoe UI',
+          'Roboto',
+          'sans-serif',
+        ],
+      },
+    },
+  },
 
   site: {
     url: 'https://majed-portfolio.vercel.app',
@@ -26,24 +42,23 @@ export default defineNuxtConfig({
   i18n: {
     defaultLocale: 'en',
     strategy: 'prefix_except_default',
-    lazy: true,
-    langDir: './',
     locales: [
       {
         code: 'en',
         language: 'en-US',
         dir: 'ltr',
-        file: 'en.json',
         name: 'English',
+        file: 'en.json',
       },
       {
         code: 'ar',
         language: 'ar-EG',
         dir: 'rtl',
-        file: 'ar.json',
         name: 'العربية',
+        file: 'ar.json',
       },
     ],
+    langDir: './',
     detectBrowserLanguage: {
       useCookie: false,
       cookieKey: 'i18n_redirected',
