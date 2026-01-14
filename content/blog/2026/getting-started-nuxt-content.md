@@ -4,7 +4,7 @@ date: 2026-01-13
 author: 'Majed Sief Alnasr'
 tags: ['nuxt', 'content', 'markdown']
 excerpt: 'Learn how to build a powerful blog with Nuxt Content v3 and leverage MDC components for rich, interactive articles.'
-featuredImage: '/images/blog/2026/nuxt-content-hero.jpg'
+featuredImage: '/images/blog/2026/nuxt-content-hero.svg'
 lang: 'en'
 ---
 
@@ -33,13 +33,65 @@ const {data: posts} = await useAsyncData('blog-posts', () =>
 
 This query fetches all blog posts and sorts them by date in descending order.
 
+## Code Highlighting
+
+You can highlight specific lines of code:
+
+## ::CodeBlock
+
+code: |
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+name: 'MyComponent',
+setup() {
+return {}
+}
+})
+language: typescript
+filename: MyComponent.vue
+highlights: [1, 3]
+
+---
+
+::
+
+## Before and After Comparison
+
+Here's a code comparison example:
+
+## ::CodeComparison
+
+language: typescript
+labels: ['Before', 'After']
+
+---
+
+#before
+
+```typescript
+const data = reactive({
+  count: 0,
+  name: 'test',
+})
+```
+
+#after
+
+```typescript
+const count = ref(0)
+const name = ref('test')
+```
+
+::
+
 ## MDC Components
 
-You can use custom components like this:
+You can embed rich media:
 
-::ContentImage{src="/images/example.jpg" alt="Example diagram"}
+::ContentImage{src="/images/blog/2026/nuxt-content-hero.jpg" alt="Nuxt Content Hero" width="800" height="400"}
 ::
 
 ## Conclusion
 
-Nuxt Content makes it incredibly easy to build content-driven sites with modern web technologies. Give it a try for your next project!
+Nuxt Content makes it incredibly easy to build content-driven sites with modern web technologies. The MDC system allows you to create rich, interactive articles with custom Vue components. Give it a try for your next project!

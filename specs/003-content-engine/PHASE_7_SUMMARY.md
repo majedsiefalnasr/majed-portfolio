@@ -14,14 +14,17 @@ Implemented comprehensive bilingual content support for English and Arabic with 
 ## File Naming Convention
 
 ### Blog Posts
+
 - English: `content/blog/2026/post-slug.md`
 - Arabic: `content/blog/2026/post-slug.ar.md`
 
 ### Case Studies
+
 - English: `content/case-studies/2026/case-study-slug.md`
 - Arabic: `content/case-studies/2026/case-study-slug.ar.md`
 
 ### URL Structure
+
 - English Blog: `/blog/post-slug`
 - Arabic Blog: `/ar/blog/post-slug`
 - English Case Study: `/case-studies/case-study-slug`
@@ -37,24 +40,24 @@ Created locale-aware content query helpers:
 
 ```typescript
 export function queryContentByLocale(basePath: string) {
-  const { locale } = useI18n()
+  const {locale} = useI18n()
   const isArabic = locale.value === 'ar'
-  
-  return queryContent(basePath)
-    .where({
-      _path: {
-        $regex: isArabic ? /\.ar$/ : /^(?!.*\.ar$)/
-      }
-    })
+
+  return queryContent(basePath).where({
+    _path: {
+      $regex: isArabic ? /\.ar$/ : /^(?!.*\.ar$)/,
+    },
+  })
 }
 
 export function getContentPath(slug: string): string {
-  const { locale } = useI18n()
+  const {locale} = useI18n()
   return locale.value === 'ar' ? `${slug}.ar` : slug
 }
 ```
 
 **Strategy:**
+
 - Arabic queries filter paths ending with `.ar`
 - English queries exclude paths with `.ar` suffix
 - No fallback between languages
@@ -64,10 +67,8 @@ export function getContentPath(slug: string): string {
 Updated `/app/pages/blog/index.vue`:
 
 ```typescript
-const { data: posts } = await useAsyncData('blog-posts', () => {
-  return queryContentByLocale('/blog')
-    .sort({ date: -1 })
-    .find()
+const {data: posts} = await useAsyncData('blog-posts', () => {
+  return queryContentByLocale('/blog').sort({date: -1}).find()
 })
 ```
 
@@ -80,7 +81,7 @@ Updated `/app/pages/blog/[...slug].vue`:
 ```typescript
 const contentPath = getContentPath(`/blog/${params.year}/${params.slug}`)
 
-const { data: post } = await useAsyncData(`blog-post-${route.path}`, () =>
+const {data: post} = await useAsyncData(`blog-post-${route.path}`, () =>
   queryContent(contentPath).findOne()
 )
 ```
@@ -92,10 +93,8 @@ const { data: post } = await useAsyncData(`blog-post-${route.path}`, () =>
 Updated `/app/pages/case-studies/index.vue`:
 
 ```typescript
-const { data: caseStudies } = await useAsyncData('case-studies', () => {
-  return queryContentByLocale('/case-studies')
-    .sort({ date: -1 })
-    .find()
+const {data: caseStudies} = await useAsyncData('case-studies', () => {
+  return queryContentByLocale('/case-studies').sort({date: -1}).find()
 })
 ```
 
@@ -108,7 +107,7 @@ Updated `/app/pages/case-studies/[...slug].vue`:
 ```typescript
 const contentPath = getContentPath(`/case-studies/${params.year}/${params.slug}`)
 
-const { data: caseStudy } = await useAsyncData(`case-study-${route.path}`, () =>
+const {data: caseStudy} = await useAsyncData(`case-study-${route.path}`, () =>
   queryContent(contentPath).findOne()
 )
 ```
@@ -121,20 +120,20 @@ Enhanced `/app/composables/useContentSEO.ts`:
 
 ```typescript
 // Generate hreflang links
-const { switchLocalePath } = useSwitchLocalePath()
+const {switchLocalePath} = useSwitchLocalePath()
 const enUrl = `${baseUrl}${switchLocalePath('en')}`
 const arUrl = `${baseUrl}${switchLocalePath('ar')}`
 
 link.push(
-  { rel: 'alternate', hreflang: 'en', href: enUrl },
-  { rel: 'alternate', hreflang: 'ar', href: arUrl },
-  { rel: 'alternate', hreflang: 'x-default', href: enUrl }
+  {rel: 'alternate', hreflang: 'en', href: enUrl},
+  {rel: 'alternate', hreflang: 'ar', href: arUrl},
+  {rel: 'alternate', hreflang: 'x-default', href: enUrl}
 )
 
 // Set locale
 meta.push({
   property: 'og:locale',
-  content: locale.value === 'ar' ? 'ar_AR' : 'en_US'
+  content: locale.value === 'ar' ? 'ar_AR' : 'en_US',
 })
 ```
 
@@ -154,20 +153,24 @@ Updated `specs/003-content-engine/quickstart.md`:
 ## Key Features
 
 ### ✅ Strict Per-Locale Loading
+
 - English pages show only `.md` files
 - Arabic pages show only `.ar.md` files
 - No cross-language fallback
 
 ### ✅ URL Consistency
+
 - Same slug for both languages
 - Only file suffix differs
 - Clean URL structure with `/ar` prefix for Arabic
 
 ### ✅ RTL Support
+
 - Arabic content automatically renders RTL
 - Proper text direction and layout
 
 ### ✅ SEO Optimization
+
 - Hreflang links for language alternates
 - Locale-specific Open Graph tags
 - x-default hreflang pointing to English
@@ -193,9 +196,11 @@ To validate the implementation:
 ## Files Modified
 
 ### Created:
+
 - `app/composables/useContentLocale.ts`
 
 ### Updated:
+
 - `app/pages/blog/index.vue`
 - `app/pages/blog/[...slug].vue`
 - `app/pages/case-studies/index.vue`
@@ -211,6 +216,7 @@ To validate the implementation:
 Phase 7 is complete. Ready to proceed with:
 
 **Phase 8**: Tag-based filtering (T042-T048)
+
 - Implement tag filter UI in list components
 - Add URL query param synchronization
 - Enable clear filter functionality

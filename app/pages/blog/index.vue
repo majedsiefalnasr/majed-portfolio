@@ -4,28 +4,31 @@
   const {queryContentByLocale} = useContentLocale()
   const {locale} = useI18n()
 
-  // Fetch locale-specific blog posts using queryCollection (Nuxt Content v3)
-  const {data: posts} = await useAsyncData('blog-posts', async () => {
-    try {
-      const result = await queryContentByLocale<BlogPost>('blog')
-      
-      // Sort by date (newest first)
-      const sorted = (result || []).sort((a: BlogPost, b: BlogPost) => {
-        return new Date(b.date).getTime() - new Date(a.date).getTime()
-      })
-      
-      console.log('[blog/index] fetched posts:', sorted?.map((p: any) => ({title: p.title, _path: p._path})))
-      console.log('[blog/index] total posts:', sorted?.length ?? 0)
-      return sorted ?? []
-    } catch (error) {
-      console.error('[blog/index] Error:', error)
-      return []
-    }
-  }, {watch: [locale]})
-
-  // Get initial tag from URL
+  // Route + initial tag (for debugging and filtering visibility)
   const route = useRoute()
   const initialTag = route.query.tag as string | undefined
+
+  // Fetch locale-specific blog posts using queryCollection (Nuxt Content v3)
+  // Key includes locale to ensure content refetches when language changes
+  const {data: posts} = await useAsyncData(
+    () => `blog-posts-${locale.value}`,
+    async () => {
+      try {
+        const result = await queryContentByLocale<BlogPost>('blog')
+
+        // Sort by date (newest first)
+        const sorted = (result || []).sort((a: BlogPost, b: BlogPost) => {
+          return new Date(b.date).getTime() - new Date(a.date).getTime()
+        })
+
+        return sorted ?? []
+      } catch {
+        // Silently handle errors and return empty array
+        return []
+      }
+    },
+    {watch: [locale]}
+  )
 
   // SEO meta tags
   const {t} = useI18n()

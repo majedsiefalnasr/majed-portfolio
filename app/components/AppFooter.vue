@@ -67,18 +67,18 @@
             <!-- Theme toggle -->
             <button
               v-if="showThemeToggle"
-              @click="handleToggleTheme"
               :aria-label="t('theme.toggle')"
-              class="p-2 rounded-lg bg-background-default-surface-base hover:bg-background-neutral-default transition-colors">
+              class="p-2 rounded-lg bg-background-default-surface-base hover:bg-background-neutral-default transition-colors"
+              @click="handleToggleTheme">
               <UIcon :name="themeIcon" class="w-5 h-5 text-icon-subtle" />
             </button>
 
             <!-- Language switcher -->
             <button
               v-if="showLanguageSwitcher"
-              @click="handleLanguageSwitch"
               :aria-label="t('language.switch')"
-              class="px-3 py-2 rounded-lg bg-background-default-surface-base hover:bg-background-neutral-default text-typography-body text-sm font-medium transition-colors">
+              class="px-3 py-2 rounded-lg bg-background-default-surface-base hover:bg-background-neutral-default text-typography-body text-sm font-medium transition-colors"
+              @click="handleLanguageSwitch">
               {{ locale === 'en' ? 'العربية' : 'English' }}
             </button>
           </div>

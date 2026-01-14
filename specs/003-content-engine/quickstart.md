@@ -254,26 +254,49 @@ Slot content
 
 #### CodeBlock (with copy button)
 
-````markdown
-::CodeBlock{language="typescript" filename="app.ts" :highlights="[3, 4, 5]"}
+Enhanced code block with syntax highlighting, copy-to-clipboard button, and optional filename display:
 
-```typescript
-const app = createApp()
-app.mount('#app')
-```
-````
+```markdown
+## ::CodeBlock
+
+code: |
+const greeting = (name: string) => {
+console.log(`Hello, ${name}!`)
+}
+language: typescript
+filename: greeting.ts
+showLineNumbers: false
+highlights: [1, 2]
+
+---
 
 ::
+```
 
-````
+**Props**:
+
+- `code` (string): The code content to display
+- `language` (string, default: "typescript"): Language for syntax highlighting
+- `filename` (string, optional): Filename to display above code
+- `showLineNumbers` (boolean, default: false): Show line numbers
+- `highlights` (array, optional): Array of line numbers to highlight
+
+**Features**:
+
+- Copy to clipboard button (appears on hover)
+- Syntax highlighting via Shiki
+- Dark mode support
+- Line number highlighting support
 
 #### CodeComparison (before/after)
 
-```markdown
+````markdown
 ::CodeComparison{language="javascript"}
 #before
+
 ```javascript
 var x = 1
+```
 ````
 
 #after
@@ -303,6 +326,71 @@ gap: "md"
 ````
 
 ---
+
+### Error Handling & Best Practices
+
+**What if a component fails?**
+
+The system includes graceful error handling: if a component has an error or invalid props, an error box will display instead of breaking the page. The error will show:
+
+- Component name
+- Error message
+- Instructions to fix the syntax
+
+**Common Issues**:
+
+1. **Missing required props**
+
+   ```markdown
+   ✗ ::ContentImage # Missing src prop
+   ✓ ::ContentImage{src="/path/to/image.jpg" alt="Description"}
+   ```
+
+2. **Invalid YAML in component**
+
+   ```markdown
+   ## ✗ ::CodeBlock
+
+   code: not properly formatted
+
+   - invalid yaml
+
+   ---
+
+   ::
+
+   ## ✓ ::CodeBlock
+
+   code: |
+   const x = 1
+   language: typescript
+
+   ---
+
+   ::
+   ```
+
+3. **Incorrect slot syntax**
+
+   ```markdown
+   ✗ ::CodeComparison{language="js"}
+   const x = 1 # Not in a slot!
+   ::
+
+   ✓ ::CodeComparison{language="js"}
+   #before
+   const x = 1
+   #after
+   const x: number = 1
+   ::
+   ```
+
+**Testing Components**:
+
+- After adding an MDC component, save and refresh the page
+- Check the browser console for any warnings
+- Verify the component displays correctly (not an error box)
+- Test on mobile to ensure responsive rendering
 
 ## Adding Images
 
@@ -462,17 +550,20 @@ lang: 'ar'
 ### Important Notes on Translations
 
 **No Language Fallback:**
+
 - Each language displays only its own content
 - English blog (`/blog`) shows only `.md` files (without `.ar` suffix)
 - Arabic blog (`/ar/blog`) shows only `.ar.md` files
 - If a post doesn't exist in a language, it simply won't appear in that locale's list
 
 **Same Slug, Different Files:**
+
 - Use the same base slug for both languages
 - Only the file suffix differs: `post.md` vs `post.ar.md`
 - This ensures consistent URLs across locales
 
 **Case Studies Work the Same Way:**
+
 - English: `content/case-studies/2026/project-name.md`
 - Arabic: `content/case-studies/2026/project-name.ar.md`
 - URLs: `/case-studies/project-name` and `/ar/case-studies/project-name`

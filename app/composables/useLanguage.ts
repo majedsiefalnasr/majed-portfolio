@@ -8,10 +8,9 @@
 import type {Locale, TextDirection, UseLanguageReturn} from '../types/layout'
 
 export function useLanguage(): UseLanguageReturn {
-  const {locale: i18nLocale, t: i18nT, setLocale: setI18nLocale} = useI18n()
+  const {locale: i18nLocale, t: i18nT} = useI18n()
   const switchLocalePath = useSwitchLocalePath()
   const router = useRouter()
-  const nuxtApp = useNuxtApp()
 
   // Current active locale
   const locale = computed<Locale>(() => {

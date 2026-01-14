@@ -28,8 +28,7 @@
         :alt="caseStudy.title"
         class="w-full h-48 object-cover rounded-t-lg transition-transform group-hover:scale-105"
         loading="lazy" />
-      <div
-        class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-t-lg"></div>
+      <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-t-lg" />
     </div>
 
     <!-- Project title -->

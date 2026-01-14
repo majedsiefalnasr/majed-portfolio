@@ -121,13 +121,13 @@ description: 'Implementation tasks for Content Engine (Blog & Case Studies)'
 
 **Validation**: Switch to Arabic and verify content displays in Arabic with RTL text direction, fallback to English for missing translations
 
-- [X] T035 [US5] Create `composables/useContentLocale.ts` with i18n-aware content queries per contracts/composables.md
-- [X] T036 [US5] Implement locale-specific blog index query (only load `slug.md` for EN, `slug.ar.md` for AR) in `app/pages/blog/index.vue`
-- [X] T037 [US5] Implement locale-specific blog detail resolution (select `.ar` file for AR, base file for EN) in `app/pages/blog/[...slug].vue`
-- [X] T038 [US5] Implement locale-specific case studies index query (EN: `case-study-slug.md`, AR: `case-study-slug.ar.md`) in `app/pages/case-studies/index.vue`
-- [X] T039 [US5] Implement locale-specific case study detail resolution (select `.ar` file for AR, base file for EN) in `app/pages/case-studies/[...slug].vue`
-- [X] T040 [US5] Add alternate-language head links (hreflang) for blog and case study pages in `app/composables/useContentSEO.ts` and page-level SEO setup
-- [X] T041 [US5] Document bilingual file naming (`post-slug.md` / `post-slug.ar.md`, `case-study-slug.md` / `case-study-slug.ar.md`) in `specs/003-content-engine/quickstart.md`
+- [x] T035 [US5] Create `composables/useContentLocale.ts` with i18n-aware content queries per contracts/composables.md
+- [x] T036 [US5] Implement locale-specific blog index query (only load `slug.md` for EN, `slug.ar.md` for AR) in `app/pages/blog/index.vue`
+- [x] T037 [US5] Implement locale-specific blog detail resolution (select `.ar` file for AR, base file for EN) in `app/pages/blog/[...slug].vue`
+- [x] T038 [US5] Implement locale-specific case studies index query (EN: `case-study-slug.md`, AR: `case-study-slug.ar.md`) in `app/pages/case-studies/index.vue`
+- [x] T039 [US5] Implement locale-specific case study detail resolution (select `.ar` file for AR, base file for EN) in `app/pages/case-studies/[...slug].vue`
+- [x] T040 [US5] Add alternate-language head links (hreflang) for blog and case study pages in `app/composables/useContentSEO.ts` and page-level SEO setup
+- [x] T041 [US5] Document bilingual file naming (`post-slug.md` / `post-slug.ar.md`, `case-study-slug.md` / `case-study-slug.ar.md`) in `specs/003-content-engine/quickstart.md`
 
 **Checkpoint**: At this point, content should be fully translatable with proper locale handling
 
@@ -139,13 +139,13 @@ description: 'Implementation tasks for Content Engine (Blog & Case Studies)'
 
 **Validation**: Click a tag on `/blog` and verify list filters to that tag, URL updates to `?tag=xyz`, clear filter returns all posts
 
-- [ ] T042 [US6] Update BlogList component to display tag filter chips above post list
-- [ ] T043 [US6] Update BlogList to sync selectedTag with URL query param
-- [ ] T044 [US6] Update CaseStudyList component to display tag filter chips
-- [ ] T045 [US6] Update CaseStudyList to sync selectedTag with URL query param
-- [ ] T046 [US6] Add active filter visual indicator and clear button to both list components
-- [ ] T047 [US6] Update blog index page to handle ?tag query param on initial load
-- [ ] T048 [US6] Update case studies index page to handle ?tag query param on initial load
+- [x] T042 [US6] Update BlogList component to display tag filter chips above post list
+- [x] T043 [US6] Update BlogList to sync selectedTag with URL query param
+- [x] T044 [US6] Update CaseStudyList component to display tag filter chips
+- [x] T045 [US6] Update CaseStudyList to sync selectedTag with URL query param
+- [x] T046 [US6] Add active filter visual indicator and clear button to both list components
+- [x] T047 [US6] Update blog index page to handle ?tag query param on initial load
+- [x] T048 [US6] Update case studies index page to handle ?tag query param on initial load
 
 **Checkpoint**: At this point, visitors should be able to filter content by tags on both blog and case studies
 
@@ -157,13 +157,13 @@ description: 'Implementation tasks for Content Engine (Blog & Case Studies)'
 
 **Validation**: Create a blog post with `::ContentImage` and `::CodeComparison` syntax and verify they render correctly
 
-- [ ] T049 [P] [US7] Create `components/content/CodeBlock.vue` MDC component with copy-to-clipboard per contracts/components.md
-- [ ] T050 [US7] Test ContentImage component with sample blog post using `::ContentImage` syntax
-- [ ] T051 [US7] Test CodeComparison component with sample blog post using before/after slots
-- [ ] T052 [US7] Test CodeBlock component with sample blog post using code highlighting
-- [ ] T053 [US7] Test ImageGallery component with sample case study
-- [ ] T054 [US7] Add graceful error handling for missing/invalid MDC components (fallback message)
-- [ ] T055 [US7] Document MDC component usage patterns in quickstart.md validation
+- [x] T049 [P] [US7] Create `components/content/CodeBlock.vue` MDC component with copy-to-clipboard per contracts/components.md
+- [x] T050 [US7] Test ContentImage component with sample blog post using `::ContentImage` syntax
+- [x] T051 [US7] Test CodeComparison component with sample blog post using before/after slots
+- [x] T052 [US7] Test CodeBlock component with sample blog post using code highlighting
+- [x] T053 [US7] Test ImageGallery component with sample case study
+- [x] T054 [US7] Add graceful error handling for missing/invalid MDC components (fallback message)
+- [x] T055 [US7] Document MDC component usage patterns in quickstart.md validation
 
 **Checkpoint**: At this point, all MDC components should work in content with proper error handling
 
@@ -173,23 +173,23 @@ description: 'Implementation tasks for Content Engine (Blog & Case Studies)'
 
 **Purpose**: Improvements that affect multiple user stories and final quality checks
 
-- [ ] T056 [P] Create sample blog post content in `content/blog/2026/getting-started.md` with frontmatter examples
-- [ ] T057 [P] Create sample case study content in `content/case-studies/2026/sample-project.md` with metrics and gallery
-- [ ] T058 [P] Add build-time content validation for required frontmatter fields per data-model.md (validate sample content includes blockquotes, links, lists, and all FR-004 markdown features)
-- [ ] T059 [P] Optimize images in public/images/ directories (compress, proper formats)
-- [ ] T060 Run Lighthouse audit on `/blog` page and verify Performance ≥95, A11y ≥95, SEO ≥95
-- [ ] T061 Run Lighthouse audit on blog post detail page and verify scores
-- [ ] T062 Run Lighthouse audit on `/case-studies` page and verify scores
-- [ ] T063 Run Lighthouse audit on case study detail page and verify scores
-- [ ] T064 [P] Verify all images use NuxtImg/NuxtPicture (no raw img tags)
-- [ ] T065 [P] Verify RTL layout works correctly for Arabic content
-- [ ] T066 Test draft content exclusion (create `_draft-test.md` and verify it doesn't appear or generate route)
-- [ ] T067 Test 404 handling for non-existent blog post and case study URLs
-- [ ] T068 Validate quickstart.md instructions by creating new content following the guide
-- [ ] T069 [P] Update documentation with deployed URLs and examples
-- [ ] T070 Final code review for TypeScript strict mode compliance (no any types)
-- [ ] T071 Final ESLint check (zero warnings policy)
-- [ ] T072 [P] Verify all content pages use Nuxt UI components and design tokens from 002-ui-design-system spec
+- [x] T056 [P] Create sample blog post content in `content/blog/2026/getting-started-nuxt-content.md` with frontmatter examples
+- [x] T057 [P] Create sample case study content in `content/case-studies/sample-project.md` with metrics and gallery
+- [x] T058 [P] Add build-time content validation for required frontmatter fields per data-model.md (validate sample content includes blockquotes, links, lists, and all FR-004 markdown features)
+- [x] T059 [P] Optimize images in public/images/ directories (compress, proper formats)
+- [x] T060 Run Lighthouse audit on `/blog` page and verify Performance ≥95, A11y ≥95, SEO ≥95
+- [x] T061 Run Lighthouse audit on blog post detail page and verify scores
+- [x] T062 Run Lighthouse audit on `/case-studies` page and verify scores
+- [x] T063 Run Lighthouse audit on case study detail page and verify scores
+- [x] T064 [P] Verify all images use NuxtImg/NuxtPicture (no raw img tags)
+- [x] T065 [P] Verify RTL layout works correctly for Arabic content
+- [x] T066 Test draft content exclusion (create `_draft-test.md` and verify it doesn't appear or generate route)
+- [x] T067 Test 404 handling for non-existent blog post and case study URLs
+- [x] T068 Validate quickstart.md instructions by creating new content following the guide
+- [x] T069 [P] Update documentation with deployed URLs and examples
+- [x] T070 Final code review for TypeScript strict mode compliance (no any types)
+- [x] T071 Final ESLint check (zero warnings policy)
+- [x] T072 [P] Verify all content pages use Nuxt UI components and design tokens from 002-ui-design-system spec
 
 ---
 

@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import type {CaseStudyMetricsProps} from '~/types/content'
 
-  const props = withDefaults(defineProps<CaseStudyMetricsProps>(), {
+  withDefaults(defineProps<CaseStudyMetricsProps>(), {
     layout: 'grid',
   })
 </script>
