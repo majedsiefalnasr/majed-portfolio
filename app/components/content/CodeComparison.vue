@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import type {CodeComparisonProps} from '~/types/content'
 
-  const props = withDefaults(defineProps<CodeComparisonProps>(), {
+  withDefaults(defineProps<CodeComparisonProps>(), {
     language: 'javascript',
     labels: () => ['Before', 'After'],
   })

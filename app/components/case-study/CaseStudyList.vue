@@ -4,6 +4,7 @@
   const props = withDefaults(defineProps<CaseStudyListProps>(), {
     showFeaturedFirst: true,
     layout: 'grid',
+    initialTag: undefined,
   })
 
   // Setup filtering
@@ -31,6 +32,11 @@
     selectTag,
     clearFilter,
   } = useContentFilter(caseStudiesRef)
+
+  // Initialize from prop if provided
+  if (props.initialTag && !selectedTag.value) {
+    selectTag(props.initialTag)
+  }
 
   // Check if filtering is active
   const hasActiveFilter = computed(() => selectedTag.value !== null)

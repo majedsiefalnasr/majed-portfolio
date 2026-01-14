@@ -1,10 +1,9 @@
 <script setup lang="ts">
   import {queryCollection} from '#imports'
-  import type {CaseStudy} from '~/types/content'
 
   const route = useRoute()
   const {getContentPath} = useContentLocale()
-  
+
   const slug = Array.isArray(route.params.slug) ? route.params.slug.join('/') : route.params.slug
   const localizedPath = getContentPath(slug)
 

@@ -1,5 +1,5 @@
 ---
-title: 'E-Commerce Platform Redesign 000000'
+title: '_draft-test'
 client: 'TechCorp Inc.'
 date: 2025-12-15
 role: 'Lead Frontend Developer'
@@ -136,9 +136,9 @@ The redesign delivered significant improvements across all key metrics:
 ## Gallery
 
 ::ImageGallery{:images='[
-{"src": "/images/case-studies/2025/techcorp-homepage.jpg", "alt": "New homepage design", "caption": "Modern, clean homepage with improved navigation"},
-{"src": "/images/case-studies/2025/techcorp-checkout.jpg", "alt": "Streamlined checkout process", "caption": "Simplified 3-step checkout flow"},
-{"src": "/images/case-studies/2025/techcorp-mobile.jpg", "alt": "Mobile responsive design", "caption": "Fully responsive design working perfectly on mobile devices"}
+{"src": "/images/case-studies/2025/techcorp-homepage.svg", "alt": "New homepage design", "caption": "Modern, clean homepage with improved navigation"},
+{"src": "/images/case-studies/2025/techcorp-checkout.svg", "alt": "Streamlined checkout process", "caption": "Simplified 3-step checkout flow"},
+{"src": "/images/case-studies/2025/techcorp-mobile.svg", "alt": "Mobile responsive design", "caption": "Fully responsive design working perfectly on mobile devices"}
 ]'}
 ::
 

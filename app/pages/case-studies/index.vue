@@ -4,19 +4,23 @@
   const {queryContentByLocale} = useContentLocale()
   const {locale} = useI18n()
 
+  const route = useRoute()
+
   // Fetch locale-specific case studies using queryCollection (Nuxt Content v3)
-  const {data: caseStudiesRaw} = await useAsyncData('case-studies', async () => {
-    try {
-      const result = await queryContentByLocale<CaseStudy>('caseStudies')
-      
-      console.log('[case-studies/index] fetched case studies:', result?.map((s: any) => ({title: s.title, _path: s._path})))
-      console.log('[case-studies/index] total case studies:', result?.length ?? 0)
-      return result ?? []
-    } catch (error) {
-      console.error('[case-studies/index] Error:', error)
-      return []
-    }
-  }, {watch: [locale]})
+  // Key includes locale to ensure content refetches when language changes
+  const {data: caseStudiesRaw} = await useAsyncData(
+    () => `case-studies-${locale.value}`,
+    async () => {
+      try {
+        const result = await queryContentByLocale<CaseStudy>('caseStudies')
+        return result ?? []
+      } catch {
+        // Silently handle errors and return empty array
+        return []
+      }
+    },
+    {watch: [locale]}
+  )
 
   // Sort case studies: featured first, then by order, then by date
   const caseStudies = computed(() => {
@@ -35,8 +39,7 @@
     })
   })
 
-  // Get initial tag from URL
-  const route = useRoute()
+  // Get initial tag from URL (not used in list rendering)
   const initialTag = route.query.tag as string | undefined
 
   // SEO meta tags
@@ -69,6 +72,6 @@
     </div>
 
     <!-- Case studies list with filtering -->
-    <CaseStudyList :case-studies="caseStudies || []" />
+    <CaseStudyList :case-studies="caseStudies || []" :initial-tag="initialTag" />
   </Container>
 </template>

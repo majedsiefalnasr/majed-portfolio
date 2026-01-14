@@ -7,6 +7,13 @@
 
 import type {ParsedContent} from '@nuxt/content'
 
+// Type for parsed AST nodes from Nuxt Content
+interface ContentNode {
+  type?: string
+  value?: string
+  children?: ContentNode[]
+}
+
 export function useReadTime(content: string | ParsedContent | undefined): number {
   if (!content) return 1
 
@@ -16,7 +23,7 @@ export function useReadTime(content: string | ParsedContent | undefined): number
     text = content
   } else if (content && typeof content === 'object' && 'body' in content) {
     // Extract text from parsed content
-    text = extractTextFromParsed(content.body)
+    text = extractTextFromParsed(content.body as ContentNode)
   }
 
   if (!text || text.trim().length === 0) return 1
@@ -24,7 +31,7 @@ export function useReadTime(content: string | ParsedContent | undefined): number
   // Strip HTML and markdown syntax
   const plainText = text
     .replace(/<[^>]*>/g, ' ') // Remove HTML tags
-    .replace(/[#*_`~\[\]()]/g, ' ') // Remove markdown syntax
+    .replace(/[#*_`~[\]()]/g, ' ') // Remove markdown syntax
     .replace(/\s+/g, ' ') // Normalize whitespace
     .trim()
 
@@ -54,7 +61,7 @@ export function useReadTime(content: string | ParsedContent | undefined): number
 /**
  * Extract plain text from Nuxt Content parsed structure
  */
-function extractTextFromParsed(node: any): string {
+function extractTextFromParsed(node: ContentNode): string {
   if (!node) return ''
 
   let text = ''

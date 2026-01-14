@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import type {ContentImageProps} from '~/types/content'
 
-  const props = withDefaults(defineProps<ContentImageProps>(), {
+  withDefaults(defineProps<ContentImageProps>(), {
     lazy: true,
   })
 </script>

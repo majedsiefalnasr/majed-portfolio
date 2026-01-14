@@ -113,7 +113,7 @@ export interface Metric {
  */
 export interface ContentQueryOptions {
   path?: string
-  where?: Record<string, any>
+  where?: Record<string, string | number | boolean>
   sort?: Record<string, 1 | -1>
   limit?: number
   skip?: number
@@ -209,6 +209,7 @@ export interface CaseStudyListProps {
   caseStudies: CaseStudy[]
   showFeaturedFirst?: boolean
   layout?: 'grid' | 'list'
+  initialTag?: string
 }
 
 /**

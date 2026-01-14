@@ -7,6 +7,14 @@
 
 import type {BlogPost, CaseStudy} from '~/types/content'
 
+// Type for parsed AST nodes from Nuxt Content
+interface ContentNode {
+  type?: string
+  value?: string
+  tag?: string
+  children?: ContentNode[]
+}
+
 export function useExcerpt(post: BlogPost | CaseStudy, maxLength: number = 150): string {
   // Use frontmatter excerpt if provided
   if (post.excerpt && post.excerpt.trim().length > 0) {
@@ -16,7 +24,7 @@ export function useExcerpt(post: BlogPost | CaseStudy, maxLength: number = 150):
   // Auto-generate from content body
   if (!post.body) return ''
 
-  let text = extractPlainText(post.body)
+  let text = extractPlainText(post.body as ContentNode)
 
   // Clean up text
   text = text
@@ -44,7 +52,7 @@ export function useExcerpt(post: BlogPost | CaseStudy, maxLength: number = 150):
 /**
  * Extract plain text from Nuxt Content parsed structure
  */
-function extractPlainText(node: any): string {
+function extractPlainText(node: ContentNode): string {
   if (!node) return ''
 
   let text = ''

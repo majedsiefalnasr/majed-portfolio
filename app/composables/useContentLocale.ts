@@ -9,10 +9,17 @@
  * Uses Nuxt Content v3 queryCollection API with post-query filtering.
  */
 
+interface ContentItem {
+  path?: string
+  _path?: string
+}
+
 interface UseContentLocaleReturn {
   currentLocale: Ref<'en' | 'ar'>
   getContentPath: (slug: string) => string
-  queryContentByLocale: <T = any>(collection: 'blog' | 'caseStudies') => Promise<T[]>
+  queryContentByLocale: <T extends ContentItem = ContentItem>(
+    collection: 'blog' | 'caseStudies'
+  ) => Promise<T[]>
 }
 
 export function useContentLocale(): UseContentLocaleReturn {
@@ -34,41 +41,45 @@ export function useContentLocale(): UseContentLocaleReturn {
   /**
    * Query content with locale-specific filtering using queryCollection (Nuxt Content v3)
    * Filters results based on locale after fetching
+   * Path detection:
+   * - For typed collections, entries expose `path` (not `_path`)
+   * - For legacy content queries, entries may expose `_path`
+   * We normalize to `docPath = item.path ?? item._path` and check `.endsWith('.ar')`.
    * @param collection - Content collection name ('blog' or 'caseStudies')
    * @returns Promise resolving to locale-filtered content array
    */
-  const queryContentByLocale = async <T = any>(collection: 'blog' | 'caseStudies'): Promise<T[]> => {
+  const queryContentByLocale = async <T extends ContentItem = ContentItem>(
+    collection: 'blog' | 'caseStudies'
+  ): Promise<T[]> => {
     const isArabic = currentLocale.value === 'ar'
-    
-    console.log(`[useContentLocale] Query collection: ${collection}, locale: ${currentLocale.value}`)
-    
+
     try {
       // Fetch all items from the collection
       const allItems = await queryCollection<T>(collection).all()
-      
-      console.log(`[useContentLocale] Total items fetched: ${allItems.length}`)
-      
+
       if (isArabic) {
-        // For Arabic, only include files with .ar suffix
-        console.log('[useContentLocale] Filtering for Arabic (.ar suffix)')
-        const filtered = allItems.filter((item: any) => {
-          const hasArSuffix = item._path?.endsWith('.ar') || false
-          return hasArSuffix
+        // For Arabic, only include files with .ar suffix AND exclude drafts (/_)
+        // Example: /2026/post-slug.ar
+        const filtered = allItems.filter((item: T) => {
+          const path = (item?.path ?? item?._path ?? '') as string
+          const isArabicFile = path.endsWith('.ar')
+          const isDraft = path.includes('/_')
+          return isArabicFile && !isDraft
         })
-        console.log(`[useContentLocale] Arabic items after filter: ${filtered.length}`)
         return filtered
       } else {
-        // For English (default), exclude files with .ar suffix
-        console.log('[useContentLocale] Filtering for English (no .ar suffix)')
-        const filtered = allItems.filter((item: any) => {
-          const hasArSuffix = item._path?.includes('.ar') || false
-          return !hasArSuffix
+        // For English (default), exclude files with .ar suffix AND exclude drafts (/_)
+        // Example: /2026/post-slug (but NOT /2026/post-slug.ar or /2026/_draft)
+        const filtered = allItems.filter((item: T) => {
+          const path = (item?.path ?? item?._path ?? '') as string
+          const isArabicFile = path.endsWith('.ar')
+          const isDraft = path.includes('/_')
+          return !isArabicFile && !isDraft
         })
-        console.log(`[useContentLocale] English items after filter: ${filtered.length}`)
         return filtered
       }
-    } catch (error) {
-      console.error(`[useContentLocale] Error querying ${collection}:`, error)
+    } catch {
+      // Silently handle errors and return empty array
       return []
     }
   }

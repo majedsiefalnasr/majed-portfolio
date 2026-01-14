@@ -29,7 +29,7 @@ export function useContentSEO(
   // Generate alternate language URLs for hreflang
   const alternateLinks = []
   const locales = ['en', 'ar']
-  
+
   for (const loc of locales) {
     const alternatePath = switchLocalePath(loc)
     if (alternatePath) {
