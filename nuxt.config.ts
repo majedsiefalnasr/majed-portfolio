@@ -73,4 +73,26 @@ export default defineNuxtConfig({
       twitterCard: 'summary_large_image',
     },
   },
+
+  content: {
+    highlight: {
+      theme: {
+        default: 'github-light',
+        dark: 'github-dark',
+      },
+    },
+    markdown: {
+      anchorLinks: false,
+    },
+    ignores: [
+      '**/_*.md', // Exclude draft files with underscore prefix
+    ],
+  },
+
+  nitro: {
+    prerender: {
+      routes: ['/blog', '/case-studies'],
+      crawlLinks: true, // Auto-discover blog posts and case studies
+    },
+  },
 })

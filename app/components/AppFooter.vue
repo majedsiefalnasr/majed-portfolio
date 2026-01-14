@@ -18,28 +18,15 @@
   const {theme, toggleTheme} = useTheme()
   const {locale, setLocale, t} = useLanguage()
 
-  // Debug: Log when composables are initialized
-  console.log('[AppFooter] Initialized with:', {
-    theme: theme.value,
-    locale: locale.value,
-    toggleTheme: typeof toggleTheme,
-    setLocale: typeof setLocale,
-  })
-
-  // Debug wrapper for toggleTheme
+  // Handle theme toggle
   const handleToggleTheme = () => {
-    console.log('[AppFooter] Toggle theme clicked, current theme:', theme.value)
     toggleTheme()
-    console.log('[AppFooter] After toggle, new theme:', theme.value)
   }
 
-  // Debug wrapper for setLocale
+  // Handle language switch with navigation
   const handleLanguageSwitch = () => {
-    console.log('[AppFooter] Current locale before switch:', locale.value)
     const newLocale = locale.value === 'en' ? 'ar' : 'en'
-    console.log('[AppFooter] Language switch clicked, current:', locale.value, '→ new:', newLocale)
     setLocale(newLocale)
-    console.log('[AppFooter] After switch, locale:', locale.value)
   }
 
   // Format copyright text with current year

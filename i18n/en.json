@@ -27,6 +27,14 @@
     "english": "English",
     "arabic": "العربية"
   },
+  "blog": {
+    "title": "Blog",
+    "description": "Read articles about web development, design, and technology"
+  },
+  "caseStudies": {
+    "title": "Case Studies",
+    "description": "Portfolio of web development projects and client work showcasing expertise in modern frameworks and best practices"
+  },
   "footer": {
     "copyright": "© {year} Majed Sief Alnasr. All rights reserved."
   }

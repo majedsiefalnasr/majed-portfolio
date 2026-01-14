@@ -8,7 +8,9 @@
 import type {Locale, TextDirection, UseLanguageReturn} from '../types/layout'
 
 export function useLanguage(): UseLanguageReturn {
-  const {locale: i18nLocale, t: i18nT} = useI18n()
+  const {locale: i18nLocale, t: i18nT, setLocale: setI18nLocale} = useI18n()
+  const switchLocalePath = useSwitchLocalePath()
+  const router = useRouter()
   const nuxtApp = useNuxtApp()
 
   // Current active locale
@@ -23,37 +25,37 @@ export function useLanguage(): UseLanguageReturn {
 
   /**
    * Set active locale
-   * Updates html lang and dir attributes, triggers layout mirroring
+   * Updates html lang and dir attributes, navigates to localized URL
    */
-  function setLocale(newLocale: Locale): void {
-    console.log('[useLanguage] setLocale called with:', newLocale, 'current:', locale.value)
-
+  async function setLocale(newLocale: Locale): Promise<void> {
     if (!['en', 'ar'].includes(newLocale)) {
       console.warn(`[useLanguage] Invalid locale "${newLocale}". Staying on current locale.`)
       return
     }
 
-    console.log('[useLanguage] Setting i18nLocale.value to:', newLocale)
-    i18nLocale.value = newLocale
+    // Use i18n's switchLocalePath to get the correct localized URL
+    const localizedPath = switchLocalePath(newLocale)
 
-    // Update html attributes
-    if (import.meta.client) {
-      const html = document.documentElement
-      const newDir = newLocale === 'ar' ? 'rtl' : 'ltr'
-      console.log('[useLanguage] Updating HTML attributes:', {lang: newLocale, dir: newDir})
-      html.setAttribute('lang', newLocale)
-      html.setAttribute('dir', newDir)
+    if (localizedPath) {
+      // Navigate to the localized path (this will trigger i18n's locale change)
+      await router.push(localizedPath)
+
+      // Update html attributes after navigation
+      if (import.meta.client) {
+        const html = document.documentElement
+        const newDir = newLocale === 'ar' ? 'rtl' : 'ltr'
+        html.setAttribute('lang', newLocale)
+        html.setAttribute('dir', newDir)
+      }
     }
-
-    console.log('[useLanguage] After setLocale, locale.value:', locale.value)
   }
 
   /**
    * Translation helper
    * Translates a key to current locale
    */
-  function t(key: string, ...args: any[]): string {
-    return i18nT(key, ...args) as string
+  function t(key: string, ...args: unknown[]): string {
+    return i18nT(key, args) as string
   }
 
   // Initialize html attributes on mount

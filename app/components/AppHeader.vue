@@ -16,17 +16,19 @@
 
   const {t} = useLanguage()
   const route = useRoute()
+  const localePath = useLocalePath()
 
-  // Compute active state for navigation links
+  // Compute active state and localized paths for navigation links
   const navLinks = computed(() => {
-    return props.links.map(link => ({
-      ...link,
-      active: route.path === link.to,
-    }))
+    return props.links.map(link => {
+      const localizedPath = localePath(link.to)
+      return {
+        ...link,
+        to: localizedPath,
+        active: route.path === localizedPath,
+      }
+    })
   })
-
-  // Debug: Log when composables are initialized
-  console.log('[AppFooter] Initialized with:')
 </script>
 
 <template>
@@ -38,7 +40,7 @@
         <div class="flex-shrink-0">
           <slot name="logo">
             <NuxtLink
-              to="/"
+              :to="localePath('/')"
               class="text-typography-title text-xl font-semibold hover:text-typography-link transition-colors"
               :aria-label="t('nav.home')">
               {{ logo || 'MS' }}

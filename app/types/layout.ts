@@ -43,7 +43,7 @@ export interface UseLanguageReturn {
   /** Set language */
   setLocale: (locale: Locale) => void
   /** Translation helper */
-  t: (key: string, ...args: any[]) => string
+  t: (key: string, ...args: unknown[]) => string
 }
 
 /**
