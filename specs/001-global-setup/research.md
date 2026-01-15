@@ -176,7 +176,7 @@ bun add -D @nuxtjs/seo
 export default defineNuxtConfig({
   modules: ['@nuxtjs/seo'],
   site: {
-    url: 'https://majed-portfolio.vercel.app', // Production URL
+    url: 'https://majedsiefalnasr.dev', // Production URL
     name: 'Majed Sief Alnasr - Portfolio',
   },
   seo: {

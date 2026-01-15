@@ -6,6 +6,7 @@
  */
 
 import type {ParsedContent as NuxtParsedContent} from '@nuxt/content'
+import type {SEOFrontmatter} from './seo'
 
 // ============================================================================
 // Core Content Types
@@ -42,6 +43,9 @@ export interface BlogPost extends ContentMetadata {
   updatedAt?: string
   lang?: 'en' | 'ar'
 
+  // SEO Extensions (optional)
+  seo?: SEOFrontmatter
+
   // Nuxt Content computed fields
   _path: string
   _id: string
@@ -74,6 +78,9 @@ export interface CaseStudy extends ContentMetadata {
   featured?: boolean
   order?: number
   lang?: 'en' | 'ar'
+
+  // SEO Extensions (optional)
+  seo?: SEOFrontmatter
 
   // Nuxt Content computed
   _path: string

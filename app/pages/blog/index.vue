@@ -33,14 +33,9 @@
   // SEO meta tags
   const {t} = useI18n()
 
-  useSeoMeta({
+  useSEO({
     title: t('blog.title', 'Blog'),
     description: t(
-      'blog.description',
-      'Read articles about web development, design, and technology'
-    ),
-    ogTitle: t('blog.title', 'Blog'),
-    ogDescription: t(
       'blog.description',
       'Read articles about web development, design, and technology'
     ),

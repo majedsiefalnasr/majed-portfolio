@@ -45,14 +45,9 @@
   // SEO meta tags
   const {t} = useI18n()
 
-  useSeoMeta({
+  useSEO({
     title: t('caseStudies.title', 'Case Studies'),
     description: t(
-      'caseStudies.description',
-      'Portfolio of web development projects and client work showcasing expertise in modern frameworks and best practices'
-    ),
-    ogTitle: t('caseStudies.title', 'Case Studies'),
-    ogDescription: t(
       'caseStudies.description',
       'Portfolio of web development projects and client work showcasing expertise in modern frameworks and best practices'
     ),

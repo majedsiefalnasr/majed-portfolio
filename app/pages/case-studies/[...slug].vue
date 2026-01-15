@@ -23,14 +23,37 @@
   const {previous, next} = await useContentNavigation(caseStudy.path, 'caseStudies')
 
   // SEO meta tags
-  useContentSEO(caseStudy, 'project')
+  useContentSEO(caseStudy, {ogType: 'article'})
+
+  // Ensure Twitter Card type is set to summary_large_image
+  useSeoMeta({
+    twitterCard: 'summary_large_image',
+  })
+
+  // Add CreativeWork structured data
+  useCaseStudyStructuredData(caseStudy)
+
+  // Add BreadcrumbList structured data
+  useBreadcrumbSchema([
+    {name: 'Home', url: '/'},
+    {name: 'Case Studies', url: '/case-studies'},
+    {name: caseStudy.title, url: caseStudy.path},
+  ])
+
+  // Add hreflang tags for bilingual content
+  const basePath = caseStudy.path.replace(/\.ar$/, '')
+  const alternateLinks = [
+    {hreflang: 'en', href: basePath},
+    {hreflang: 'ar', href: `${basePath}.ar`},
+    {hreflang: 'x-default', href: basePath}, // x-default points to English version
+  ]
 
   useHead({
-    title: `${caseStudy.title} - Case Study`,
-    meta: [
-      {name: 'description', content: caseStudy.excerpt},
-      {property: 'og:type', content: 'website'},
-    ],
+    link: alternateLinks.map(link => ({
+      rel: 'alternate',
+      hreflang: link.hreflang,
+      href: `https://majedsiefalnasr.dev${link.href}`,
+    })),
   })
 </script>
 

@@ -14,6 +14,18 @@
       lang: locale,
       dir: direction,
     },
+    // Preconnect to critical domains for performance
+    link: [
+      {
+        rel: 'preconnect',
+        href: 'https://fonts.googleapis.com',
+      },
+      {
+        rel: 'preconnect',
+        href: 'https://fonts.gstatic.com',
+        crossorigin: 'anonymous',
+      },
+    ],
   })
 
   console.log('[App] Initialized with locale:', locale.value, 'and direction:', direction.value)

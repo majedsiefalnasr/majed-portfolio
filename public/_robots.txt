@@ -1,2 +1,5 @@
 User-Agent: *
 Disallow:
+
+# Sitemap location
+Sitemap: https://majed-portfolio.vercel.app/sitemap.xml

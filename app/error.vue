@@ -1,0 +1,126 @@
+<script setup lang="ts">
+  /**
+   * Custom 404 Error Page
+   *
+   * Provides SEO-optimized error page with helpful navigation
+   * and proper HTTP status code (404)
+   */
+
+  const error = useError()
+  const {t} = useI18n()
+
+  // Check if we're in development mode
+  const isDev = computed(() => process.dev)
+
+  // SEO metadata for error page
+  useSeoMeta({
+    title: '404 - Page Not Found',
+    description:
+      'The page you are looking for could not be found. Browse our blog posts and case studies or return to the homepage.',
+    robots: 'noindex,follow', // Don't index error pages
+  })
+
+  // Clear error and navigate to home
+  const handleClearError = () => clearError({redirect: '/'})
+
+  // Suggested pages to visit
+  const suggestions = [
+    {
+      title: 'Home',
+      description: 'Return to the homepage',
+      to: '/',
+      icon: 'i-heroicons-home',
+    },
+    {
+      title: 'Blog',
+      description: 'Read technical articles and tutorials',
+      to: '/blog',
+      icon: 'i-heroicons-document-text',
+    },
+    {
+      title: 'Case Studies',
+      description: 'View portfolio projects and case studies',
+      to: '/case-studies',
+      icon: 'i-heroicons-briefcase',
+    },
+  ]
+</script>
+
+<template>
+  <UContainer class="py-16">
+    <div class="mx-auto max-w-2xl text-center">
+      <!-- Error Code -->
+      <div class="mb-8">
+        <h1 class="text-9xl font-bold text-gray-300 dark:text-gray-700">404</h1>
+      </div>
+
+      <!-- Error Message -->
+      <div class="mb-12">
+        <h2 class="mb-4 text-3xl font-bold text-gray-900 dark:text-white">
+          {{ error?.statusMessage || 'Page Not Found' }}
+        </h2>
+        <p class="text-lg text-gray-600 dark:text-gray-400">
+          Sorry, the page you are looking for doesn't exist or has been moved.
+        </p>
+      </div>
+
+      <!-- Navigation Suggestions -->
+      <div class="mb-12">
+        <h3 class="mb-6 text-xl font-semibold text-gray-900 dark:text-white">
+          Here are some helpful links:
+        </h3>
+        <div class="grid gap-4 md:grid-cols-3">
+          <UCard
+            v-for="suggestion in suggestions"
+            :key="suggestion.to"
+            class="hover:shadow-lg transition-shadow">
+            <NuxtLink :to="suggestion.to" class="block">
+              <div class="text-center">
+                <UIcon :name="suggestion.icon" class="mx-auto mb-3 h-8 w-8 text-primary-500" />
+                <h4 class="mb-2 font-semibold text-gray-900 dark:text-white">
+                  {{ suggestion.title }}
+                </h4>
+                <p class="text-sm text-gray-600 dark:text-gray-400">
+                  {{ suggestion.description }}
+                </p>
+              </div>
+            </NuxtLink>
+          </UCard>
+        </div>
+      </div>
+
+      <!-- Primary Action -->
+      <div>
+        <UButton size="lg" @click="handleClearError">
+          <UIcon name="i-heroicons-arrow-left" class="mr-2" />
+          Return to Homepage
+        </UButton>
+      </div>
+
+      <!-- Error Details (Development Only) -->
+      <div v-if="error && isDev" class="mt-12 text-left">
+        <UCard>
+          <template #header>
+            <h3 class="text-sm font-semibold text-gray-900 dark:text-white">
+              Error Details (Development Only)
+            </h3>
+          </template>
+          <div class="space-y-2 text-sm">
+            <div>
+              <span class="font-medium">Status Code:</span>
+              {{ error.statusCode }}
+            </div>
+            <div v-if="error.statusMessage">
+              <span class="font-medium">Message:</span>
+              {{ error.statusMessage }}
+            </div>
+            <div v-if="error.message">
+              <span class="font-medium">Details:</span>
+              {{ error.message }}
+            </div>
+          </div>
+        </UCard>
+      </div>
+    </div>
+  </UContainer>
+</template>

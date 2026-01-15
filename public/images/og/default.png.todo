@@ -1,0 +1,16 @@
+TODO: Create a 1200x630 pixel default Open Graph image
+
+Requirements:
+- Dimensions: 1200x630 pixels (1.91:1 ratio)
+- Format: PNG or JPEG
+- Content: Portfolio branding, name, title
+- Background: Professional color (e.g., brand color or gradient)
+- Text: "Majed Sief Alnasr" and role/tagline
+- Keep file size under 1MB
+
+Tools to create:
+1. Figma/Canva: Use OG image templates
+2. ImageMagick: convert -size 1200x630 ...
+3. Online tools: og-image.vercel.app
+
+Current status: Placeholder file created - replace with actual branded image

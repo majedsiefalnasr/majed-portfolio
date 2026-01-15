@@ -1,0 +1,180 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://schema.org/Person",
+  "title": "Person Schema (Homepage)",
+  "description": "Schema.org Person type for portfolio homepage representing an individual professional",
+  "type": "object",
+  "required": ["@context", "@type", "name"],
+  "properties": {
+    "@context": {
+      "type": "string",
+      "const": "https://schema.org",
+      "description": "Schema.org context"
+    },
+    "@type": {
+      "type": "string",
+      "const": "Person",
+      "description": "Schema type for an individual person"
+    },
+    "name": {
+      "type": "string",
+      "description": "Full name of the person"
+    },
+    "givenName": {
+      "type": "string",
+      "description": "First name"
+    },
+    "familyName": {
+      "type": "string",
+      "description": "Last name"
+    },
+    "jobTitle": {
+      "type": "string",
+      "description": "Professional title or role"
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 160,
+      "description": "Professional bio or summary"
+    },
+    "url": {
+      "type": "string",
+      "format": "uri",
+      "description": "Homepage or portfolio URL"
+    },
+    "image": {
+      "type": "string",
+      "format": "uri",
+      "description": "Profile photo or avatar URL"
+    },
+    "sameAs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "format": "uri"
+      },
+      "description": "Social media profiles and professional network URLs",
+      "examples": [
+        [
+          "https://github.com/username",
+          "https://linkedin.com/in/username",
+          "https://twitter.com/username"
+        ]
+      ]
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "description": "Contact email address"
+    },
+    "telephone": {
+      "type": "string",
+      "description": "Contact phone number"
+    },
+    "address": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string",
+          "const": "PostalAddress"
+        },
+        "addressLocality": {
+          "type": "string",
+          "description": "City or locality"
+        },
+        "addressRegion": {
+          "type": "string",
+          "description": "State or region"
+        },
+        "addressCountry": {
+          "type": "string",
+          "description": "Country code (e.g., 'US', 'EG')"
+        }
+      },
+      "description": "Physical address or location"
+    },
+    "knowsAbout": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Skills, technologies, or areas of expertise"
+    },
+    "alumniOf": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string",
+          "const": "EducationalOrganization"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of educational institution"
+        }
+      },
+      "description": "Educational background"
+    },
+    "worksFor": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string",
+          "const": "Organization"
+        },
+        "name": {
+          "type": "string",
+          "description": "Current employer name"
+        }
+      },
+      "description": "Current employer (if applicable)"
+    },
+    "nationality": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string",
+          "const": "Country"
+        },
+        "name": {
+          "type": "string",
+          "description": "Country name"
+        }
+      },
+      "description": "Nationality"
+    }
+  },
+  "examples": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Majed Sief Alnasr",
+      "givenName": "Majed",
+      "familyName": "Sief Alnasr",
+      "jobTitle": "Full-Stack Developer & UI/UX Designer",
+      "description": "Experienced developer specializing in Vue.js, Nuxt, TypeScript, and modern web technologies. Passionate about creating performant, accessible, and user-friendly applications.",
+      "url": "https://majedsiefalnasr.dev",
+      "image": "https://majedsiefalnasr.dev/images/profile.jpg",
+      "sameAs": [
+        "https://github.com/majedsiefalnasr",
+        "https://linkedin.com/in/majedsiefalnasr",
+        "https://twitter.com/majedsiefalnasr"
+      ],
+      "email": "contact@majed-portfolio.vercel.app",
+      "knowsAbout": [
+        "Vue.js",
+        "Nuxt",
+        "TypeScript",
+        "JavaScript",
+        "UI/UX Design",
+        "SEO",
+        "Web Performance",
+        "Accessibility"
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Cairo",
+        "addressCountry": "EG"
+      }
+    }
+  ]
+}
