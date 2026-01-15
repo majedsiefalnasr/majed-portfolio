@@ -4,7 +4,7 @@ date: 2026-01-10
 author: 'Majed Sief Alnasr'
 tags: ['typescript', 'api', 'backend']
 excerpt: 'Discover best practices for creating robust, type-safe REST APIs using TypeScript and modern frameworks.'
-lang: 'en'
+lang: 'ar'
 ---
 
 ## Why Type Safety Matters
