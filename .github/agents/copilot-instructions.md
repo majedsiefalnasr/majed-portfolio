@@ -8,6 +8,8 @@ Auto-generated from all feature plans. Last updated: 2026-01-12
 - TypeScript 5.6+ (strict mode enabled per constitution) (001-content-engine)
 - TypeScript (strict mode) with Nuxt 4 (latest stable) + `@nuxt/content` v3, `@nuxt/ui` v4.3.0+, `@nuxt/image`, `@nuxtjs/i18n`, Tailwind CSS (003-content-engine)
 - File-based Markdown storage in `/content` directory (no database) (003-content-engine)
+- TypeScript 5.x (strict mode enabled per constitution) + GitHub Copilot Chat API, @nuxt/content v3, Nuxt 4.x (004-content-generation-agent)
+- File system (markdown files in `/content/blog/YYYY/` and `/content/case-studies/`) (004-content-generation-agent)
 
 - TypeScript (strict mode) with Vue 3 Composition API (001-global-setup)
 
@@ -27,9 +29,9 @@ npm test && npm run lint
 TypeScript (strict mode) with Vue 3 Composition API: Follow standard conventions
 
 ## Recent Changes
+- 004-content-generation-agent: Added TypeScript 5.x (strict mode enabled per constitution) + GitHub Copilot Chat API, @nuxt/content v3, Nuxt 4.x
 - 003-content-engine: Added TypeScript (strict mode) with Nuxt 4 (latest stable) + `@nuxt/content` v3, `@nuxt/ui` v4.3.0+, `@nuxt/image`, `@nuxtjs/i18n`, Tailwind CSS
 - 001-content-engine: Added TypeScript 5.6+ (strict mode enabled per constitution)
-- 002-ui-design-system: Added TypeScript (strict mode enabled per constitution)
 
 
 <!-- MANUAL ADDITIONS START -->
