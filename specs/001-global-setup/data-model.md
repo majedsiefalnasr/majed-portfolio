@@ -61,10 +61,10 @@ interface TranslationFile {
 
 Global site metadata for SEO and branding.
 
-| Field  | Type   | Value                                | Description             |
-| ------ | ------ | ------------------------------------ | ----------------------- |
-| `url`  | string | `https://majed-portfolio.vercel.app` | Production site URL     |
-| `name` | string | `Majed Sief Alnasr - Portfolio`      | Site name for meta tags |
+| Field  | Type   | Value                           | Description             |
+| ------ | ------ | ------------------------------- | ----------------------- |
+| `url`  | string | `https://majedsiefalnasr.dev`   | Production site URL     |
+| `name` | string | `Majed Sief Alnasr - Portfolio` | Site name for meta tags |
 
 ---
 

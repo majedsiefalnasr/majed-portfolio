@@ -14,9 +14,17 @@
 <script setup lang="ts">
   const {t} = useI18n()
 
-  // SEO meta tags
-  useSeoMeta({
-    title: () => t('site.title'),
-    description: () => t('site.description'),
+  // SEO meta tags using custom composable
+  useHomepageSEO()
+
+  // Add Person structured data for homepage
+  usePersonSchema({
+    name: 'Majed Sief Alnasr',
+    jobTitle: 'Full Stack Developer',
+    description: t('site.description'),
+    url: 'https://majedsiefalnasr.dev',
+    sameAs: [
+      // Add social media profiles if available
+    ],
   })
 </script>

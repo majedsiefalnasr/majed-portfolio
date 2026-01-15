@@ -80,7 +80,7 @@ export default defineNuxtConfig({
   css: ['~/assets/css/main.css'],
 
   site: {
-    url: 'https://majed-portfolio.vercel.app',
+    url: 'https://majedsiefalnasr.dev',
     name: 'Majed Sief Alnasr - Portfolio',
   },
 

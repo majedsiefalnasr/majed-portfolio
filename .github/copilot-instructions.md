@@ -138,11 +138,134 @@ When generating content or code:
 
 ## SEO Best Practices
 
-- Use descriptive titles (50-60 characters)
-- Write compelling excerpts (150-160 characters)
-- Include relevant tags (3-7 tags per post)
-- Optimize images with alt text
-- Use heading hierarchy correctly (h1 → h2 → h3)
+### Meta Tags and Structured Data
+
+- **Title Length**: 30-60 characters for optimal display in search results
+- **Description Length**: 120-160 characters for search snippets
+- **OG Images**: Use 1200x630px images (1.91:1 aspect ratio) for social sharing
+- **Structured Data**: Add Schema.org JSON-LD for rich search results
+
+### SEO Composables
+
+```typescript
+// Basic page SEO
+useSEO({
+  title: 'Page Title',
+  description: 'Page description under 160 characters',
+  ogImage: '/images/og/page.jpg',
+  canonical: '/page-url',
+})
+
+// Content-based SEO (blog posts, case studies)
+useContentSEO(content, {
+  ogType: 'article',
+  canonical: `/blog/${slug}`,
+})
+
+// Homepage SEO with Person schema
+useHomepageSEO()
+usePersonSchema({
+  name: 'Majed Sief Alnasr',
+  jobTitle: 'Full Stack Developer',
+})
+
+// Article structured data
+useBlogPostStructuredData(post)
+useBreadcrumbSchema([
+  {name: 'Home', url: '/'},
+  {name: 'Blog', url: '/blog'},
+  {name: post.title, url: post.path},
+])
+```
+
+### Content Frontmatter SEO
+
+```markdown
+---
+title: 'Main Title'
+excerpt: 'Main excerpt used as fallback'
+seo:
+  title: 'Custom SEO title for search results (30-60 chars)'
+  description: 'Custom meta description optimized for search (120-160 chars)'
+  ogImage: '/images/custom-social-share.jpg'
+  keywords: ['keyword1', 'keyword2', 'keyword3']
+  noindex: false # Set to true to exclude from search results
+---
+```
+
+### Image Optimization for SEO
+
+```vue
+<!-- Featured image (above fold) - use eager loading -->
+<NuxtImg
+  src="/images/blog/post.jpg"
+  alt="Descriptive alt text (under 125 chars)"
+  width="1200"
+  height="630"
+  loading="eager"
+  class="w-full" />
+
+<!-- Content image (below fold) - lazy load -->
+<NuxtImg
+  src="/images/diagram.png"
+  alt="Architecture diagram showing API flow"
+  width="800"
+  height="600"
+  loading="lazy" />
+```
+
+### SEO Validation
+
+```typescript
+import {validateSEOTitle, validateSEODescription} from '@/utils/seo/validators'
+
+// Validate title length
+const titleResult = validateSEOTitle('My Blog Post Title')
+if (!titleResult.success) {
+  console.warn(titleResult.errors)
+}
+
+// Validate description length
+const descResult = validateSEODescription('This is my post description...')
+if (descResult.warnings) {
+  console.info(descResult.warnings) // Character count guidance
+}
+```
+
+### Performance Targets
+
+- **Lighthouse SEO Score**: ≥ 95
+- **LCP (Largest Contentful Paint)**: < 2.5s
+- **CLS (Cumulative Layout Shift)**: < 0.1
+- **Total Page Weight**: < 1MB initial load
+
+### Canonical URLs and Hreflang
+
+```typescript
+// Canonical URL (no trailing slash)
+useSEO({
+  canonical: '/blog/my-post', // Automatically normalized
+})
+
+// Bilingual hreflang tags
+useSEO({
+  alternateLinks: [
+    {hreflang: 'en', href: '/blog/my-post'},
+    {hreflang: 'ar', href: '/ar/blog/my-post'},
+    {hreflang: 'x-default', href: '/blog/my-post'},
+  ],
+})
+```
+
+### Sitemap Configuration
+
+The sitemap is automatically generated from:
+
+- Static pages defined in `nuxt.config.ts`
+- Blog posts via `server/api/__sitemap__/blog.ts`
+- Case studies via `server/api/__sitemap__/case-studies.ts`
+
+Content with `seo.noindex: true` is automatically excluded from the sitemap.
 
 ## Common Patterns
 

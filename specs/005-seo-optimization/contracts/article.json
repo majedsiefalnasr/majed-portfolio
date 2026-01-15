@@ -1,0 +1,175 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://schema.org/Article",
+  "title": "Article Schema (Blog Post)",
+  "description": "Schema.org Article type for blog posts with author, publication date, and content metadata",
+  "type": "object",
+  "required": ["@context", "@type", "headline", "author", "datePublished"],
+  "properties": {
+    "@context": {
+      "type": "string",
+      "const": "https://schema.org",
+      "description": "Schema.org context"
+    },
+    "@type": {
+      "type": "string",
+      "enum": ["Article", "BlogPosting", "TechArticle"],
+      "description": "Specific article type"
+    },
+    "headline": {
+      "type": "string",
+      "maxLength": 110,
+      "description": "Article headline/title (max 110 characters for optimal display)"
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 160,
+      "description": "Article summary or excerpt"
+    },
+    "image": {
+      "oneOf": [
+        {
+          "type": "string",
+          "format": "uri",
+          "description": "Single featured image URL"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uri"
+          },
+          "description": "Multiple image URLs"
+        }
+      ]
+    },
+    "datePublished": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Publication date in ISO 8601 format (e.g., 2026-01-15T10:00:00Z)"
+    },
+    "dateModified": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Last modification date in ISO 8601 format"
+    },
+    "author": {
+      "type": "object",
+      "required": ["@type", "name"],
+      "properties": {
+        "@type": {
+          "type": "string",
+          "const": "Person"
+        },
+        "name": {
+          "type": "string",
+          "description": "Author's full name"
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "Author's profile URL"
+        },
+        "image": {
+          "type": "string",
+          "format": "uri",
+          "description": "Author's avatar/photo URL"
+        },
+        "sameAs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uri"
+          },
+          "description": "Author's social media profiles"
+        }
+      }
+    },
+    "publisher": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string",
+          "enum": ["Organization", "Person"]
+        },
+        "name": {
+          "type": "string"
+        },
+        "logo": {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "type": "string",
+              "const": "ImageObject"
+            },
+            "url": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        }
+      }
+    },
+    "mainEntityOfPage": {
+      "type": "object",
+      "required": ["@type", "@id"],
+      "properties": {
+        "@type": {
+          "type": "string",
+          "const": "WebPage"
+        },
+        "@id": {
+          "type": "string",
+          "format": "uri",
+          "description": "Canonical URL of the article page"
+        }
+      }
+    },
+    "keywords": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Article tags/keywords"
+    },
+    "wordCount": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Total word count of the article content"
+    },
+    "articleSection": {
+      "type": "string",
+      "description": "Article category or section"
+    },
+    "inLanguage": {
+      "type": "string",
+      "enum": ["en", "ar", "en-US", "ar-EG"],
+      "description": "Content language code"
+    }
+  },
+  "examples": [
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "Building a Scalable API with Nuxt 4",
+      "description": "Learn how to build a production-ready API with Nuxt 4, TypeScript, and best practices for scale.",
+      "image": "https://majedsiefalnasr.dev/images/blog/nuxt-api.jpg",
+      "datePublished": "2026-01-15T09:00:00Z",
+      "dateModified": "2026-01-16T12:30:00Z",
+      "author": {
+        "@type": "Person",
+        "name": "Majed Sief Alnasr",
+        "url": "https://majedsiefalnasr.dev",
+        "sameAs": ["https://github.com/majedsiefalnasr", "https://linkedin.com/in/majedsiefalnasr"]
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://majedsiefalnasr.dev/blog/2026/building-scalable-api-nuxt-4"
+      },
+      "keywords": ["Nuxt 4", "TypeScript", "API Development", "Web Development"],
+      "wordCount": 2450,
+      "articleSection": "Web Development",
+      "inLanguage": "en"
+    }
+  ]
+}

@@ -34,18 +34,37 @@
   }))
 
   // SEO
-  useContentSEO(post.value, 'article')
+  useContentSEO(post.value, {ogType: 'article'})
 
+  // Ensure Twitter Card type is set to summary_large_image
   useSeoMeta({
-    title: `${post.value.title} - Majed Sief Alnasr`,
-    description: post.value.excerpt || useExcerpt(post.value),
-    ogType: 'article',
-    ogTitle: post.value.title,
-    ogDescription: post.value.excerpt || useExcerpt(post.value),
-    ogImage: post.value.featuredImage,
-    articlePublishedTime: post.value.date,
-    articleModifiedTime: post.value.updatedAt || post.value.date,
-    articleAuthor: post.value.author || 'Majed Sief Alnasr',
+    twitterCard: 'summary_large_image',
+  })
+
+  // Add Article structured data (BlogPosting)
+  useBlogPostStructuredData(post.value)
+
+  // Add BreadcrumbList structured data
+  useBreadcrumbSchema([
+    {name: 'Home', url: '/'},
+    {name: 'Blog', url: '/blog'},
+    {name: post.value.title, url: post.value.path},
+  ])
+
+  // Add hreflang tags for bilingual content
+  const basePath = post.value.path.replace(/\.ar$/, '')
+  const alternateLinks = [
+    {hreflang: 'en', href: basePath},
+    {hreflang: 'ar', href: `${basePath}.ar`},
+    {hreflang: 'x-default', href: basePath}, // x-default points to English version
+  ]
+
+  useHead({
+    link: alternateLinks.map(link => ({
+      rel: 'alternate',
+      hreflang: link.hreflang,
+      href: `https://majedsiefalnasr.dev${link.href}`,
+    })),
   })
 </script>
 

@@ -1,0 +1,147 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://schema.org/CreativeWork",
+  "title": "CreativeWork Schema (Case Study)",
+  "description": "Schema.org CreativeWork type for case studies showcasing project work",
+  "type": "object",
+  "required": ["@context", "@type", "name", "author", "datePublished"],
+  "properties": {
+    "@context": {
+      "type": "string",
+      "const": "https://schema.org",
+      "description": "Schema.org context"
+    },
+    "@type": {
+      "type": "string",
+      "const": "CreativeWork",
+      "description": "Schema type for creative work/projects"
+    },
+    "name": {
+      "type": "string",
+      "maxLength": 110,
+      "description": "Case study or project name"
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 160,
+      "description": "Brief project summary"
+    },
+    "image": {
+      "type": "string",
+      "format": "uri",
+      "description": "Featured project image or screenshot"
+    },
+    "datePublished": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Project completion or publication date in ISO 8601 format"
+    },
+    "author": {
+      "type": "object",
+      "required": ["@type", "name"],
+      "properties": {
+        "@type": {
+          "type": "string",
+          "const": "Person"
+        },
+        "name": {
+          "type": "string",
+          "description": "Creator/developer name"
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "Creator's profile URL"
+        }
+      },
+      "description": "Project author/creator"
+    },
+    "keywords": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Technologies, skills, or tags associated with the project"
+    },
+    "inLanguage": {
+      "type": "string",
+      "enum": ["en", "ar", "en-US", "ar-EG"],
+      "description": "Content language code"
+    },
+    "about": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string",
+          "const": "Thing"
+        },
+        "name": {
+          "type": "string",
+          "description": "What the creative work is about"
+        }
+      },
+      "description": "Subject matter of the work"
+    },
+    "client": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string",
+          "const": "Organization"
+        },
+        "name": {
+          "type": "string",
+          "description": "Client organization name"
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "Client website URL"
+        }
+      },
+      "description": "Client or organization for whom the work was created"
+    },
+    "genre": {
+      "type": "string",
+      "description": "Project category (e.g., 'Web Development', 'Mobile App', 'UI/UX Design')"
+    },
+    "timeRequired": {
+      "type": "string",
+      "pattern": "^P(?:\\d+Y)?(?:\\d+M)?(?:\\d+W)?(?:\\d+D)?(?:T(?:\\d+H)?(?:\\d+M)?(?:\\d+S)?)?$",
+      "description": "Project timeline in ISO 8601 duration format (e.g., 'P3M' for 3 months)"
+    },
+    "url": {
+      "type": "string",
+      "format": "uri",
+      "description": "Canonical URL of the case study page"
+    }
+  },
+  "examples": [
+    {
+      "@context": "https://schema.org",
+      "@type": "CreativeWork",
+      "name": "E-commerce Platform Redesign",
+      "description": "Led the complete redesign of a high-traffic e-commerce platform, improving conversion rates by 35% and reducing bounce rate by 20%.",
+      "image": "https://majedsiefalnasr.dev/images/case-studies/ecommerce-redesign.jpg",
+      "datePublished": "2025-12-01T00:00:00Z",
+      "author": {
+        "@type": "Person",
+        "name": "Majed Sief Alnasr",
+        "url": "https://majedsiefalnasr.dev"
+      },
+      "keywords": ["Vue.js", "Nuxt 3", "E-commerce", "UX Design", "Performance Optimization"],
+      "inLanguage": "en",
+      "about": {
+        "@type": "Thing",
+        "name": "E-commerce User Experience"
+      },
+      "client": {
+        "@type": "Organization",
+        "name": "Tech Retail Corp"
+      },
+      "genre": "Web Development",
+      "timeRequired": "P6M",
+      "url": "https://majedsiefalnasr.dev/case-studies/ecommerce-platform-redesign"
+    }
+  ]
+}
