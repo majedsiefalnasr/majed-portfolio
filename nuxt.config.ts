@@ -76,7 +76,6 @@ export default defineNuxtConfig({
 
   sitemap: {
     enabled: true,
-    strictNuxtContentPaths: true,
     xsl: false, // Disable XSL transformation for better performance
     credits: false, // Disable credits comment in sitemap
     // Static pages sitemap configuration
