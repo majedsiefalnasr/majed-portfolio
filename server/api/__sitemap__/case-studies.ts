@@ -2,19 +2,16 @@ import {asSitemapUrl, defineSitemapEventHandler} from '#imports'
 
 /**
  * Dynamic sitemap source for case studies
- * Provides automatic discovery and indexing of portfolio case studies for search engines
+ * Provides automatic discovery and indexing of case study content for search engines
  *
  * @module server/api/__sitemap__/case-studies
  * @see FR-017 Sitemap generation
  * @see US1 Search Engine Discovery
  */
 
-export default defineSitemapEventHandler(async () => {
-  // Query all case studies from content directory using queryContent
-  const caseStudies = await queryContent('case-studies')
-    .where({_path: {$regex: /^\/case-studies\/.+/}})
-    .only(['_path', 'date', 'lang'])
-    .find()
+export default defineSitemapEventHandler(async event => {
+  // Query all case studies from content directory
+  const caseStudies = await queryCollection(event, 'caseStudies').all()
 
   return caseStudies.map((caseStudy: any) => {
     return asSitemapUrl({

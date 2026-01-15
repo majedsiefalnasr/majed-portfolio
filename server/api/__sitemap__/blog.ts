@@ -9,12 +9,9 @@ import {asSitemapUrl, defineSitemapEventHandler} from '#imports'
  * @see US1 Search Engine Discovery
  */
 
-export default defineSitemapEventHandler(async () => {
-  // Query all blog posts from content directory using queryContent
-  const posts = await queryContent('blog')
-    .where({_path: {$regex: /^\/blog\/.+/}})
-    .only(['_path', 'date', 'lang'])
-    .find()
+export default defineSitemapEventHandler(async event => {
+  // Query all blog posts from content directory
+  const posts = await queryCollection(event, 'blog').all()
 
   return posts.map((post: any) => {
     return asSitemapUrl({

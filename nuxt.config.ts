@@ -18,6 +18,17 @@ export default defineNuxtConfig({
 
   css: ['~/assets/css/main.css'],
 
+  // Hybrid rendering: Pre-render specific routes at build time
+  routeRules: {
+    '/': {prerender: true},
+    '/blog': {prerender: true},
+    '/blog/**': {prerender: true}, // Pre-render all blog posts
+    '/case-studies': {prerender: true},
+    '/case-studies/**': {prerender: true}, // Pre-render all case studies
+    '/ar/blog/**': {prerender: true},
+    '/ar/case-studies/**': {prerender: true},
+  },
+
   fonts: {
     families: [{name: 'Geist', provider: 'google'}],
     defaults: {
@@ -131,8 +142,26 @@ export default defineNuxtConfig({
 
   nitro: {
     prerender: {
-      routes: ['/blog', '/case-studies'],
-      crawlLinks: true, // Auto-discover blog posts and case studies
+      crawlLinks: true, // Crawl links to discover routes automatically
+      failOnError: false,
+    },
+  },
+
+  hooks: {
+    async 'nitro:config'(nitroConfig) {
+      // Automatically discover and add all blog posts and case studies to prerender
+      // This ensures all content is pre-rendered at build time
+      const {getPrerenderRoutes} = await import('./scripts/get-prerender-routes')
+      const routes = await getPrerenderRoutes()
+
+      nitroConfig.prerender = nitroConfig.prerender || {}
+      nitroConfig.prerender.routes = nitroConfig.prerender.routes || []
+
+      routes.forEach(route => {
+        if (!nitroConfig.prerender!.routes!.includes(route)) {
+          nitroConfig.prerender!.routes!.push(route)
+        }
+      })
     },
   },
 })
