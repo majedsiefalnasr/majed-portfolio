@@ -6,6 +6,8 @@
    * Sets html lang and dir attributes based on locale.
    */
 
+  import {SpeedInsights} from '@vercel/speed-insights/nuxt'
+
   const {locale, direction} = useLanguage()
 
   // Update html attributes when locale changes
@@ -37,11 +39,13 @@
       <AppHeader />
 
       <main class="flex-1">
-        <NuxtRouteAnnouncer />
         <NuxtPage />
       </main>
 
       <AppFooter />
     </div>
+
+    <!-- Vercel Speed Insights -->
+    <SpeedInsights />
   </UApp>
 </template>
