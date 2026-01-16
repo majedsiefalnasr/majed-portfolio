@@ -34,7 +34,7 @@
 <template>
   <header
     class="bg-background-default-surface-layer-1 border-b border-border-default sticky top-0 z-50">
-    <Container>
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16">
         <!-- Logo (start edge - left for LTR, right for RTL) -->
         <div class="flex-shrink-0">
@@ -67,6 +67,6 @@
           </slot>
         </nav>
       </div>
-    </Container>
+    </div>
   </header>
 </template>

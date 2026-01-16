@@ -1,6 +1,5 @@
 <script setup lang="ts">
   import {queryCollection} from '#imports'
-  import {Badge} from '@/components/ui/badge'
   import Icon from '@/components/ui/Icon.vue'
 
   const route = useRoute()
@@ -60,7 +59,7 @@
 </script>
 
 <template>
-  <Container class="py-12">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <!-- Hero section -->
     <div class="mb-12">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
@@ -147,5 +146,5 @@
         </div>
       </div>
     </div>
-  </Container>
+  </div>
 </template>

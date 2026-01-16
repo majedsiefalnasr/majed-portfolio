@@ -3,6 +3,13 @@ export default defineNuxtConfig({
   compatibilityDate: '2026-01-12',
   devtools: {enabled: true},
 
+  components: [
+    {
+      path: '~/components',
+      pathPrefix: false,
+    },
+  ],
+
   modules: [
     '@nuxtjs/tailwindcss',
     '@nuxtjs/color-mode',

@@ -1,6 +1,4 @@
 <script setup lang="ts">
-  import {Button} from '@/components/ui/button'
-  import {Card, CardContent} from '@/components/ui/card'
   import Icon from '@/components/ui/Icon.vue'
   import type {BlogPostCardProps} from '~/types/content'
 

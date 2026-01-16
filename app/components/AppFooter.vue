@@ -1,5 +1,4 @@
 <script setup lang="ts">
-  import {Button} from '@/components/ui/button'
   import Icon from '@/components/ui/Icon.vue'
   import type {AppFooterProps, SocialLink} from '../types/layout'
   import {STANDARD_SOCIAL_LINKS} from '../types/layout'
@@ -44,7 +43,7 @@
 
 <template>
   <footer class="bg-background-default-surface-layer-1 border-t border-border-default mt-auto">
-    <Container>
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
       <div class="py-8 flex flex-col gap-6">
         <!-- Top row: Social links, Theme toggle, Language switcher -->
         <div class="flex items-center justify-between flex-wrap gap-4">
@@ -95,6 +94,6 @@
           </slot>
         </div>
       </div>
-    </Container>
+    </div>
   </footer>
 </template>

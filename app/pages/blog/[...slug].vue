@@ -1,6 +1,5 @@
 <script setup lang="ts">
   import {queryCollection} from '#imports'
-  import {Button} from '@/components/ui/button'
   import Icon from '@/components/ui/Icon.vue'
 
   const route = useRoute()
@@ -71,7 +70,7 @@
 </script>
 
 <template>
-  <Container>
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
     <div class="mx-auto max-w-3xl py-12">
       <!-- Back to Blog -->
       <Button variant="ghost" as-child class="mb-8">
@@ -134,5 +133,5 @@
         </div>
       </nav>
     </div>
-  </Container>
+  </div>
 </template>

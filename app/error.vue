@@ -1,6 +1,4 @@
 <script setup lang="ts">
-  import {Button} from '@/components/ui/button'
-  import {Card, CardContent, CardHeader, CardTitle} from '@/components/ui/card'
   import Icon from '@/components/ui/Icon.vue'
   /**
    * Custom 404 Error Page

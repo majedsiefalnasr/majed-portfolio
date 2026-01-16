@@ -63,23 +63,6 @@ export interface I18nConfig {
 // ============================================================================
 
 /**
- * Tailwind breakpoint identifiers
- */
-export type Breakpoint = 'sm' | 'md' | 'lg' | 'xl' | '2xl'
-
-/**
- * Container configuration for responsive width constraints
- */
-export interface ContainerConfig {
-  /** Maximum width per breakpoint */
-  maxWidth?: Partial<Record<Breakpoint, string>>
-  /** Horizontal padding per breakpoint */
-  padding?: Partial<Record<Breakpoint, string>>
-  /** Center content with auto margins */
-  centered?: boolean
-}
-
-/**
  * Navigation link definition
  */
 export interface NavigationLink {
@@ -137,41 +120,9 @@ export interface AppFooterProps {
   showLanguageSwitcher?: boolean
 }
 
-/**
- * Container component props
- */
-export interface ContainerProps {
-  /** Custom configuration (overrides defaults) */
-  config?: ContainerConfig
-  /** HTML element tag */
-  as?: string
-}
-
 // ============================================================================
 // Constants
 // ============================================================================
-
-/**
- * Default Tailwind breakpoints
- */
-export const DEFAULT_BREAKPOINTS: Record<Breakpoint, string> = {
-  sm: '640px',
-  md: '768px',
-  lg: '1024px',
-  xl: '1280px',
-  '2xl': '1536px',
-} as const
-
-/**
- * Default container padding
- */
-export const DEFAULT_PADDING: Record<Breakpoint, string> = {
-  sm: '1rem',
-  md: '1.5rem',
-  lg: '2rem',
-  xl: '2rem',
-  '2xl': '2rem',
-} as const
 
 /**
  * Standard navigation links structure

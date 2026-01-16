@@ -44,7 +44,7 @@
 </script>
 
 <template>
-  <Container class="py-12">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <!-- Header -->
     <div class="mb-12">
       <h1 class="text-4xl font-bold text-foreground mb-4">Blog</h1>
@@ -55,5 +55,5 @@
 
     <!-- Blog list with filtering -->
     <BlogList :posts="posts || []" :initial-tag="initialTag" />
-  </Container>
+  </div>
 </template>

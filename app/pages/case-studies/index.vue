@@ -56,7 +56,7 @@
 </script>
 
 <template>
-  <Container class="py-12">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <!-- Header -->
     <div class="mb-12">
       <h1 class="text-4xl font-bold text-foreground mb-4">Case Studies</h1>
@@ -68,5 +68,5 @@
 
     <!-- Case studies list with filtering -->
     <CaseStudyList :case-studies="caseStudies || []" :initial-tag="initialTag" />
-  </Container>
+  </div>
 </template>

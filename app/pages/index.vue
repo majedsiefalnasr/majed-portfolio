@@ -1,5 +1,5 @@
 <template>
-  <UContainer class="py-16">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
     <div class="text-center">
       <h1 class="text-4xl font-bold text-foreground mb-4">
         {{ $t('site.title') }}
@@ -8,7 +8,7 @@
         {{ $t('site.description') }}
       </p>
     </div>
-  </UContainer>
+  </div>
 </template>
 
 <script setup lang="ts">

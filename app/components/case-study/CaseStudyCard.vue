@@ -1,7 +1,4 @@
 <script setup lang="ts">
-  import {Badge} from '@/components/ui/badge'
-  import {Button} from '@/components/ui/button'
-  import {Card, CardContent} from '@/components/ui/card'
   import Icon from '@/components/ui/Icon.vue'
   import type {CaseStudyCardProps} from '~/types/content'
 
