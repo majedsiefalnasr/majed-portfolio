@@ -15,6 +15,7 @@ export interface SEOMetadata {
   title: string // Page title (<title> tag)
   description: string // Meta description
   titleTemplate?: string | boolean | null // Title template (default: appends site name)
+  keywords?: string[] // Meta keywords
 
   // Open Graph
   ogTitle?: string // Falls back to title if not provided
