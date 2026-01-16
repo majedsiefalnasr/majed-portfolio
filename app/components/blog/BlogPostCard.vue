@@ -1,4 +1,7 @@
 <script setup lang="ts">
+  import {Button} from '@/components/ui/button'
+  import {Card, CardContent} from '@/components/ui/card'
+  import Icon from '@/components/ui/Icon.vue'
   import type {BlogPostCardProps} from '~/types/content'
 
   const props = withDefaults(defineProps<BlogPostCardProps>(), {
@@ -15,40 +18,43 @@
 
 <template>
   <NuxtLink :to="post.path" class="block">
-    <UCard class="transition-all hover:shadow-lg">
+    <Card class="transition-all hover:shadow-lg">
       <!-- Featured image (optional) -->
-      <div v-if="post.featuredImage" class="mb-4 -mx-6 -mt-6">
+      <div v-if="post.featuredImage" class="overflow-hidden rounded-t-lg">
         <NuxtImg
           :src="post.featuredImage"
           :alt="post.title"
-          class="w-full h-48 object-cover rounded-t-lg"
+          class="w-full h-48 object-cover"
           loading="lazy" />
       </div>
 
-      <!-- Post title -->
-      <h3 class="text-xl font-semibold mb-3 text-gray-900 dark:text-gray-100">
-        {{ post.title }}
-      </h3>
+      <CardContent class="pt-6">
+        <!-- Post title -->
+        <h3 class="text-xl font-semibold mb-3 text-foreground">
+          {{ post.title }}
+        </h3>
 
-      <!-- Metadata -->
-      <BlogPostMeta
-        :date="post.date"
-        :read-time="readTime"
-        :tags="showTags ? post.tags : undefined"
-        :author="post.author"
-        class="mb-3" />
+        <!-- Metadata -->
+        <BlogPostMeta
+          :date="post.date"
+          :read-time="readTime"
+          :tags="showTags ? post.tags : undefined"
+          :author="post.author"
+          class="mb-3" />
 
-      <!-- Excerpt -->
-      <p v-if="showExcerpt && excerpt" class="text-gray-600 dark:text-gray-400 line-clamp-3">
-        {{ excerpt }}
-      </p>
+        <!-- Excerpt -->
+        <p v-if="showExcerpt && excerpt" class="text-muted-foreground line-clamp-3">
+          {{ excerpt }}
+        </p>
 
-      <!-- Read more link -->
-      <div class="mt-4">
-        <UButton variant="link" trailing-icon="i-heroicons-arrow-right" :padded="false">
-          Read more
-        </UButton>
-      </div>
-    </UCard>
+        <!-- Read more link -->
+        <div class="mt-4">
+          <Button variant="link" class="px-0">
+            Read more
+            <Icon icon="radix-icons:arrow-right" class="ms-2 h-4 w-4" />
+          </Button>
+        </div>
+      </CardContent>
+    </Card>
   </NuxtLink>
 </template>

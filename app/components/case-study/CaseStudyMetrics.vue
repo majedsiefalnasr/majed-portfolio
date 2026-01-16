@@ -1,4 +1,5 @@
 <script setup lang="ts">
+  import Icon from '@/components/ui/Icon.vue'
   import type {CaseStudyMetricsProps} from '~/types/content'
 
   withDefaults(defineProps<CaseStudyMetricsProps>(), {
@@ -18,18 +19,18 @@
       <div
         v-for="metric in metrics"
         :key="metric.label"
-        class="metric-item bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-md transition-shadow">
+        class="metric-item bg-card rounded-lg p-6 border border-border shadow-sm hover:shadow-md transition-shadow">
         <div class="flex items-center justify-between">
           <div class="flex-1">
-            <div class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-1">
+            <div class="text-2xl font-bold text-foreground mb-1">
               {{ metric.value }}
             </div>
-            <div class="text-sm text-gray-600 dark:text-gray-400">
+            <div class="text-sm text-muted-foreground">
               {{ metric.label }}
             </div>
           </div>
-          <div v-if="metric.icon" class="ml-4">
-            <UIcon :name="metric.icon" class="h-8 w-8 text-primary-500" />
+          <div v-if="metric.icon" class="ms-4">
+            <Icon :icon="metric.icon" class="h-8 w-8 text-primary-500" />
           </div>
         </div>
       </div>

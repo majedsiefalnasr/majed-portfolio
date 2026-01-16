@@ -1,4 +1,6 @@
 <script setup lang="ts">
+  import {Badge} from '@/components/ui/badge'
+  import Icon from '@/components/ui/Icon.vue'
   import type {BlogPostMetaProps} from '~/types/content'
 
   const props = withDefaults(defineProps<BlogPostMetaProps>(), {
@@ -24,30 +26,30 @@
 </script>
 
 <template>
-  <div class="flex flex-wrap items-center gap-4 text-sm text-gray-600 dark:text-gray-400">
+  <div class="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
     <!-- Date -->
     <time :datetime="date" class="flex items-center gap-1">
-      <UIcon name="i-heroicons-calendar" class="h-4 w-4" />
+      <Icon icon="radix-icons:calendar" class="h-4 w-4" />
       {{ formattedDate }}
     </time>
 
     <!-- Read time -->
     <span class="flex items-center gap-1">
-      <UIcon name="i-heroicons-clock" class="h-4 w-4" />
+      <Icon icon="radix-icons:clock" class="h-4 w-4" />
       {{ readTimeLabel }}
     </span>
 
     <!-- Author (optional) -->
     <span v-if="showAuthor && author" class="flex items-center gap-1">
-      <UIcon name="i-heroicons-user" class="h-4 w-4" />
+      <Icon icon="radix-icons:person" class="h-4 w-4" />
       {{ author }}
     </span>
 
     <!-- Tags -->
     <div v-if="showTags && tags && tags.length > 0" class="flex flex-wrap gap-2">
-      <UBadge v-for="tag in tags" :key="tag" variant="soft" size="sm">
+      <Badge v-for="tag in tags" :key="tag" variant="secondary">
         {{ tag }}
-      </UBadge>
+      </Badge>
     </div>
   </div>
 </template>

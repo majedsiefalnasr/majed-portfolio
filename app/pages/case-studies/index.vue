@@ -59,8 +59,8 @@
   <Container class="py-12">
     <!-- Header -->
     <div class="mb-12">
-      <h1 class="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">Case Studies</h1>
-      <p class="text-lg text-gray-600 dark:text-gray-400">
+      <h1 class="text-4xl font-bold text-foreground mb-4">Case Studies</h1>
+      <p class="text-lg text-muted-foreground">
         Portfolio of web development projects and client work showcasing expertise in modern
         frameworks and best practices
       </p>

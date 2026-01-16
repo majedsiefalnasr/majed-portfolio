@@ -1,4 +1,6 @@
 <script setup lang="ts">
+  import {Button} from '@/components/ui/button'
+  import Icon from '@/components/ui/Icon.vue'
   import type {CaseStudyListProps} from '~/types/content'
 
   const props = withDefaults(defineProps<CaseStudyListProps>(), {
@@ -55,32 +57,28 @@
     <!-- Tag filter chips -->
     <div v-if="availableTags.length > 0" class="space-y-3">
       <div class="flex items-center justify-between">
-        <h3 class="text-sm font-semibold text-gray-700 dark:text-gray-300">Filter by technology</h3>
-        <UButton
-          v-if="hasActiveFilter"
-          variant="ghost"
-          size="xs"
-          icon="i-heroicons-x-mark"
-          @click="clearFilter">
+        <h3 class="text-sm font-semibold text-foreground">Filter by technology</h3>
+        <Button v-if="hasActiveFilter" variant="ghost" size="sm" @click="clearFilter">
+          <Icon icon="radix-icons:cross-2" class="me-2 h-4 w-4" />
           Clear filter
-        </UButton>
+        </Button>
       </div>
 
       <div class="flex flex-wrap gap-2">
-        <UButton
+        <Button
           v-for="tag in availableTags"
           :key="tag"
-          :variant="selectedTag === tag ? 'solid' : 'soft'"
+          :variant="selectedTag === tag ? 'default' : 'secondary'"
           size="sm"
           @click="selectTag(tag)">
           {{ tag }}
-          <span class="ml-1 text-xs opacity-75"> ({{ tagCounts[tag] }}) </span>
-        </UButton>
+          <span class="ms-1 text-xs opacity-75"> ({{ tagCounts[tag] }}) </span>
+        </Button>
       </div>
     </div>
 
     <!-- Case studies count -->
-    <div class="text-sm text-gray-600 dark:text-gray-400">
+    <div class="text-sm text-muted-foreground">
       {{ filteredCaseStudies.length }}
       {{ filteredCaseStudies.length === 1 ? 'case study' : 'case studies' }}
       <span v-if="hasActiveFilter">with tag "{{ selectedTag }}"</span>
@@ -104,8 +102,8 @@
 
     <!-- Empty state -->
     <div v-else class="text-center py-12">
-      <UIcon name="i-heroicons-briefcase" class="h-12 w-12 mx-auto text-gray-400 mb-4" />
-      <p class="text-gray-600 dark:text-gray-400">
+      <Icon icon="radix-icons:backpack" class="h-12 w-12 mx-auto text-muted-foreground mb-4" />
+      <p class="text-muted-foreground">
         {{ emptyMessage }}
       </p>
     </div>

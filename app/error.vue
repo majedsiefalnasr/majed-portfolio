@@ -1,4 +1,7 @@
 <script setup lang="ts">
+  import {Button} from '@/components/ui/button'
+  import {Card, CardContent, CardHeader, CardTitle} from '@/components/ui/card'
+  import Icon from '@/components/ui/Icon.vue'
   /**
    * Custom 404 Error Page
    *
@@ -7,10 +10,10 @@
    */
 
   const error = useError()
-  const {t} = useI18n()
+  const {t: _t} = useI18n()
 
   // Check if we're in development mode
-  const isDev = computed(() => process.dev)
+  const isDev = computed(() => import.meta.dev)
 
   // SEO metadata for error page
   useSeoMeta({
@@ -70,56 +73,58 @@
           Here are some helpful links:
         </h3>
         <div class="grid gap-4 md:grid-cols-3">
-          <UCard
+          <Card
             v-for="suggestion in suggestions"
             :key="suggestion.to"
             class="hover:shadow-lg transition-shadow">
-            <NuxtLink :to="suggestion.to" class="block">
-              <div class="text-center">
-                <UIcon :name="suggestion.icon" class="mx-auto mb-3 h-8 w-8 text-primary-500" />
-                <h4 class="mb-2 font-semibold text-gray-900 dark:text-white">
-                  {{ suggestion.title }}
-                </h4>
-                <p class="text-sm text-gray-600 dark:text-gray-400">
-                  {{ suggestion.description }}
-                </p>
-              </div>
-            </NuxtLink>
-          </UCard>
+            <CardContent class="pt-6">
+              <NuxtLink :to="suggestion.to" class="block">
+                <div class="text-center">
+                  <Icon :icon="suggestion.icon" class="mx-auto mb-3 h-8 w-8 text-primary-500" />
+                  <h4 class="mb-2 font-semibold text-gray-900 dark:text-white">
+                    {{ suggestion.title }}
+                  </h4>
+                  <p class="text-sm text-gray-600 dark:text-gray-400">
+                    {{ suggestion.description }}
+                  </p>
+                </div>
+              </NuxtLink>
+            </CardContent>
+          </Card>
         </div>
       </div>
 
       <!-- Primary Action -->
       <div>
-        <UButton size="lg" @click="handleClearError">
-          <UIcon name="i-heroicons-arrow-left" class="mr-2" />
+        <Button size="lg" @click="handleClearError">
+          <Icon icon="radix-icons:arrow-left" class="me-2 h-4 w-4" />
           Return to Homepage
-        </UButton>
+        </Button>
       </div>
 
       <!-- Error Details (Development Only) -->
-      <div v-if="error && isDev" class="mt-12 text-left">
-        <UCard>
-          <template #header>
-            <h3 class="text-sm font-semibold text-gray-900 dark:text-white">
-              Error Details (Development Only)
-            </h3>
-          </template>
-          <div class="space-y-2 text-sm">
-            <div>
-              <span class="font-medium">Status Code:</span>
-              {{ error.statusCode }}
+      <div v-if="error && isDev" class="mt-12 text-start">
+        <Card>
+          <CardHeader>
+            <CardTitle class="text-sm"> Error Details (Development Only) </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div class="space-y-2 text-sm">
+              <div>
+                <span class="font-medium">Status Code:</span>
+                {{ error.statusCode }}
+              </div>
+              <div v-if="error.statusMessage">
+                <span class="font-medium">Message:</span>
+                {{ error.statusMessage }}
+              </div>
+              <div v-if="error.message">
+                <span class="font-medium">Details:</span>
+                {{ error.message }}
+              </div>
             </div>
-            <div v-if="error.statusMessage">
-              <span class="font-medium">Message:</span>
-              {{ error.statusMessage }}
-            </div>
-            <div v-if="error.message">
-              <span class="font-medium">Details:</span>
-              {{ error.message }}
-            </div>
-          </div>
-        </UCard>
+          </CardContent>
+        </Card>
       </div>
     </div>
   </UContainer>

@@ -1,5 +1,7 @@
 <script setup lang="ts">
   import {queryCollection} from '#imports'
+  import {Button} from '@/components/ui/button'
+  import Icon from '@/components/ui/Icon.vue'
 
   const route = useRoute()
   const {getContentPath} = useContentLocale()
@@ -72,9 +74,12 @@
   <Container>
     <div class="mx-auto max-w-3xl py-12">
       <!-- Back to Blog -->
-      <UButton to="/blog" variant="ghost" icon="i-heroicons-arrow-left" class="mb-8">
-        Back to Blog
-      </UButton>
+      <Button variant="ghost" as-child class="mb-8">
+        <NuxtLink to="/blog">
+          <Icon icon="radix-icons:arrow-left" class="me-2 h-4 w-4" />
+          Back to Blog
+        </NuxtLink>
+      </Button>
 
       <!-- Post Header -->
       <header class="mb-8">
@@ -105,27 +110,27 @@
       <!-- Navigation -->
       <nav class="mt-12 border-t pt-8">
         <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-          <UButton
+          <Button
             v-if="navigation?.previous"
-            :to="navigation.previous.path"
             variant="outline"
+            as-child
             class="justify-start text-left">
-            <div>
-              <div class="text-xs text-gray-500 dark:text-gray-400">Previous</div>
-              <div class="font-semibold">{{ navigation.previous.title }}</div>
-            </div>
-          </UButton>
+            <NuxtLink :to="navigation.previous.path">
+              <div>
+                <div class="text-xs text-muted-foreground">Previous</div>
+                <div class="font-semibold">{{ navigation.previous.title }}</div>
+              </div>
+            </NuxtLink>
+          </Button>
           <div v-else />
-          <UButton
-            v-if="navigation?.next"
-            :to="navigation.next.path"
-            variant="outline"
-            class="justify-end text-right">
-            <div>
-              <div class="text-xs text-gray-500 dark:text-gray-400">Next</div>
-              <div class="font-semibold">{{ navigation.next.title }}</div>
-            </div>
-          </UButton>
+          <Button v-if="navigation?.next" variant="outline" as-child class="justify-end text-right">
+            <NuxtLink :to="navigation.next.path">
+              <div>
+                <div class="text-xs text-muted-foreground">Next</div>
+                <div class="font-semibold">{{ navigation.next.title }}</div>
+              </div>
+            </NuxtLink>
+          </Button>
         </div>
       </nav>
     </div>
