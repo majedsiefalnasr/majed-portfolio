@@ -4,14 +4,14 @@
  * Exports all available templates for content generation
  */
 
-export {blogDefaultTemplate} from './blog-default'
-export {blogTutorialTemplate} from './blog-tutorial'
-export {caseStudyDefaultTemplate} from './case-study-default'
-
 import type {ContentTemplate} from '../template-schema'
 import {blogDefaultTemplate} from './blog-default'
 import {blogTutorialTemplate} from './blog-tutorial'
 import {caseStudyDefaultTemplate} from './case-study-default'
+
+export {blogDefaultTemplate} from './blog-default'
+export {blogTutorialTemplate} from './blog-tutorial'
+export {caseStudyDefaultTemplate} from './case-study-default'
 
 /**
  * All available templates

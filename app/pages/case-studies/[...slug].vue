@@ -1,5 +1,7 @@
 <script setup lang="ts">
   import {queryCollection} from '#imports'
+  import {Badge} from '@/components/ui/badge'
+  import Icon from '@/components/ui/Icon.vue'
 
   const route = useRoute()
   const {getContentPath} = useContentLocale()
@@ -64,7 +66,7 @@
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
         <!-- Content -->
         <div class="space-y-6">
-          <div class="flex items-center space-x-4 text-sm text-gray-600 dark:text-gray-400">
+          <div class="flex items-center space-x-4 text-sm text-muted-foreground">
             <span class="font-medium">{{ caseStudy.client }}</span>
             <span>•</span>
             <span>{{ caseStudy.role }}</span>
@@ -72,19 +74,19 @@
             <span>{{ caseStudy.timeline }}</span>
           </div>
 
-          <h1 class="text-4xl font-bold text-gray-900 dark:text-gray-100">
+          <h1 class="text-4xl font-bold text-foreground">
             {{ caseStudy.title }}
           </h1>
 
-          <p class="text-lg text-gray-600 dark:text-gray-400">
+          <p class="text-lg text-muted-foreground">
             {{ caseStudy.excerpt }}
           </p>
 
           <!-- Tags -->
           <div v-if="caseStudy.tags && caseStudy.tags.length > 0" class="flex flex-wrap gap-2">
-            <UBadge v-for="tag in caseStudy.tags" :key="tag" variant="soft" size="sm">
+            <Badge v-for="tag in caseStudy.tags" :key="tag" variant="secondary">
               {{ tag }}
-            </UBadge>
+            </Badge>
           </div>
         </div>
 
@@ -111,8 +113,8 @@
           <NuxtLink
             :to="previous.path"
             class="flex items-center space-x-3 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors group">
-            <UIcon
-              name="i-heroicons-arrow-left"
+            <Icon
+              icon="radix-icons:arrow-left"
               class="h-5 w-5 group-hover:-translate-x-1 transition-transform" />
             <div>
               <div class="text-sm text-gray-500 dark:text-gray-500">Previous</div>
@@ -125,21 +127,21 @@
           <NuxtLink
             to="/case-studies"
             class="inline-flex items-center space-x-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors">
-            <UIcon name="i-heroicons-arrow-left" class="h-4 w-4" />
+            <Icon icon="radix-icons:arrow-left" class="h-4 w-4" />
             <span>Back to Case Studies</span>
           </NuxtLink>
         </div>
 
-        <div v-if="next" class="flex-1 text-right">
+        <div v-if="next" class="flex-1 text-end">
           <NuxtLink
             :to="next.path"
             class="flex items-center justify-end space-x-3 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors group">
-            <div class="text-right">
+            <div class="text-end">
               <div class="text-sm text-gray-500 dark:text-gray-500">Next</div>
               <div class="font-medium">{{ next.title }}</div>
             </div>
-            <UIcon
-              name="i-heroicons-arrow-right"
+            <Icon
+              icon="radix-icons:arrow-right"
               class="h-5 w-5 group-hover:translate-x-1 transition-transform" />
           </NuxtLink>
         </div>

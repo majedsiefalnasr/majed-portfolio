@@ -4,7 +4,8 @@ export default defineNuxtConfig({
   devtools: {enabled: true},
 
   modules: [
-    '@nuxt/ui',
+    '@nuxtjs/tailwindcss',
+    '@nuxtjs/color-mode',
     '@nuxt/fonts',
     '@nuxt/content',
     '@nuxt/image',
@@ -15,6 +16,10 @@ export default defineNuxtConfig({
     '@nuxt/scripts',
     '@nuxt/test-utils',
   ],
+
+  colorMode: {
+    classSuffix: '',
+  },
 
   css: ['~/assets/css/main.css'],
 

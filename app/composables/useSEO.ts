@@ -70,7 +70,7 @@ export function useSEO(metadata: SEOMetadata) {
 
   // Handle titleTemplate separately if needed
   if (processedMetadata.titleTemplate !== undefined) {
-    useSeoMeta({titleTemplate: processedMetadata.titleTemplate as any})
+    useSeoMeta({titleTemplate: processedMetadata.titleTemplate as string})
   }
 
   // Set HTML attributes (lang and dir) separately

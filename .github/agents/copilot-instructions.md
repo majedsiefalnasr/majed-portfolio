@@ -12,6 +12,8 @@ Auto-generated from all feature plans. Last updated: 2026-01-12
 - File system (markdown files in `/content/blog/YYYY/` and `/content/case-studies/`) (004-content-generation-agent)
 - TypeScript 5.6+ (strict mode) with Vue 3.5+ Composition API (005-seo-optimization)
 - File-based (Markdown frontmatter for metadata, static JSON-LD schemas) (005-seo-optimization)
+- TypeScript (strict mode), Vue 3, Nuxt 4 + shadcn-vue (CLI-based), Radix Icons, Tailwind CSS, Nuxt Content v3, @nuxtjs/i18n (006-shadcn-vue-migration)
+- N/A (static site, content in markdown files) (006-shadcn-vue-migration)
 
 - TypeScript (strict mode) with Vue 3 Composition API (001-global-setup)
 
@@ -31,9 +33,9 @@ npm test && npm run lint
 TypeScript (strict mode) with Vue 3 Composition API: Follow standard conventions
 
 ## Recent Changes
+- 006-shadcn-vue-migration: Added TypeScript (strict mode), Vue 3, Nuxt 4 + shadcn-vue (CLI-based), Radix Icons, Tailwind CSS, Nuxt Content v3, @nuxtjs/i18n
 - 005-seo-optimization: Added TypeScript 5.6+ (strict mode) with Vue 3.5+ Composition API
 - 004-content-generation-agent: Added TypeScript 5.x (strict mode enabled per constitution) + GitHub Copilot Chat API, @nuxt/content v3, Nuxt 4.x
-- 003-content-engine: Added TypeScript (strict mode) with Nuxt 4 (latest stable) + `@nuxt/content` v3, `@nuxt/ui` v4.3.0+, `@nuxt/image`, `@nuxtjs/i18n`, Tailwind CSS
 
 
 <!-- MANUAL ADDITIONS START -->

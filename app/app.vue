@@ -34,18 +34,16 @@
 </script>
 
 <template>
-  <UApp>
-    <div class="min-h-screen flex flex-col bg-background-default-surface-base text-typography-body">
-      <AppHeader />
+  <div class="min-h-screen flex flex-col bg-background text-foreground">
+    <AppHeader />
 
-      <main class="flex-1">
-        <NuxtPage />
-      </main>
+    <main class="flex-1">
+      <NuxtPage />
+    </main>
 
-      <AppFooter />
-    </div>
+    <AppFooter />
+  </div>
 
-    <!-- Vercel Speed Insights -->
-    <SpeedInsights />
-  </UApp>
+  <!-- Vercel Speed Insights -->
+  <SpeedInsights />
 </template>

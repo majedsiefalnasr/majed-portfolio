@@ -1,10 +1,10 @@
 <template>
   <UContainer class="py-16">
     <div class="text-center">
-      <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+      <h1 class="text-4xl font-bold text-foreground mb-4">
         {{ $t('site.title') }}
       </h1>
-      <p class="text-lg text-gray-600 dark:text-gray-400">
+      <p class="text-lg text-muted-foreground">
         {{ $t('site.description') }}
       </p>
     </div>

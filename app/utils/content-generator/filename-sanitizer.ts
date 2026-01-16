@@ -94,8 +94,8 @@ export async function checkDuplicateSlug(options: {
   workspaceRoot: string
 }): Promise<{exists: boolean; filePath?: string}> {
   const {slug, contentType, workspaceRoot} = options
-  const fs = require('fs').promises
-  const path = require('path')
+  const {promises: fs} = await import('fs')
+  const {default: path} = await import('path')
 
   const searchPatterns = [slug, `_draft-${slug}`]
 
@@ -140,7 +140,7 @@ export async function checkDuplicateSlug(options: {
           }
         }
       }
-    } catch (error) {
+    } catch {
       // Blog directory doesn't exist yet
       return {exists: false}
     }
@@ -176,7 +176,7 @@ export async function checkDuplicateSlug(options: {
           }
         }
       }
-    } catch (error) {
+    } catch {
       // Case studies directory doesn't exist yet
       return {exists: false}
     }

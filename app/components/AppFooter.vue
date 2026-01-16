@@ -1,4 +1,6 @@
 <script setup lang="ts">
+  import {Button} from '@/components/ui/button'
+  import Icon from '@/components/ui/Icon.vue'
   import type {AppFooterProps, SocialLink} from '../types/layout'
   import {STANDARD_SOCIAL_LINKS} from '../types/layout'
 
@@ -36,7 +38,7 @@
 
   // Theme toggle button icon
   const themeIcon = computed(() => {
-    return theme.value === 'dark' ? 'i-heroicons-moon-20-solid' : 'i-heroicons-sun-20-solid'
+    return theme.value === 'dark' ? 'radix-icons:moon' : 'radix-icons:sun'
   })
 </script>
 
@@ -57,7 +59,7 @@
                 target="_blank"
                 rel="noopener noreferrer"
                 class="text-icon-subtle hover:text-icon-default transition-colors">
-                <UIcon :name="link.icon" class="w-5 h-5" />
+                <Icon :icon="link.icon" class="w-5 h-5" />
               </a>
             </slot>
           </div>
@@ -65,22 +67,24 @@
           <!-- Controls -->
           <div class="flex items-center gap-4">
             <!-- Theme toggle -->
-            <button
+            <Button
               v-if="showThemeToggle"
+              variant="ghost"
+              size="icon"
               :aria-label="t('theme.toggle')"
-              class="p-2 rounded-lg bg-background-default-surface-base hover:bg-background-neutral-default transition-colors"
               @click="handleToggleTheme">
-              <UIcon :name="themeIcon" class="w-5 h-5 text-icon-subtle" />
-            </button>
+              <Icon :icon="themeIcon" class="w-5 h-5" />
+            </Button>
 
             <!-- Language switcher -->
-            <button
+            <Button
               v-if="showLanguageSwitcher"
+              variant="ghost"
+              size="sm"
               :aria-label="t('language.switch')"
-              class="px-3 py-2 rounded-lg bg-background-default-surface-base hover:bg-background-neutral-default text-typography-body text-sm font-medium transition-colors"
               @click="handleLanguageSwitch">
               {{ locale === 'en' ? 'العربية' : 'English' }}
-            </button>
+            </Button>
           </div>
         </div>
 
