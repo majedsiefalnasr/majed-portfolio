@@ -153,6 +153,9 @@ export function useContentSEO(
   // Resolve OG image (priority: seo.ogImage > featuredImage > default)
   const ogImage = content.seo?.ogImage || content.featuredImage
 
+  // Resolve keywords (not used directly here, but could be added to meta tags if needed)
+  const keywords = content.seo?.keywords || []
+
   // Determine robots directive
   const robots = content.seo?.noindex ? 'noindex,follow' : 'index,follow'
 
@@ -161,6 +164,7 @@ export function useContentSEO(
     title,
     description,
     ogImage,
+    keywords,
     ogType: options?.ogType,
     canonical: options?.canonical,
     lang: content.lang,
@@ -184,6 +188,7 @@ export function useHomepageSEO(options?: {
   description?: string
   image?: string
   lang?: 'en' | 'ar'
+  keywords?: string[]
 }) {
   const config = useRuntimeConfig()
   const siteUrl = (config.public?.siteUrl as string | undefined) || 'https://majedsiefalnasr.dev'
@@ -194,9 +199,21 @@ export function useHomepageSEO(options?: {
     options?.description ||
     'Portfolio showcasing full-stack development projects, case studies, and technical blog posts. Specialized in TypeScript, Vue.js, Nuxt, and modern web technologies.'
 
+  const defaultKeywords = options?.keywords || [
+    'portfolio',
+    'full-stack development',
+    'case studies',
+    'technical blog',
+    'TypeScript',
+    'Vue.js',
+    'Nuxt',
+    'web technologies',
+  ]
+
   useSEO({
     title: `${defaultTitle} | ${defaultTagline}`,
     description: defaultDescription,
+    keywords: defaultKeywords,
     ogType: 'profile',
     ogImage: options?.image || '/images/og/default.png',
     lang: options?.lang || 'en',

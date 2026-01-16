@@ -5,7 +5,7 @@
  * Note: H1 auto-generated from frontmatter title; markdown content uses H2-H6
  */
 
-import type {ParsedContent as NuxtParsedContent} from '@nuxt/content'
+import type {ParsedContentv2 as NuxtParsedContent} from '@nuxt/content'
 import type {SEOFrontmatter} from './seo'
 
 // ============================================================================
