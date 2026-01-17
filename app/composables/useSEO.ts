@@ -73,34 +73,12 @@ export function useSEO(metadata: SEOMetadata) {
     useSeoMeta({titleTemplate: processedMetadata.titleTemplate as string})
   }
 
-  // Set HTML attributes (lang and dir) separately
-
-  // Set HTML attributes (lang and dir) separately
-  if (processedMetadata.lang) {
-    useHead({
-      htmlAttrs: {
-        lang: processedMetadata.lang,
-        dir: processedMetadata.lang === 'ar' ? 'rtl' : 'ltr',
-      },
-    })
-  }
-
   // Build and set link tags for canonical and hreflang
   const linkTags = buildLinkTags(processedMetadata)
 
   if (linkTags.length > 0) {
     useHead({
       link: linkTags,
-    })
-  }
-
-  // Set HTML attributes (lang and dir)
-  if (metadata.lang) {
-    useHead({
-      htmlAttrs: {
-        lang: metadata.lang,
-        dir: metadata.lang === 'ar' ? 'rtl' : 'ltr',
-      },
     })
   }
 }
@@ -169,13 +147,12 @@ export function useContentSEO(
 
     alternateLinks = [
       {hreflang: content.lang || 'en', href: `${siteUrl}${content._path}`},
-      ...content.sameAs
+      ...(content.sameAs
         .map(path => {
           const langMatch = path.match(/\/(en|ar)\//)
-          return langMatch ? {hreflang: langMatch[1], href: `${siteUrl}${path}`} : null
+          return langMatch ? {hreflang: langMatch[1] as string, href: `${siteUrl}${path}`} : null
         })
-        .filter(Boolean),
-      {hreflang: 'x-default', href: `${siteUrl}${content._path}`},
+        .filter(Boolean) as Array<{hreflang: string; href: string}>),
     ]
   }
 
