@@ -22,6 +22,7 @@ export default defineNuxtConfig({
     '@nuxt/eslint',
     '@nuxt/scripts',
     '@nuxt/test-utils',
+    '@vercel/analytics/nuxt',
   ],
 
   colorMode: {

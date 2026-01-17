@@ -6,6 +6,7 @@
    * Sets html lang and dir attributes based on locale.
    */
 
+  import {Analytics} from '@vercel/analytics/nuxt'
   import {SpeedInsights} from '@vercel/speed-insights/nuxt'
 
   const {locale, direction} = useLanguage()
@@ -46,4 +47,6 @@
 
   <!-- Vercel Speed Insights -->
   <SpeedInsights />
+  <!-- Vercel Analytics -->
+  <Analytics />
 </template>
