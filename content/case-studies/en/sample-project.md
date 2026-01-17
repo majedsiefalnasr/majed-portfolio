@@ -7,6 +7,7 @@ timeline: '6 months (Jul 2025 - Dec 2025)'
 tags: ['vue', 'nuxt', 'tailwind', 'stripe', 'vercel']
 excerpt: 'Complete redesign of enterprise e-commerce platform, achieving 40% performance improvement and 25% conversion increase.'
 featuredImage: '/images/case-studies/2025/techcorp-hero.svg'
+lang: 'en'
 testimonial:
   quote: 'The new platform exceeded our expectations. Performance and conversion rates improved significantly.'
   author: 'Jane Smith'
@@ -23,7 +24,6 @@ metrics:
     icon: 'i-heroicons-trophy'
 featured: true
 order: 1
-lang: 'en'
 ---
 
 ## Problem

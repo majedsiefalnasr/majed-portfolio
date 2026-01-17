@@ -13,21 +13,42 @@ export default defineSitemapEventHandler(async event => {
   // Query all case studies from content directory
   const caseStudies = await queryCollection(event, 'caseStudies').all()
 
-  return caseStudies.map((caseStudy: any) => {
+  // Filter out draft content
+  const publishedCaseStudies = caseStudies.filter(
+    (caseStudy: any) => !caseStudy.path?.includes('/_draft') && !caseStudy.stem?.includes('_draft')
+  )
+
+  return publishedCaseStudies.map((caseStudy: any) => {
+    // Build alternatives from sameAs
+    const alternatives = []
+    if (caseStudy.lang) {
+      alternatives.push({
+        lang: caseStudy.lang,
+        href: caseStudy.path,
+      })
+    }
+    if (caseStudy.sameAs) {
+      caseStudy.sameAs.forEach((altPath: string) => {
+        if (altPath.includes('/ar/')) {
+          alternatives.push({
+            lang: 'ar',
+            href: altPath,
+          })
+        } else {
+          alternatives.push({
+            lang: 'en',
+            href: altPath,
+          })
+        }
+      })
+    }
+
     return asSitemapUrl({
-      loc: caseStudy._path,
+      loc: caseStudy.path,
       lastmod: caseStudy.date,
       changefreq: 'yearly',
       priority: 0.9,
-      // Add alternate language versions if available
-      alternatives: caseStudy.lang
-        ? [
-            {
-              lang: caseStudy.lang,
-              href: caseStudy._path,
-            },
-          ]
-        : undefined,
+      alternatives: alternatives.length > 0 ? alternatives : undefined,
     })
   })
 })

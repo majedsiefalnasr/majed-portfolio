@@ -3,14 +3,16 @@
   import Icon from '@/components/ui/Icon.vue'
 
   const route = useRoute()
-  const {getContentPath} = useContentLocale()
+  const {switchContentLanguage, getAvailableLanguages} = useContentLanguage()
 
-  const slug = Array.isArray(route.params.slug) ? route.params.slug.join('/') : route.params.slug
-  const localizedPath = getContentPath(slug)
+  // Determine if this is an Arabic route (starts with ar/case-studies/)
+  const isArabicRoute = route.path.startsWith('/ar/case-studies/')
 
-  // Fetch case study with locale-specific path
-  const {data: study} = await useAsyncData(`case-study-${localizedPath}`, () =>
-    queryCollection('caseStudies').path(`/case-studies/${localizedPath}`).first()
+  // Fetch case study by path
+  const {data: study} = await useAsyncData(`case-study-${route.path}`, () =>
+    queryCollection('caseStudies')
+      .all()
+      .then(items => items.find(item => item.path === route.path) || null)
   )
 
   // Handle 404
@@ -20,8 +22,19 @@
 
   const caseStudy = study.value
 
+  // Back button URL based on current language
+  const backToCaseStudiesUrl = computed(() =>
+    isArabicRoute ? '/ar/case-studies' : '/case-studies'
+  )
+
   // Get navigation links (locale-specific)
   const {previous, next} = await useContentNavigation(caseStudy.path, 'caseStudies')
+
+  // Language switching
+  const availableLanguages = computed(() => getAvailableLanguages(caseStudy))
+  const handleLanguageSwitch = async (newLang: string) => {
+    await switchContentLanguage(newLang as 'en' | 'ar', caseStudy)
+  }
 
   // SEO meta tags
   useContentSEO(caseStudy, {ogType: 'article'})
@@ -38,24 +51,8 @@
   useBreadcrumbSchema([
     {name: 'Home', url: '/'},
     {name: 'Case Studies', url: '/case-studies'},
-    {name: caseStudy.title, url: caseStudy.path},
+    {name: caseStudy.title, url: caseStudy._path},
   ])
-
-  // Add hreflang tags for bilingual content
-  const basePath = caseStudy.path.replace(/\.ar$/, '')
-  const alternateLinks = [
-    {hreflang: 'en', href: basePath},
-    {hreflang: 'ar', href: `${basePath}.ar`},
-    {hreflang: 'x-default', href: basePath}, // x-default points to English version
-  ]
-
-  useHead({
-    link: alternateLinks.map(link => ({
-      rel: 'alternate',
-      hreflang: link.hreflang,
-      href: `https://majedsiefalnasr.dev${link.href}`,
-    })),
-  })
 </script>
 
 <template>
@@ -80,6 +77,22 @@
           <p class="text-lg text-muted-foreground">
             {{ caseStudy.excerpt }}
           </p>
+
+          <!-- Language Switcher -->
+          <div v-if="availableLanguages.length > 1" class="flex gap-2 mt-4">
+            <button
+              v-for="lang in availableLanguages"
+              :key="lang.lang"
+              @click="handleLanguageSwitch(lang.lang)"
+              :class="[
+                'px-3 py-1 text-sm rounded-md transition-colors',
+                caseStudy.lang === lang.lang
+                  ? 'bg-blue-600 text-white'
+                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600',
+              ]">
+              {{ lang.lang === 'en' ? 'English' : 'العربية' }}
+            </button>
+          </div>
 
           <!-- Tags -->
           <div v-if="caseStudy.tags && caseStudy.tags.length > 0" class="flex flex-wrap gap-2">
@@ -124,7 +137,7 @@
 
         <div class="flex-1 text-center">
           <NuxtLink
-            to="/case-studies"
+            :to="backToCaseStudiesUrl"
             class="inline-flex items-center space-x-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors">
             <Icon icon="radix-icons:arrow-left" class="h-4 w-4" />
             <span>Back to Case Studies</span>

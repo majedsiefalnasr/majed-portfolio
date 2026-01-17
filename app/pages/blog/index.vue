@@ -22,7 +22,8 @@
         })
 
         return sorted ?? []
-      } catch {
+      } catch (error) {
+        console.error('Error fetching blog posts:', error)
         // Silently handle errors and return empty array
         return []
       }

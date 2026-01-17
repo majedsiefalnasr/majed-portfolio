@@ -24,13 +24,14 @@ export interface ContentMetadata {
   featuredImage?: string
   updatedAt?: string
   lang?: 'en' | 'ar'
+  sameAs?: string[] // Array of _path strings for other language variants
   _path: string
   _id: string
 }
 
 /**
  * Blog post entity
- * File location: /content/blog/YYYY/post-slug.md
+ * File location: /content/blog/{lang}/YYYY/post-slug.md
  */
 export interface BlogPost extends ContentMetadata {
   // Frontmatter fields
@@ -59,7 +60,7 @@ export interface BlogPost extends ContentMetadata {
 
 /**
  * Case study entity
- * File location: /content/case-studies/YYYY/project-slug.md
+ * File location: /content/case-studies/{lang}/YYYY/project-slug.md
  */
 export interface CaseStudy extends ContentMetadata {
   // Required fields

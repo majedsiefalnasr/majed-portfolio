@@ -7,6 +7,7 @@ timeline: '4 months (Sep 2025 - Dec 2025)'
 tags: ['react', 'node.js', 'postgresql', 'tailwind', 'vercel']
 excerpt: 'Built a real-time analytics dashboard processing 1M+ events daily with interactive visualizations.'
 featuredImage: '/images/case-studies/2025/dashboard-hero.svg'
+lang: 'en'
 testimonial:
   quote: 'The new dashboard gave us insights we never had before. Performance is incredible.'
   author: 'John Martinez'
@@ -20,7 +21,6 @@ metrics:
     value: '99.95%'
 featured: true
 order: 2
-lang: 'en'
 ---
 
 ## Problem

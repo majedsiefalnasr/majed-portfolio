@@ -14,7 +14,8 @@
       try {
         const result = await queryContentByLocale<CaseStudy>('caseStudies')
         return result ?? []
-      } catch {
+      } catch (error) {
+        console.error('Error fetching case studies:', error)
         // Silently handle errors and return empty array
         return []
       }

@@ -1,11 +1,20 @@
-import {defineContentConfig, defineCollection} from '@nuxt/content'
+import {defineCollection, defineContentConfig} from '@nuxt/content'
 import {z} from 'zod'
 
 export default defineContentConfig({
   collections: {
     blog: defineCollection({
       type: 'page',
-      source: 'blog/**/*.md',
+      source: [
+        {
+          include: 'blog/en/**/*.md',
+          prefix: '/blog',
+        },
+        {
+          include: 'blog/ar/**/*.md',
+          prefix: '/ar/blog',
+        },
+      ],
       schema: z.object({
         title: z.string(),
         date: z.string(),
@@ -14,11 +23,21 @@ export default defineContentConfig({
         excerpt: z.string().optional(),
         featuredImage: z.string().optional(),
         lang: z.string().optional(),
+        sameAs: z.array(z.string()).optional(),
       }),
     }),
     caseStudies: defineCollection({
       type: 'page',
-      source: 'case-studies/**/*.md',
+      source: [
+        {
+          include: 'case-studies/en/**/*.md',
+          prefix: '/case-studies',
+        },
+        {
+          include: 'case-studies/ar/**/*.md',
+          prefix: '/ar/case-studies',
+        },
+      ],
       schema: z.object({
         title: z.string(),
         client: z.string(),
@@ -47,6 +66,7 @@ export default defineContentConfig({
         featured: z.boolean().optional(),
         order: z.number().optional(),
         lang: z.string().optional(),
+        sameAs: z.array(z.string()).optional(),
       }),
     }),
   },

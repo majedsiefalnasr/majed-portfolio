@@ -21,34 +21,38 @@
     robots: 'noindex,follow', // Don't index error pages
   })
 
+  // Determine if this is an Arabic route (starts with ar/)
+  const route = useRoute()
+  const isArabicRoute = route.path.startsWith('/ar/')
+
   // Clear error and navigate to home
-  const handleClearError = () => clearError({redirect: '/'})
+  const handleClearError = () => clearError({redirect: isArabicRoute ? '/ar' : '/'})
 
   // Suggested pages to visit
   const suggestions = [
     {
       title: 'Home',
       description: 'Return to the homepage',
-      to: '/',
+      to: isArabicRoute ? '/ar' : '/',
       icon: 'i-heroicons-home',
     },
     {
       title: 'Blog',
       description: 'Read technical articles and tutorials',
-      to: '/blog',
+      to: isArabicRoute ? '/ar/blog' : '/blog',
       icon: 'i-heroicons-document-text',
     },
     {
       title: 'Case Studies',
       description: 'View portfolio projects and case studies',
-      to: '/case-studies',
+      to: isArabicRoute ? '/ar/case-studies' : '/case-studies',
       icon: 'i-heroicons-briefcase',
     },
   ]
 </script>
 
 <template>
-  <UContainer class="py-16">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <div class="mx-auto max-w-2xl text-center">
       <!-- Error Code -->
       <div class="mb-8">
@@ -125,5 +129,5 @@
         </Card>
       </div>
     </div>
-  </UContainer>
+  </div>
 </template>

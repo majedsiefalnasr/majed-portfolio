@@ -137,6 +137,8 @@ export function useContentSEO(
       noindex?: boolean
     }
     lang?: 'en' | 'ar'
+    sameAs?: string[]
+    _path?: string
   },
   options?: {
     ogType?: 'website' | 'article' | 'profile'
@@ -159,6 +161,24 @@ export function useContentSEO(
   // Determine robots directive
   const robots = content.seo?.noindex ? 'noindex,follow' : 'index,follow'
 
+  // Generate alternate links from sameAs if not provided
+  let alternateLinks = options?.alternateLinks
+  if (!alternateLinks && content.sameAs && content._path) {
+    const config = useRuntimeConfig()
+    const siteUrl = (config.public?.siteUrl as string | undefined) || 'https://majedsiefalnasr.dev'
+
+    alternateLinks = [
+      {hreflang: content.lang || 'en', href: `${siteUrl}${content._path}`},
+      ...content.sameAs
+        .map(path => {
+          const langMatch = path.match(/\/(en|ar)\//)
+          return langMatch ? {hreflang: langMatch[1], href: `${siteUrl}${path}`} : null
+        })
+        .filter(Boolean),
+      {hreflang: 'x-default', href: `${siteUrl}${content._path}`},
+    ]
+  }
+
   // Build SEO metadata
   const metadata: SEOMetadata = {
     title,
@@ -168,7 +188,7 @@ export function useContentSEO(
     ogType: options?.ogType,
     canonical: options?.canonical,
     lang: content.lang,
-    alternateLinks: options?.alternateLinks,
+    alternateLinks,
     robots,
   }
 

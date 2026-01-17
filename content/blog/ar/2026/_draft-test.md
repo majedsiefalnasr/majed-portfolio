@@ -3,7 +3,7 @@ title: 'This is a draft test post'
 date: 2026-01-14
 tags: ['test']
 excerpt: 'This post should be excluded from the blog list'
-lang: 'en'
+lang: 'ar'
 ---
 
 ## Draft Content

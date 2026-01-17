@@ -37,5 +37,15 @@
   },
   "footer": {
     "copyright": "© {year} Majed Sief Alnasr. All rights reserved."
+  },
+  "content": {
+    "notAvailable": {
+      "title": "Content Not Available",
+      "description": "This content is not available in the selected language.",
+      "availableLanguages": "Available Languages"
+    }
+  },
+  "common": {
+    "backToHome": "Back to Home"
   }
 }

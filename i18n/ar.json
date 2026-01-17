@@ -37,5 +37,15 @@
   },
   "footer": {
     "copyright": "© {year} ماجد سيف النصر. جميع الحقوق محفوظة."
+  },
+  "content": {
+    "notAvailable": {
+      "title": "المحتوى غير متوفر",
+      "description": "هذا المحتوى غير متوفر باللغة المحددة.",
+      "availableLanguages": "اللغات المتاحة"
+    }
+  },
+  "common": {
+    "backToHome": "العودة إلى الرئيسية"
   }
 }

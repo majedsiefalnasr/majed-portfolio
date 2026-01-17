@@ -1,12 +1,13 @@
 /**
  * useContentLocale Composable
  *
- * Provides locale-aware content querying for bilingual content files.
- * Files follow the naming convention:
- * - English (default): post-slug.md, case-study-slug.md
- * - Arabic: post-slug.ar.md, case-study-slug.ar.md
+ * Provides locale-aware content querying for multilingual content files.
+ * Files follow the new directory structure:
+ * - content/{type}/{lang}/YYYY/slug.md
+ * - e.g., content/blog/en/2026/post-slug.md
+ * - e.g., content/blog/ar/2026/post-slug.md
  *
- * Uses Nuxt Content v3 queryCollection API with post-query filtering.
+ * Uses Nuxt Content v3 queryCollection API with path-based querying.
  */
 
 interface ContentItem {
@@ -19,7 +20,7 @@ interface UseContentLocaleReturn {
   getContentPath: (slug: string) => string
   queryContentByLocale: <T extends ContentItem = ContentItem>(
     collection: 'blog' | 'caseStudies'
-  ) => Promise<T[]>
+  ) => any // Query builder
 }
 
 export function useContentLocale(): UseContentLocaleReturn {
@@ -28,14 +29,17 @@ export function useContentLocale(): UseContentLocaleReturn {
 
   /**
    * Get locale-specific content file path
-   * @param slug - Base slug without extension (e.g., 'my-post', 'my-case-study')
-   * @returns Full path with locale suffix for non-English (e.g., 'my-post.ar' for Arabic)
+   * @param slug - Slug which may include lang/YYYY/ or just slug
+   * @returns Full path with locale prefix if not present
    */
   const getContentPath = (slug: string): string => {
-    if (currentLocale.value === 'ar') {
-      return `${slug}.ar`
+    // If slug already includes lang (e.g., 'en/2026/my-post'), use as is
+    if (slug.match(/^(en|ar)\/\d{4}\//)) {
+      return slug
     }
-    return slug
+    // Otherwise, construct path with current locale
+    const year = new Date().getFullYear() // Default to current year, can be improved
+    return `${currentLocale.value}/${year}/${slug}`
   }
 
   /**
@@ -48,40 +52,22 @@ export function useContentLocale(): UseContentLocaleReturn {
    * @param collection - Content collection name ('blog' or 'caseStudies')
    * @returns Promise resolving to locale-filtered content array
    */
-  const queryContentByLocale = async <T extends ContentItem = ContentItem>(
+  const queryContentByLocale = <T extends ContentItem = ContentItem>(
     collection: 'blog' | 'caseStudies'
-  ): Promise<T[]> => {
-    const isArabic = currentLocale.value === 'ar'
-
-    try {
-      // Fetch all items from the collection
-      const allItems = await queryCollection<T>(collection).all()
-
-      if (isArabic) {
-        // For Arabic, only include files with .ar suffix AND exclude drafts (/_)
-        // Example: /2026/post-slug.ar
-        const filtered = allItems.filter((item: T) => {
-          const path = (item?.path ?? item?._path ?? '') as string
-          const isArabicFile = path.endsWith('.ar')
-          const isDraft = path.includes('/_')
-          return isArabicFile && !isDraft
-        })
+  ) => {
+    // Fetch all items and filter by locale manually to avoid where() issues
+    return queryCollection<T>(collection)
+      .all()
+      .then(items => {
+        const filtered =
+          items?.filter(
+            item =>
+              item.lang === currentLocale.value &&
+              !item.path?.includes('/_draft') &&
+              !item.stem?.includes('_draft')
+          ) || []
         return filtered
-      } else {
-        // For English (default), exclude files with .ar suffix AND exclude drafts (/_)
-        // Example: /2026/post-slug (but NOT /2026/post-slug.ar or /2026/_draft)
-        const filtered = allItems.filter((item: T) => {
-          const path = (item?.path ?? item?._path ?? '') as string
-          const isArabicFile = path.endsWith('.ar')
-          const isDraft = path.includes('/_')
-          return !isArabicFile && !isDraft
-        })
-        return filtered
-      }
-    } catch {
-      // Silently handle errors and return empty array
-      return []
-    }
+      })
   }
 
   return {

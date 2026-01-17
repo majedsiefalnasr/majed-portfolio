@@ -5,7 +5,7 @@ author: 'Majed Sief Alnasr'
 tags: ['nuxt', 'content', 'markdown', 'tutorial']
 excerpt: 'Learn how to create dynamic content with Nuxt Content v3 using MDC components and advanced markdown features.'
 featuredImage: '/images/blog/2026/nuxt-content-hero.svg'
-lang: 'en'
+lang: 'ar'
 ---
 
 ## Introduction

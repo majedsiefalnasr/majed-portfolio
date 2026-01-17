@@ -13,21 +13,42 @@ export default defineSitemapEventHandler(async event => {
   // Query all blog posts from content directory
   const posts = await queryCollection(event, 'blog').all()
 
-  return posts.map((post: any) => {
+  // Filter out draft content
+  const publishedPosts = posts.filter(
+    (post: any) => !post.path?.includes('/_draft') && !post.stem?.includes('_draft')
+  )
+
+  return publishedPosts.map((post: any) => {
+    // Build alternatives from sameAs
+    const alternatives = []
+    if (post.lang) {
+      alternatives.push({
+        lang: post.lang,
+        href: post.path,
+      })
+    }
+    if (post.sameAs) {
+      post.sameAs.forEach((altPath: string) => {
+        if (altPath.includes('/ar/')) {
+          alternatives.push({
+            lang: 'ar',
+            href: altPath,
+          })
+        } else {
+          alternatives.push({
+            lang: 'en',
+            href: altPath,
+          })
+        }
+      })
+    }
+
     return asSitemapUrl({
-      loc: post._path,
+      loc: post.path,
       lastmod: post.date,
       changefreq: 'monthly',
       priority: 0.8,
-      // Add alternate language versions if available
-      alternatives: post.lang
-        ? [
-            {
-              lang: post.lang,
-              href: post._path,
-            },
-          ]
-        : undefined,
+      alternatives: alternatives.length > 0 ? alternatives : undefined,
     })
   })
 })

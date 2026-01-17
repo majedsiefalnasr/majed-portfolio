@@ -5,7 +5,7 @@ author: 'Majed Sief Alnasr'
 tags: ['nuxt', 'content', 'markdown']
 excerpt: 'Learn how to build a powerful blog with Nuxt Content v3 and leverage MDC components for rich, interactive articles.'
 featuredImage: '/images/blog/2026/nuxt-content-hero.svg'
-lang: 'en'
+lang: 'ar'
 ---
 
 ## Introduction

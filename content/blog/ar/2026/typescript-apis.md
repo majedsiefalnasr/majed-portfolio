@@ -1,10 +1,11 @@
 ---
-title: 'Building Type-Safe APIs with TypeScript 000000'
+title: 'Building Type-Safe APIs with TypeScript'
 date: 2026-01-10
 author: 'Majed Sief Alnasr'
 tags: ['typescript', 'api', 'backend']
 excerpt: 'Discover best practices for creating robust, type-safe REST APIs using TypeScript and modern frameworks.'
 lang: 'ar'
+sameAs: ['/blog/2026/typescript-apis']
 ---
 
 ## Why Type Safety Matters

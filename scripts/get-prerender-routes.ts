@@ -11,40 +11,68 @@ export async function getPrerenderRoutes(): Promise<string[]> {
   try {
     // Get all blog post files
     const blogDir = join(process.cwd(), 'content/blog')
-    const years = await fs.readdir(blogDir)
+    const langs = await fs.readdir(blogDir)
 
-    for (const year of years) {
-      if (year.startsWith('_') || year.startsWith('.')) continue
+    for (const lang of langs) {
+      if (lang.startsWith('_') || lang.startsWith('.')) continue
 
-      const yearPath = join(blogDir, year)
-      const stat = await fs.stat(yearPath)
+      const langPath = join(blogDir, lang)
+      const stat = await fs.stat(langPath)
 
       if (stat.isDirectory()) {
-        const files = await fs.readdir(yearPath)
+        const years = await fs.readdir(langPath)
 
-        for (const file of files) {
-          // Skip draft files and non-markdown files
-          if (file.startsWith('_') || !file.endsWith('.md')) continue
+        for (const year of years) {
+          if (year.startsWith('_') || year.startsWith('.')) continue
 
-          const slug = file.replace(/\.md$/, '').replace(/\.ar$/, '')
-          const isArabic = file.endsWith('.ar.md')
+          const yearPath = join(langPath, year)
+          const yearStat = await fs.stat(yearPath)
 
-          routes.push(isArabic ? `/ar/blog/${year}/${slug}` : `/blog/${year}/${slug}`)
+          if (yearStat.isDirectory()) {
+            const files = await fs.readdir(yearPath)
+
+            for (const file of files) {
+              // Skip draft files and non-markdown files
+              if (file.startsWith('_') || !file.endsWith('.md')) continue
+
+              const slug = file.replace(/\.md$/, '')
+              // Generate routes based on new URL structure
+              if (lang === 'en') {
+                routes.push(`/blog/${year}/${slug}`)
+              } else {
+                routes.push(`/ar/blog/${year}/${slug}`)
+              }
+            }
+          }
         }
       }
     }
 
     // Get all case study files
     const caseStudiesDir = join(process.cwd(), 'content/case-studies')
-    const caseStudyFiles = await fs.readdir(caseStudiesDir)
+    const caseLangs = await fs.readdir(caseStudiesDir)
 
-    for (const file of caseStudyFiles) {
-      if (file.startsWith('_') || !file.endsWith('.md')) continue
+    for (const lang of caseLangs) {
+      if (lang.startsWith('_') || lang.startsWith('.')) continue
 
-      const slug = file.replace(/\.md$/, '').replace(/\.ar$/, '')
-      const isArabic = file.endsWith('.ar.md')
+      const langPath = join(caseStudiesDir, lang)
+      const stat = await fs.stat(langPath)
 
-      routes.push(isArabic ? `/ar/case-studies/${slug}` : `/case-studies/${slug}`)
+      if (stat.isDirectory()) {
+        const files = await fs.readdir(langPath)
+
+        for (const file of files) {
+          if (file.startsWith('_') || !file.endsWith('.md')) continue
+
+          const slug = file.replace(/\.md$/, '')
+          // Generate routes based on new URL structure
+          if (lang === 'en') {
+            routes.push(`/case-studies/${slug}`)
+          } else {
+            routes.push(`/ar/case-studies/${slug}`)
+          }
+        }
+      }
     }
   } catch (error) {
     console.warn('Error reading content directory:', error)
