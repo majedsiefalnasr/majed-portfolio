@@ -10,13 +10,7 @@
 
   // Fetch blog post by path
   const {data: post} = await useAsyncData(`blog-${route.path}`, () =>
-    queryCollection('blog')
-      .all()
-      .then(items => {
-        // Find item by path
-        const found = items.find(item => item.path === route.path) || null
-        return found
-      })
+    queryCollection('blog').path(route.path).first()
   )
 
   // 404 if post not found
@@ -31,16 +25,10 @@
   const readTime = useReadTime(post.value.body)
 
   // Get previous/next navigation (locale-specific)
-  const {queryContentByLocale} = useContentLocale()
-  const {data: allPosts} = await useAsyncData('all-blog-posts', () =>
-    queryContentByLocale('blog').sort({date: -1}).find()
-  )
-
-  const posts = allPosts.value || []
-  const currentIndex = posts.findIndex(p => p.path === post.value!.path)
+  const {data: nav} = await useContentNavigation(post.value!, 'blog')
   const navigation = computed(() => ({
-    previous: posts[currentIndex + 1] || null,
-    next: posts[currentIndex - 1] || null,
+    previous: nav.value?.previous || null,
+    next: nav.value?.next || null,
   }))
 
   // Language switching

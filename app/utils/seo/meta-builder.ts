@@ -7,16 +7,7 @@
 
 import type {SEOMetadata} from '~/types/seo'
 
-/**
- * Site configuration for SEO
- * TODO: Move to runtime config or environment variables
- */
-const SITE_CONFIG = {
-  url: 'https://majedsiefalnasr.dev', // TODO: Replace with actual domain
-  defaultImage: '/images/og/default.png',
-  author: 'Majed Sief Alnasr',
-  twitterHandle: '@majedsiefalnasr', // TODO: Update with actual Twitter handle
-}
+const DEFAULT_IMAGE = '/images/og/default.png'
 
 /**
  * Builds complete SEO meta tags from metadata object
@@ -25,12 +16,13 @@ const SITE_CONFIG = {
  * @returns Object compatible with useSeoMeta() from @nuxtjs/seo
  */
 export function buildMetaTags(metadata: SEOMetadata) {
+  const config = useRuntimeConfig().public
   const {title, description, lang = 'en'} = metadata
 
   // Build absolute URLs for images
   const ogImageUrl = metadata.ogImage
     ? buildAbsoluteUrl(metadata.ogImage)
-    : buildAbsoluteUrl(SITE_CONFIG.defaultImage)
+    : buildAbsoluteUrl(DEFAULT_IMAGE)
 
   const twitterImageUrl = metadata.twitterImage
     ? buildAbsoluteUrl(metadata.twitterImage)
@@ -50,7 +42,7 @@ export function buildMetaTags(metadata: SEOMetadata) {
     ogImage: ogImageUrl,
     ogType: metadata.ogType || 'website',
     ogUrl: metadata.ogUrl || canonicalUrl,
-    ogSiteName: 'Majed Sief Alnasr | CX & Product Designer',
+    ogSiteName: config.siteName,
     ogLocale: lang === 'ar' ? 'ar_SA' : 'en_US',
 
     // Twitter Card tags
@@ -58,8 +50,8 @@ export function buildMetaTags(metadata: SEOMetadata) {
     twitterTitle: metadata.twitterTitle || metadata.ogTitle || title,
     twitterDescription: metadata.twitterDescription || metadata.ogDescription || description,
     twitterImage: twitterImageUrl,
-    twitterSite: SITE_CONFIG.twitterHandle,
-    twitterCreator: SITE_CONFIG.twitterHandle,
+    twitterSite: config.twitterHandle,
+    twitterCreator: config.twitterHandle,
 
     // Additional meta tags
     robots: metadata.robots || 'index,follow',
@@ -159,7 +151,8 @@ export function buildAbsoluteUrl(path: string): string {
   // Ensure path starts with /
   const cleanPath = path.startsWith('/') ? path : `/${path}`
 
-  return `${SITE_CONFIG.url}${cleanPath}`
+  const config = useRuntimeConfig().public
+  return `${config.siteUrl}${cleanPath}`
 }
 
 /**

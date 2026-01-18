@@ -6,6 +6,15 @@ export default defineNuxtConfig({
   compatibilityDate: '2026-01-12',
   devtools: {enabled: true},
 
+  runtimeConfig: {
+    public: {
+      siteUrl: 'https://majedsiefalnasr.dev',
+      siteName: 'Majed Sief Alnasr - Portfolio',
+      twitterHandle: '@majedsiefalnasr',
+      siteAuthor: 'Majed Sief Alnasr',
+    },
+  },
+
   components: [
     {
       path: '~/components',

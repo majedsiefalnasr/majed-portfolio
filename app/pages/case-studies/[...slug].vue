@@ -10,9 +10,7 @@
 
   // Fetch case study by path
   const {data: study} = await useAsyncData(`case-study-${route.path}`, () =>
-    queryCollection('caseStudies')
-      .all()
-      .then(items => items.find(item => item.path === route.path) || null)
+    queryCollection('caseStudies').path(route.path).first()
   )
 
   // Handle 404
@@ -28,7 +26,9 @@
   )
 
   // Get navigation links (locale-specific)
-  const {previous, next} = await useContentNavigation(caseStudy.path, 'caseStudies')
+  const {data: nav} = await useContentNavigation(caseStudy, 'caseStudies')
+  const previous = computed(() => nav.value?.previous)
+  const next = computed(() => nav.value?.next)
 
   // Language switching
   const availableLanguages = computed(() => getAvailableLanguages(caseStudy))
