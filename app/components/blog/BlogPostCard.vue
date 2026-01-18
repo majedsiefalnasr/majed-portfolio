@@ -1,14 +1,14 @@
 <script setup lang="ts">
   import Icon from '@/components/ui/Icon.vue'
   import type {BlogPostCardProps} from '~/types/content'
+  import {calculateReadTime} from '~/utils/content/read-time'
 
   const props = withDefaults(defineProps<BlogPostCardProps>(), {
     showExcerpt: true,
     showTags: true,
   })
 
-  // Calculate read time
-  const readTime = computed(() => useReadTime(props.post.body))
+  const readTime = computed(() => calculateReadTime(props.post.body))
 
   // Get excerpt
   const excerpt = computed(() => useExcerpt(props.post))

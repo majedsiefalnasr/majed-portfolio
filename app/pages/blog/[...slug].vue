@@ -1,6 +1,7 @@
 <script setup lang="ts">
   import {queryCollection} from '#imports'
   import Icon from '@/components/ui/Icon.vue'
+  import {calculateReadTime} from '~/utils/content/read-time'
 
   const route = useRoute()
   const {switchContentLanguage, getAvailableLanguages} = useContentLanguage()
@@ -21,8 +22,7 @@
   // Back button URL based on current language
   const backToBlogUrl = computed(() => (isArabicRoute ? '/ar/blog' : '/blog'))
 
-  // Calculate read time
-  const readTime = useReadTime(post.value.body)
+  const readTime = calculateReadTime(post.value.body)
 
   // Get previous/next navigation (locale-specific)
   const {data: nav} = await useContentNavigation(post.value!, 'blog')
