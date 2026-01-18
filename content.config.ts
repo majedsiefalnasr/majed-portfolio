@@ -8,10 +8,12 @@ export default defineContentConfig({
       source: [
         {
           include: 'blog/en/**/*.md',
+          exclude: ['blog/en/**/*_draft*.md'],
           prefix: '/blog',
         },
         {
           include: 'blog/ar/**/*.md',
+          exclude: ['blog/ar/**/*_draft*.md'],
           prefix: '/ar/blog',
         },
       ],
@@ -31,10 +33,12 @@ export default defineContentConfig({
       source: [
         {
           include: 'case-studies/en/**/*.md',
+          exclude: ['case-studies/en/**/*_draft*.md'],
           prefix: '/case-studies',
         },
         {
           include: 'case-studies/ar/**/*.md',
+          exclude: ['case-studies/ar/**/*_draft*.md'],
           prefix: '/ar/case-studies',
         },
       ],
