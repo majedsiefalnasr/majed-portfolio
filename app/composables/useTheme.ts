@@ -39,27 +39,10 @@ export function useTheme(): UseThemeReturn {
    * If preference is 'system', sets to opposite of current resolved theme
    */
   function toggleTheme(): void {
-    console.log('[useTheme] toggleTheme called, current:', {
-      theme: theme.value,
-      preference: preference.value,
-    })
-
-    if (preference.value === 'system') {
-      // Toggle based on current resolved theme
-      const newTheme = theme.value === 'light' ? 'dark' : 'light'
-      console.log('[useTheme] System preference, setting to:', newTheme)
-      setTheme(newTheme)
-    } else {
-      // Toggle between light and dark
-      const newTheme = preference.value === 'light' ? 'dark' : 'light'
-      console.log('[useTheme] Explicit preference, setting to:', newTheme)
-      setTheme(newTheme)
-    }
-
-    console.log('[useTheme] After toggle:', {
-      theme: theme.value,
-      preference: preference.value,
-    })
+    const newTheme = preference.value === 'system'
+      ? (theme.value === 'light' ? 'dark' : 'light')
+      : (preference.value === 'light' ? 'dark' : 'light')
+    setTheme(newTheme)
   }
 
   return {
