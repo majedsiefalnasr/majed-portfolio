@@ -138,21 +138,6 @@ export default defineNuxtConfig({
     sources: ['/api/__sitemap__/blog', '/api/__sitemap__/case-studies'],
   },
 
-  content: {
-    highlight: {
-      theme: {
-        default: 'github-light',
-        dark: 'github-dark',
-      },
-    },
-    markdown: {
-      anchorLinks: false,
-    },
-    ignores: [
-      '**/_*.md', // Exclude draft files with underscore prefix
-    ],
-  },
-
   image: {
     // Optimize images for performance (Core Web Vitals)
     format: ['webp', 'avif'], // Modern formats with better compression
