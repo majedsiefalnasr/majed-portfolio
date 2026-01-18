@@ -20,7 +20,7 @@ interface UseContentLocaleReturn {
   getContentPath: (slug: string) => string
   queryContentByLocale: <T extends ContentItem = ContentItem>(
     collection: 'blog' | 'caseStudies'
-  ) => any // Query builder
+  ) => unknown
 }
 
 export function useContentLocale(): UseContentLocaleReturn {
@@ -44,30 +44,17 @@ export function useContentLocale(): UseContentLocaleReturn {
 
   /**
    * Query content with locale-specific filtering using queryCollection (Nuxt Content v3)
-   * Filters results based on locale after fetching
-   * Path detection:
-   * - For typed collections, entries expose `path` (not `_path`)
-   * - For legacy content queries, entries may expose `_path`
-   * We normalize to `docPath = item.path ?? item._path` and check `.endsWith('.ar')`.
+   * Uses server-side .where() clause for better performance
    * @param collection - Content collection name ('blog' or 'caseStudies')
    * @returns Promise resolving to locale-filtered content array
    */
   const queryContentByLocale = <T extends ContentItem = ContentItem>(
     collection: 'blog' | 'caseStudies'
   ) => {
-    // Fetch all items and filter by locale manually to avoid where() issues
-    return queryCollection<T>(collection)
+    return queryCollection(collection)
+      .where('lang', '=', currentLocale.value)
+      .where('stem', 'NOT LIKE', '\\_%')
       .all()
-      .then(items => {
-        const filtered =
-          items?.filter(
-            item =>
-              item.lang === currentLocale.value &&
-              !item.path?.includes('/_draft') &&
-              !item.stem?.includes('_draft')
-          ) || []
-        return filtered
-      })
   }
 
   return {
