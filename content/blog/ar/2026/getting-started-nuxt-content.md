@@ -89,7 +89,7 @@ const name = ref('test')
 
 You can embed rich media:
 
-::ContentImage{src="/images/blog/2026/nuxt-content-hero.jpg" alt="Nuxt Content Hero" width="800" height="400"}
+::ContentImage{src="/images/blog/2026/nuxt-content-hero.svg" alt="Nuxt Content Hero" width="800" height="400"}
 ::
 
 ## Conclusion

@@ -1,11 +1,5 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@plugin 'tailwindcss-animate';
-@import 'tw-animate-css';
-
-@custom-variant dark (&:is(.dark *));
+@import 'tailwindcss';
+@custom-variant dark (&:where(.dark, .dark *));
 
 /* Apply Geist font globally */
 body {
@@ -88,13 +82,4 @@ h6 {
   --chart-3: 30 80% 55%;
   --chart-4: 280 65% 60%;
   --chart-5: 340 75% 55%;
-}
-
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
 }

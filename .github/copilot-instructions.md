@@ -51,7 +51,7 @@ Use the `@content-generator` agent to create new blog posts and case studies wit
 - Custom template system (default, tutorial, case study templates)
 - Automatic file path resolution and conflict detection
 
-**Documentation**: See [specs/004-content-generation-agent/USAGE.md](specs/004-content-generation-agent/USAGE.md) for complete usage guide.
+**Documentation**: See [.github/agents/content-generator.agent.md](.github/agents/content-generator.agent.md) for the agent reference.
 
 ## Code Style Guidelines
 

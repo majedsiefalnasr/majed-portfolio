@@ -3,14 +3,8 @@
   import type {AppFooterProps, SocialLink} from '../types/layout'
   import {STANDARD_SOCIAL_LINKS} from '../types/layout'
 
-  /**
-   * AppFooter Component
-   *
-   * Footer with social links, copyright, and theme/language toggles.
-   */
-
   const props = withDefaults(defineProps<AppFooterProps>(), {
-    socialLinks: () => STANDARD_SOCIAL_LINKS as unknown as SocialLink[],
+    socialLinks: () => STANDARD_SOCIAL_LINKS as SocialLink[],
     copyright: 'footer.copyright',
     showThemeToggle: true,
     showLanguageSwitcher: true,
@@ -19,30 +13,18 @@
   const {theme, toggleTheme} = useTheme()
   const {locale, setLocale, t} = useLanguage()
 
-  // Handle theme toggle
-  const handleToggleTheme = () => {
-    toggleTheme()
-  }
+  const nextLocale = computed(() => (locale.value === 'en' ? 'ar' : 'en'))
+  const toggleLanguage = () => setLocale(nextLocale.value)
 
-  // Handle language switch with navigation
-  const handleLanguageSwitch = () => {
-    const newLocale = locale.value === 'en' ? 'ar' : 'en'
-    setLocale(newLocale)
-  }
+  const copyrightText = computed(() => t(props.copyright, {year: new Date().getFullYear()}))
 
-  // Format copyright text with current year
-  const copyrightText = computed(() => {
-    return t(props.copyright, {year: new Date().getFullYear()})
-  })
-
-  // Theme toggle button icon
-  const themeIcon = computed(() => {
-    return theme.value === 'dark' ? 'radix-icons:moon' : 'radix-icons:sun'
-  })
+  const themeIcon = computed(() =>
+    theme.value === 'dark' ? 'radix-icons:moon' : 'radix-icons:sun'
+  )
 </script>
 
 <template>
-  <footer class="bg-background-default-surface-layer-1 border-t border-border-default mt-auto">
+  <footer class="bg-background-default-surface-layer-1 border-t mt-auto">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
       <div class="py-8 flex flex-col gap-6">
         <!-- Top row: Social links, Theme toggle, Language switcher -->
@@ -71,7 +53,7 @@
               variant="ghost"
               size="icon"
               :aria-label="t('theme.toggle')"
-              @click="handleToggleTheme">
+              @click="toggleTheme">
               <Icon :icon="themeIcon" class="w-5 h-5" />
             </Button>
 
@@ -81,8 +63,8 @@
               variant="ghost"
               size="sm"
               :aria-label="t('language.switch')"
-              @click="handleLanguageSwitch">
-              {{ locale === 'en' ? 'العربية' : 'English' }}
+              @click="toggleLanguage">
+              {{ nextLocale === 'en' ? 'English' : 'العربية' }}
             </Button>
           </div>
         </div>

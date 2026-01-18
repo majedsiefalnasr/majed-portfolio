@@ -4,8 +4,6 @@
  * Main composable for managing SEO meta tags across the application.
  * Wraps Nuxt's useSeoMeta() with intelligent defaults and fallbacks.
  *
- * @see specs/005-seo-optimization/data-model.md
- * @see specs/005-seo-optimization/research.md
  */
 
 import type {SEOMetadata} from '~/types/seo'

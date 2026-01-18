@@ -3,8 +3,6 @@
  *
  * Generates meta tags for SEO with intelligent fallbacks and defaults.
  * Handles title, description, Open Graph, and Twitter Card tags.
- *
- * @see specs/005-seo-optimization/data-model.md
  */
 
 import type {SEOMetadata} from '~/types/seo'

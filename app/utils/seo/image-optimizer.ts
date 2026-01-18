@@ -3,8 +3,6 @@
  *
  * Handles OG image optimization, fallbacks, and validation.
  * Ensures all images meet SEO and performance requirements.
- *
- * @see specs/005-seo-optimization/data-model.md
  */
 
 import type {ImageMetadata} from '~/types/seo'

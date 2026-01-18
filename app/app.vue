@@ -1,11 +1,4 @@
 <script setup lang="ts">
-  /**
-   * Root App Component
-   *
-   * Manages global layout with AppHeader and AppFooter.
-   * Sets html lang and dir attributes based on locale.
-   */
-
   import {Analytics} from '@vercel/analytics/nuxt'
   import {SpeedInsights} from '@vercel/speed-insights/nuxt'
 
@@ -30,12 +23,10 @@
       },
     ],
   })
-
-  console.log('[App] Initialized with locale:', locale.value, 'and direction:', direction.value)
 </script>
 
 <template>
-  <div class="min-h-screen flex flex-col bg-background text-foreground">
+  <div class="min-h-screen flex flex-col bg-white dark:bg-black dark:text-white">
     <AppHeader />
 
     <main class="flex-1">
