@@ -96,8 +96,8 @@ export function calculateReadTime(
   const codeBlockMatches = text.match(/```[\s\S]*?```|`[^`]+`/g) || []
   const codeWords = codeBlockMatches
     .join(' ')
-    .replace(/```[\s\S]*?```/g, ' ')
-    .replace(/`[^`]+`/g, ' ')
+    .replace(/```/g, ' ')
+    .replace(/`/g, ' ')
     .split(/\s+/)
     .filter(word => word.length > 0).length
 
