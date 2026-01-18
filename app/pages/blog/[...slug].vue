@@ -21,7 +21,7 @@
 
   // 404 if post not found
   if (!post.value) {
-    throw createError({statusCode: 404, statusMessage: 'Post not found'})
+    throw createError({statusCode: 404, statusMessage: 'Post not found', fatal: true})
   }
 
   // Back button URL based on current language

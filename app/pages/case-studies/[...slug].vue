@@ -17,7 +17,7 @@
 
   // Handle 404
   if (!study.value) {
-    throw createError({statusCode: 404, statusMessage: 'Case study not found'})
+    throw createError({statusCode: 404, statusMessage: 'Case study not found', fatal: true})
   }
 
   const caseStudy = study.value
