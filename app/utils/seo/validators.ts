@@ -3,8 +3,6 @@
  *
  * Zod schemas for validating SEO metadata with soft validation (warnings, not errors).
  * Provides character count guidance for optimal SEO performance.
- *
- * @see specs/005-seo-optimization/data-model.md
  */
 
 import {z} from 'zod'

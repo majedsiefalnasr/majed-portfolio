@@ -2,15 +2,8 @@
   import type {AppHeaderProps, NavigationLink} from '../types/layout'
   import {STANDARD_NAV_LINKS} from '../types/layout'
 
-  /**
-   * AppHeader Component
-   *
-   * Main navigation header with logo and navigation links.
-   * Logo positioned on start edge (left for LTR, right for RTL).
-   */
-
   const props = withDefaults(defineProps<AppHeaderProps>(), {
-    links: () => STANDARD_NAV_LINKS as unknown as NavigationLink[],
+    links: () => STANDARD_NAV_LINKS as NavigationLink[],
     showNav: true,
   })
 
@@ -18,9 +11,8 @@
   const route = useRoute()
   const localePath = useLocalePath()
 
-  // Compute active state and localized paths for navigation links
-  const navLinks = computed(() => {
-    return props.links.map(link => {
+  const navLinks = computed(() =>
+    props.links.map(link => {
       const localizedPath = localePath(link.to)
       return {
         ...link,
@@ -28,12 +20,11 @@
         active: route.path === localizedPath,
       }
     })
-  })
+  )
 </script>
 
 <template>
-  <header
-    class="bg-background-default-surface-layer-1 border-b border-border-default sticky top-0 z-50">
+  <header class="bg-background-default-surface-layer-1 border-b sticky top-0 z-50">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16">
         <!-- Logo (start edge - left for LTR, right for RTL) -->

@@ -19,7 +19,7 @@
       <div
         v-for="metric in metrics"
         :key="metric.label"
-        class="metric-item bg-card rounded-lg p-6 border border-border shadow-sm hover:shadow-md transition-shadow">
+        class="metric-item bg-card rounded-lg p-6 border shadow-sm hover:shadow-md transition-shadow">
         <div class="flex items-center justify-between">
           <div class="flex-1">
             <div class="text-2xl font-bold text-foreground mb-1">

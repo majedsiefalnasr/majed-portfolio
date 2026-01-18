@@ -14,6 +14,8 @@ Auto-generated from all feature plans. Last updated: 2026-01-12
 - File-based (Markdown frontmatter for metadata, static JSON-LD schemas) (005-seo-optimization)
 - TypeScript (strict mode), Vue 3, Nuxt 4 + shadcn-vue (CLI-based), Radix Icons, Tailwind CSS, Nuxt Content v3, @nuxtjs/i18n (006-shadcn-vue-migration)
 - N/A (static site, content in markdown files) (006-shadcn-vue-migration)
+- TypeScript 5.6.3 (Nuxt 4.2.2 / Vue 3.5.26) + Nuxt 4, Nuxt Content v3, Nuxt Image, Nuxt i18n, Nuxt SEO, Tailwind CSS, Zod (001-code-cleanup-performance)
+- File-based Markdown content in content/ (Nuxt Content v3) (001-code-cleanup-performance)
 
 - TypeScript (strict mode) with Vue 3 Composition API (001-global-setup)
 
@@ -33,9 +35,9 @@ npm test && npm run lint
 TypeScript (strict mode) with Vue 3 Composition API: Follow standard conventions
 
 ## Recent Changes
+- 001-code-cleanup-performance: Added TypeScript 5.6.3 (Nuxt 4.2.2 / Vue 3.5.26) + Nuxt 4, Nuxt Content v3, Nuxt Image, Nuxt i18n, Nuxt SEO, Tailwind CSS, Zod
 - 006-shadcn-vue-migration: Added TypeScript (strict mode), Vue 3, Nuxt 4 + shadcn-vue (CLI-based), Radix Icons, Tailwind CSS, Nuxt Content v3, @nuxtjs/i18n
 - 005-seo-optimization: Added TypeScript 5.6+ (strict mode) with Vue 3.5+ Composition API
-- 004-content-generation-agent: Added TypeScript 5.x (strict mode enabled per constitution) + GitHub Copilot Chat API, @nuxt/content v3, Nuxt 4.x
 
 
 <!-- MANUAL ADDITIONS START -->

@@ -1,4 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+
+import tailwindcss from '@tailwindcss/vite'
+
 export default defineNuxtConfig({
   compatibilityDate: '2026-01-12',
   devtools: {enabled: true},
@@ -11,7 +14,6 @@ export default defineNuxtConfig({
   ],
 
   modules: [
-    '@nuxtjs/tailwindcss',
     '@nuxtjs/color-mode',
     '@nuxt/fonts',
     '@nuxt/content',
@@ -22,7 +24,6 @@ export default defineNuxtConfig({
     '@nuxt/eslint',
     '@nuxt/scripts',
     '@nuxt/test-utils',
-    '@vercel/analytics/nuxt',
   ],
 
   colorMode: {
@@ -30,6 +31,10 @@ export default defineNuxtConfig({
   },
 
   css: ['~/assets/css/main.css'],
+
+  vite: {
+    plugins: [tailwindcss()],
+  },
 
   // Hybrid rendering: Pre-render specific routes at build time
   routeRules: {

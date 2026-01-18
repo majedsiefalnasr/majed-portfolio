@@ -2,9 +2,6 @@
  * SEO Type Definitions
  *
  * Type definitions for SEO metadata, structured data, and content frontmatter extensions.
- * Based on data-model.md specifications.
- *
- * @see specs/005-seo-optimization/data-model.md
  */
 
 /**

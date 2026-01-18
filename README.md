@@ -93,10 +93,7 @@ This portfolio includes a powerful GitHub Copilot agent for creating blog posts 
 
 ### Documentation
 
-- **Usage Guide**: [specs/004-content-generation-agent/USAGE.md](specs/004-content-generation-agent/USAGE.md)
-- **Examples**: See [specs/004-content-generation-agent/examples/](specs/004-content-generation-agent/examples/)
-  - [Sample Blog Post](specs/004-content-generation-agent/examples/sample-blog-post.md)
-  - [Sample Case Study](specs/004-content-generation-agent/examples/sample-case-study.md)
+- **Agent Reference**: [.github/agents/content-generator.agent.md](.github/agents/content-generator.agent.md)
 
 ## Project Structure
 
@@ -112,15 +109,22 @@ majed-portfolio/
 ├── content/
 │   ├── blog/              # Blog posts (markdown)
 │   └── case-studies/      # Case studies (markdown)
-├── specs/                 # Feature specifications
-│   ├── 001-global-setup/
-│   ├── 002-ui-design-system/
-│   ├── 003-content-engine/
-│   └── 004-content-generation-agent/
+├── specs/                 # Feature specifications (active)
 ├── test/                  # Test files
 ├── i18n/                  # Internationalization
 └── public/                # Static assets
 ```
+
+## Editing Guide
+
+### Common Updates
+
+- **Navigation and layout**: Update [app/components/AppHeader.vue](app/components/AppHeader.vue) and [app/components/AppFooter.vue](app/components/AppFooter.vue).
+- **Global layout shell**: Update [app/app.vue](app/app.vue).
+- **Blog posts**: Add/edit Markdown in content/blog/YYYY/slug.md.
+- **Case studies**: Add/edit Markdown in content/case-studies/.
+- **Images**: Place in public/images/ and reference with /images/... paths.
+- **Translations**: Update i18n/en.json and i18n/ar.json for UI text.
 
 ## Content Structure
 
