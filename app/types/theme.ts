@@ -4,7 +4,7 @@
  * Types for theme preference management and color theming
  */
 
-import type {ComputedRef} from 'vue'
+import type { ComputedRef } from 'vue'
 
 // ============================================================================
 // Theme System Types
@@ -65,7 +65,13 @@ export interface ThemeConfig {
 /**
  * Color token categories (semantic grouping)
  */
-export type ColorCategory = 'Background' | 'Border' | 'Button' | 'Icon' | 'Typography' | 'Palettes'
+export type ColorCategory =
+  | 'Background'
+  | 'Border'
+  | 'Button'
+  | 'Icon'
+  | 'Typography'
+  | 'Palettes'
 
 /**
  * Complete color token definition
@@ -129,5 +135,7 @@ export function isThemePreference(value: unknown): value is ThemePreference {
  */
 export function isHexColor(value: unknown): value is HexColor {
   if (typeof value !== 'string') return false
-  return /^#([0-9A-Fa-f]{3}|[0-9A-Fa-f]{4}|[0-9A-Fa-f]{6}|[0-9A-Fa-f]{8})$/.test(value)
+  return /^#([0-9A-Fa-f]{3}|[0-9A-Fa-f]{4}|[0-9A-Fa-f]{6}|[0-9A-Fa-f]{8})$/.test(
+    value,
+  )
 }

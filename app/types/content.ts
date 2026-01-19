@@ -5,8 +5,8 @@
  * Note: H1 auto-generated from frontmatter title; markdown content uses H2-H6
  */
 
-import type {ParsedContentv2 as NuxtParsedContent} from '@nuxt/content'
-import type {SEOFrontmatter} from './seo'
+import type { ParsedContentv2 as NuxtParsedContent } from '@nuxt/content'
+import type { SEOFrontmatter } from './seo'
 
 // ============================================================================
 // Core Content Types
@@ -355,7 +355,7 @@ export interface FrontmatterValidation {
   required: string[]
   optional: string[]
   types: Record<string, string>
-  ranges: Record<string, {min?: number; max?: number}>
+  ranges: Record<string, { min?: number; max?: number }>
 }
 
 /**

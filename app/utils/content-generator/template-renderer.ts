@@ -4,8 +4,8 @@
  * Generate complete markdown content from metadata and AI-generated sections.
  */
 
-import {buildFrontmatter} from './frontmatter-builder'
-import type {BlogPostMetadata, CaseStudyMetadata} from './schemas'
+import { buildFrontmatter } from './frontmatter-builder'
+import type { BlogPostMetadata, CaseStudyMetadata } from './schemas'
 
 /**
  * Generated blog post sections
@@ -48,7 +48,7 @@ export function renderBlogPost(options: {
   mode: 'full' | 'metadata-only'
   sections?: BlogPostSections
 }): string {
-  const {metadata, mode, sections} = options
+  const { metadata, mode, sections } = options
 
   // Build frontmatter
   const frontmatter = buildFrontmatter(metadata)
@@ -107,7 +107,7 @@ export function renderCaseStudy(options: {
   mode: 'full' | 'metadata-only'
   sections?: CaseStudySections
 }): string {
-  const {metadata, mode, sections} = options
+  const { metadata, mode, sections } = options
 
   // Build frontmatter
   const frontmatter = buildFrontmatter(metadata)
@@ -143,7 +143,9 @@ List technologies and tools here...
     throw new Error('Sections are required for full content mode')
   }
 
-  const technologiesSection = sections.technologiesUsed ? `\n${sections.technologiesUsed}\n` : ''
+  const technologiesSection = sections.technologiesUsed
+    ? `\n${sections.technologiesUsed}\n`
+    : ''
 
   return `${frontmatter}
 

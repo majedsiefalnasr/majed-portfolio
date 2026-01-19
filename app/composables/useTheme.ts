@@ -5,7 +5,11 @@
  * Wraps Nuxt UI's useColorMode() for enhanced type safety and convenience.
  */
 
-import type {ThemePreference, ThemeValue, UseThemeReturn} from '../types/theme'
+import type {
+  ThemePreference,
+  ThemeValue,
+  UseThemeReturn,
+} from '../types/theme'
 
 export function useTheme(): UseThemeReturn {
   const colorMode = useColorMode()
@@ -26,7 +30,9 @@ export function useTheme(): UseThemeReturn {
    */
   function setTheme(newTheme: ThemePreference): void {
     if (!['light', 'dark', 'system'].includes(newTheme)) {
-      console.warn(`[useTheme] Invalid theme "${newTheme}". Falling back to "system".`)
+      console.warn(
+        `[useTheme] Invalid theme "${newTheme}". Falling back to "system".`,
+      )
       colorMode.preference = 'system'
       return
     }
@@ -39,9 +45,14 @@ export function useTheme(): UseThemeReturn {
    * If preference is 'system', sets to opposite of current resolved theme
    */
   function toggleTheme(): void {
-    const newTheme = preference.value === 'system'
-      ? (theme.value === 'light' ? 'dark' : 'light')
-      : (preference.value === 'light' ? 'dark' : 'light')
+    const newTheme =
+      preference.value === 'system'
+        ? theme.value === 'light'
+          ? 'dark'
+          : 'light'
+        : preference.value === 'light'
+          ? 'dark'
+          : 'light'
     setTheme(newTheme)
   }
 

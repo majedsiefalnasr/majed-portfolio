@@ -1,5 +1,5 @@
-import {defineCollection, defineContentConfig} from '@nuxt/content'
-import {z} from 'zod'
+import { defineCollection, defineContentConfig } from '@nuxt/content'
+import { z } from 'zod'
 
 export default defineContentConfig({
   collections: {
@@ -64,7 +64,7 @@ export default defineContentConfig({
               label: z.string(),
               value: z.string(),
               icon: z.string().optional(),
-            })
+            }),
           )
           .optional(),
         featured: z.boolean().optional(),

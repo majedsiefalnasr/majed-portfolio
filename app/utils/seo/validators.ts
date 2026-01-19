@@ -5,14 +5,17 @@
  * Provides character count guidance for optimal SEO performance.
  */
 
-import {z} from 'zod'
+import { z } from 'zod'
 
 /**
  * SEO Metadata validation schema (strict validation)
  * Used for runtime validation of SEO metadata objects
  */
 export const seoMetadataSchema = z.object({
-  title: z.string().min(1, 'Title is required').max(60, 'Title must be 60 characters or less'),
+  title: z
+    .string()
+    .min(1, 'Title is required')
+    .max(60, 'Title must be 60 characters or less'),
   description: z
     .string()
     .min(1, 'Description is required')
@@ -22,11 +25,18 @@ export const seoMetadataSchema = z.object({
   ogImage: z.string().optional(),
   ogType: z.enum(['website', 'article', 'profile']).optional(),
   ogUrl: z.string().url('OG URL must be a valid URL').optional(),
-  twitterCard: z.enum(['summary', 'summary_large_image', 'app', 'player']).optional(),
+  twitterCard: z
+    .enum(['summary', 'summary_large_image', 'app', 'player'])
+    .optional(),
   canonical: z.string().url('Canonical URL must be a valid URL').optional(),
   lang: z.enum(['en', 'ar']).optional(),
   robots: z
-    .enum(['index,follow', 'noindex,follow', 'index,nofollow', 'noindex,nofollow'])
+    .enum([
+      'index,follow',
+      'noindex,follow',
+      'index,nofollow',
+      'noindex,nofollow',
+    ])
     .optional(),
 })
 
@@ -36,8 +46,14 @@ export const seoMetadataSchema = z.object({
  */
 export const seoFrontmatterSchema = z
   .object({
-    title: z.string().max(60, 'SEO title must be 60 characters or less').optional(),
-    description: z.string().max(160, 'SEO description must be 160 characters or less').optional(),
+    title: z
+      .string()
+      .max(60, 'SEO title must be 60 characters or less')
+      .optional(),
+    description: z
+      .string()
+      .max(160, 'SEO description must be 160 characters or less')
+      .optional(),
     ogImage: z.string().optional(),
     keywords: z.array(z.string()).optional(),
     noindex: z.boolean().optional(),
@@ -61,10 +77,11 @@ export const imageMetadataSchema = z.object({
  * Recommended size: 1200x630 (1.91:1 ratio)
  */
 export const ogImageDimensionsSchema = z.object({
-  width: z.number().refine(val => val === 1200, {
-    message: 'Recommended OG image width is 1200px for optimal display across platforms',
+  width: z.number().refine((val) => val === 1200, {
+    message:
+      'Recommended OG image width is 1200px for optimal display across platforms',
   }),
-  height: z.number().refine(val => val === 630, {
+  height: z.number().refine((val) => val === 630, {
     message: 'Recommended OG image height is 630px (1.91:1 ratio)',
   }),
 })
@@ -91,21 +108,27 @@ export function validateSEOTitle(title: string): ValidationResult<string> {
 
   if (!title || title.trim().length === 0) {
     errors.push('Title is required')
-    return {success: false, errors}
+    return { success: false, errors }
   }
 
   const length = title.length
 
   if (length > 60) {
-    errors.push(`Title is ${length} characters (max 60). It will be truncated in search results.`)
+    errors.push(
+      `Title is ${length} characters (max 60). It will be truncated in search results.`,
+    )
   }
 
   if (length < 30) {
-    warnings.push(`Title is ${length} characters. Recommended: 30-60 for optimal SEO.`)
+    warnings.push(
+      `Title is ${length} characters. Recommended: 30-60 for optimal SEO.`,
+    )
   }
 
   if (length >= 30 && length <= 60) {
-    warnings.push(`Title length (${length} chars) is optimal for search results.`)
+    warnings.push(
+      `Title length (${length} chars) is optimal for search results.`,
+    )
   }
 
   return {
@@ -122,29 +145,35 @@ export function validateSEOTitle(title: string): ValidationResult<string> {
  * @param description - Description to validate
  * @returns Validation result with warnings
  */
-export function validateSEODescription(description: string): ValidationResult<string> {
+export function validateSEODescription(
+  description: string,
+): ValidationResult<string> {
   const warnings: string[] = []
   const errors: string[] = []
 
   if (!description || description.trim().length === 0) {
     errors.push('Description is required')
-    return {success: false, errors}
+    return { success: false, errors }
   }
 
   const length = description.length
 
   if (length > 160) {
     errors.push(
-      `Description is ${length} characters (max 160). It will be truncated in search results.`
+      `Description is ${length} characters (max 160). It will be truncated in search results.`,
     )
   }
 
   if (length < 120) {
-    warnings.push(`Description is ${length} characters. Recommended: 120-160 for optimal SEO.`)
+    warnings.push(
+      `Description is ${length} characters. Recommended: 120-160 for optimal SEO.`,
+    )
   }
 
   if (length >= 120 && length <= 160) {
-    warnings.push(`Description length (${length} chars) is optimal for search results.`)
+    warnings.push(
+      `Description length (${length} chars) is optimal for search results.`,
+    )
   }
 
   return {
@@ -164,8 +193,8 @@ export function validateSEODescription(description: string): ValidationResult<st
  */
 export function validateOGImageDimensions(
   width: number,
-  height: number
-): ValidationResult<{width: number; height: number}> {
+  height: number,
+): ValidationResult<{ width: number; height: number }> {
   const warnings: string[] = []
   const aspectRatio = width / height
 
@@ -175,26 +204,26 @@ export function validateOGImageDimensions(
 
   if (width !== recommendedWidth || height !== recommendedHeight) {
     warnings.push(
-      `Image dimensions are ${width}x${height}. Recommended: ${recommendedWidth}x${recommendedHeight} (1.91:1 ratio) for optimal display on Facebook, LinkedIn, and Twitter.`
+      `Image dimensions are ${width}x${height}. Recommended: ${recommendedWidth}x${recommendedHeight} (1.91:1 ratio) for optimal display on Facebook, LinkedIn, and Twitter.`,
     )
   }
 
   if (Math.abs(aspectRatio - recommendedRatio) > 0.1) {
     warnings.push(
-      `Image aspect ratio is ${aspectRatio.toFixed(2)}:1. Recommended: 1.91:1 to prevent cropping on social platforms.`
+      `Image aspect ratio is ${aspectRatio.toFixed(2)}:1. Recommended: 1.91:1 to prevent cropping on social platforms.`,
     )
   }
 
   // Minimum dimensions warning
   if (width < 600 || height < 315) {
     warnings.push(
-      `Image dimensions are below minimum recommended size (600x315). Some platforms may not display the image.`
+      `Image dimensions are below minimum recommended size (600x315). Some platforms may not display the image.`,
     )
   }
 
   return {
     success: true,
-    data: {width, height},
+    data: { width, height },
     warnings: warnings.length > 0 ? warnings : undefined,
   }
 }
@@ -241,13 +270,15 @@ export function validateSEOFrontmatter(frontmatter: {
   // Validate keywords count
   if (frontmatter.keywords && frontmatter.keywords.length > 10) {
     warnings.push(
-      `${frontmatter.keywords.length} keywords provided. Recommended: 3-7 keywords for focused SEO.`
+      `${frontmatter.keywords.length} keywords provided. Recommended: 3-7 keywords for focused SEO.`,
     )
   }
 
   // Validate noindex flag
   if (frontmatter.noindex) {
-    warnings.push('Content is marked as noindex. It will not appear in search results.')
+    warnings.push(
+      'Content is marked as noindex. It will not appear in search results.',
+    )
   }
 
   return {
@@ -278,12 +309,14 @@ export function validateImageSEO(image: {
   }
 
   if (!image.width || !image.height) {
-    errors.push('Image width and height are required to prevent Cumulative Layout Shift (CLS)')
+    errors.push(
+      'Image width and height are required to prevent Cumulative Layout Shift (CLS)',
+    )
   }
 
   if (image.alt && image.alt.length > 125) {
     warnings.push(
-      `Alt text is ${image.alt.length} characters. Recommended: under 125 characters for screen readers.`
+      `Alt text is ${image.alt.length} characters. Recommended: under 125 characters for screen readers.`,
     )
   }
 

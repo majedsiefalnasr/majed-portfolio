@@ -71,16 +71,18 @@ export function useArticleSchema(article: {
       name: article.author,
     },
     datePublished: article.datePublished,
-    ...(article.dateModified && {dateModified: article.dateModified}),
-    ...(article.description && {description: article.description}),
+    ...(article.dateModified && { dateModified: article.dateModified }),
+    ...(article.description && { description: article.description }),
     ...(article.image && {
       image: Array.isArray(article.image)
-        ? article.image.map(img => (img.startsWith('http') ? img : `${siteUrl}${img}`))
+        ? article.image.map((img) =>
+            img.startsWith('http') ? img : `${siteUrl}${img}`,
+          )
         : article.image.startsWith('http')
           ? article.image
           : `${siteUrl}${article.image}`,
     }),
-    ...(article.keywords && {keywords: article.keywords}),
+    ...(article.keywords && { keywords: article.keywords }),
     publisher: {
       '@type': 'Person',
       name: article.author,
@@ -125,8 +127,8 @@ export function useCreativeWorkSchema(work: {
       name: work.author,
     },
     datePublished: work.datePublished,
-    ...(work.keywords && {keywords: work.keywords}),
-    ...(work.about && {about: work.about}),
+    ...(work.keywords && { keywords: work.keywords }),
+    ...(work.about && { about: work.about }),
   }
 
   useStructuredDataBase(schema)
@@ -167,12 +169,14 @@ export function usePersonSchema(person: {
     '@context': 'https://schema.org',
     '@type': 'Person',
     name: person.name,
-    ...(person.description && {description: person.description}),
-    ...(person.jobTitle && {jobTitle: person.jobTitle}),
-    ...(person.url && {url: person.url}),
-    ...(person.sameAs && person.sameAs.length > 0 && {sameAs: person.sameAs}),
+    ...(person.description && { description: person.description }),
+    ...(person.jobTitle && { jobTitle: person.jobTitle }),
+    ...(person.url && { url: person.url }),
+    ...(person.sameAs && person.sameAs.length > 0 && { sameAs: person.sameAs }),
     ...(person.image && {
-      image: person.image.startsWith('http') ? person.image : `${siteUrl}${person.image}`,
+      image: person.image.startsWith('http')
+        ? person.image
+        : `${siteUrl}${person.image}`,
     }),
   }
 
@@ -196,7 +200,7 @@ export function useBreadcrumbSchema(
   breadcrumbs: Array<{
     name: string
     url?: string
-  }>
+  }>,
 ) {
   const config = useRuntimeConfig()
   const siteUrl = config.public.siteUrl || 'https://majedsiefalnasr.dev'
@@ -210,7 +214,9 @@ export function useBreadcrumbSchema(
 
     // Only add item (URL) if it's not the current page (last item)
     if (crumb.url && index < breadcrumbs.length - 1) {
-      item.item = crumb.url.startsWith('http') ? crumb.url : `${siteUrl}${crumb.url}`
+      item.item = crumb.url.startsWith('http')
+        ? crumb.url
+        : `${siteUrl}${crumb.url}`
     }
 
     return item
@@ -265,9 +271,9 @@ export function useBlogPostStructuredData(post: {
 
   // Breadcrumb schema
   useBreadcrumbSchema([
-    {name: 'Home', url: '/'},
-    {name: 'Blog', url: '/blog'},
-    {name: post.title}, // Current page
+    { name: 'Home', url: '/' },
+    { name: 'Blog', url: '/blog' },
+    { name: post.title }, // Current page
   ])
 }
 
@@ -308,9 +314,9 @@ export function useCaseStudyStructuredData(caseStudy: {
 
   // Breadcrumb schema
   useBreadcrumbSchema([
-    {name: 'Home', url: '/'},
-    {name: 'Case Studies', url: '/case-studies'},
-    {name: caseStudy.title}, // Current page
+    { name: 'Home', url: '/' },
+    { name: 'Case Studies', url: '/case-studies' },
+    { name: caseStudy.title }, // Current page
   ])
 }
 

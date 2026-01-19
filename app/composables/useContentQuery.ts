@@ -5,14 +5,14 @@
  * reactive refs for data, pending, and error states.
  */
 
-import {queryCollection} from '#imports'
-import type {BlogPost, CaseStudy, ContentQueryOptions} from '~/types/content'
+import { queryCollection } from '#imports'
+import type { BlogPost, CaseStudy, ContentQueryOptions } from '~/types/content'
 
 export function useContentQuery<T = BlogPost | CaseStudy>(
   collection: 'blog' | 'caseStudies',
-  options: ContentQueryOptions = {}
+  options: ContentQueryOptions = {},
 ) {
-  const {where = {}, sort = {date: -1}, limit, skip} = options
+  const { where = {}, sort = { date: -1 }, limit, skip } = options
 
   return useAsyncData(
     `content-${collection}-${JSON.stringify(options)}`,
@@ -34,7 +34,8 @@ export function useContentQuery<T = BlogPost | CaseStudy>(
       if (sort) {
         for (const [field, direction] of Object.entries(sort)) {
           const sortField = field as 'date' | 'stem' | 'title'
-          const sortDirection = direction === 1 || direction === 'ASC' ? 'ASC' : 'DESC'
+          const sortDirection =
+            direction === 1 || direction === 'ASC' ? 'ASC' : 'DESC'
           query = query.order(sortField, sortDirection)
         }
       }
@@ -50,7 +51,7 @@ export function useContentQuery<T = BlogPost | CaseStudy>(
       return query.all()
     },
     {
-      transform: data => data as T[],
-    }
+      transform: (data) => data as T[],
+    },
   )
 }

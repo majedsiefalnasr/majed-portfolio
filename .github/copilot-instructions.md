@@ -203,7 +203,8 @@ seo:
   width="1200"
   height="630"
   loading="eager"
-  class="w-full" />
+  class="w-full"
+/>
 
 <!-- Content image (below fold) - lazy load -->
 <NuxtImg
@@ -211,7 +212,8 @@ seo:
   alt="Architecture diagram showing API flow"
   width="800"
   height="600"
-  loading="lazy" />
+  loading="lazy"
+/>
 ```
 
 ### SEO Validation

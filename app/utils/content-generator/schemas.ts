@@ -6,7 +6,7 @@
  * with TypeScript interfaces in app/types/content.ts.
  */
 
-import {z} from 'zod'
+import { z } from 'zod'
 
 // =============================================================================
 // Shared Validators
@@ -19,11 +19,11 @@ const DateSchema = z
   .string()
   .regex(/^\d{4}-\d{2}-\d{2}$/, 'Date must be in YYYY-MM-DD format')
   .refine(
-    date => {
+    (date) => {
       const parsed = new Date(date)
       return !isNaN(parsed.getTime())
     },
-    {message: 'Date must be a valid date'}
+    { message: 'Date must be a valid date' },
   )
 
 /**
@@ -33,7 +33,10 @@ const TagSchema = z
   .string()
   .min(2, 'Tag must be at least 2 characters')
   .max(30, 'Tag must be at most 30 characters')
-  .regex(/^[a-z0-9-]+$/, 'Tags must be lowercase letters, numbers, and hyphens only')
+  .regex(
+    /^[a-z0-9-]+$/,
+    'Tags must be lowercase letters, numbers, and hyphens only',
+  )
 
 /**
  * Language validator: en or ar
@@ -47,7 +50,7 @@ const ImagePathSchema = z
   .string()
   .regex(
     /^\/images\/.*\.(jpg|jpeg|png|svg|webp|gif)$/i,
-    'Must be a valid image path starting with /images/'
+    'Must be a valid image path starting with /images/',
   )
 
 // =============================================================================
@@ -132,7 +135,11 @@ export const CaseStudyMetadataSchema = z.object({
     .max(100, 'Title must be at most 100 characters')
     .trim(),
 
-  client: z.string().min(2, 'Client name must be at least 2 characters').max(50).trim(),
+  client: z
+    .string()
+    .min(2, 'Client name must be at least 2 characters')
+    .max(50)
+    .trim(),
 
   date: DateSchema,
 
@@ -182,7 +189,9 @@ export const GenerationOptionsSchema = z.object({
   contentType: z.enum(['blog', 'case-study']),
   mode: z.enum(['full', 'metadata-only']),
   length: z.enum(['short', 'medium', 'long']).optional(),
-  tone: z.enum(['professional', 'conversational', 'technical', 'educational']).optional(),
+  tone: z
+    .enum(['professional', 'conversational', 'technical', 'educational'])
+    .optional(),
 })
 
 export type GenerationOptions = z.infer<typeof GenerationOptionsSchema>
@@ -241,7 +250,7 @@ export function validateBlogPostMetadata(data: unknown): ValidationResult {
   const timestamp = new Date()
 
   if (!result.success) {
-    const errors: ValidationError[] = result.error.issues.map(err => ({
+    const errors: ValidationError[] = result.error.issues.map((err) => ({
       field: err.path.join('.'),
       message: err.message,
       code: err.code,
@@ -278,7 +287,8 @@ export function validateBlogPostMetadata(data: unknown): ValidationResult {
   } else if (result.data.excerpt.length > 160) {
     warnings.push({
       field: 'excerpt',
-      message: 'Excerpt is longer than 160 characters - may be truncated in search results',
+      message:
+        'Excerpt is longer than 160 characters - may be truncated in search results',
       code: 'EXCERPT_TOO_LONG',
       severity: 'warning' as const,
     })
@@ -313,7 +323,7 @@ export function validateCaseStudyMetadata(data: unknown): ValidationResult {
   const timestamp = new Date()
 
   if (!result.success) {
-    const errors: ValidationError[] = result.error.issues.map(err => ({
+    const errors: ValidationError[] = result.error.issues.map((err) => ({
       field: err.path.join('.'),
       message: err.message,
       code: err.code,
@@ -350,7 +360,8 @@ export function validateCaseStudyMetadata(data: unknown): ValidationResult {
   } else if (result.data.excerpt.length > 160) {
     warnings.push({
       field: 'excerpt',
-      message: 'Excerpt is longer than 160 characters - may be truncated in search results',
+      message:
+        'Excerpt is longer than 160 characters - may be truncated in search results',
       code: 'EXCERPT_TOO_LONG',
       severity: 'warning' as const,
     })
@@ -359,7 +370,8 @@ export function validateCaseStudyMetadata(data: unknown): ValidationResult {
   if (!result.data.testimonial) {
     warnings.push({
       field: 'testimonial',
-      message: 'Testimonial is missing - case studies are more compelling with client quotes',
+      message:
+        'Testimonial is missing - case studies are more compelling with client quotes',
       code: 'MISSING_TESTIMONIAL',
       severity: 'warning' as const,
     })
@@ -368,7 +380,8 @@ export function validateCaseStudyMetadata(data: unknown): ValidationResult {
   if (!result.data.metrics || result.data.metrics.length === 0) {
     warnings.push({
       field: 'metrics',
-      message: 'Metrics are missing - quantifiable results strengthen case studies',
+      message:
+        'Metrics are missing - quantifiable results strengthen case studies',
       code: 'MISSING_METRICS',
       severity: 'warning' as const,
     })

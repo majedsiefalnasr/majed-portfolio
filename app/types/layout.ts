@@ -4,7 +4,7 @@
  * Types for layout components, navigation, and i18n
  */
 
-import type {ComputedRef} from 'vue'
+import type { ComputedRef } from 'vue'
 
 // ============================================================================
 // Language & i18n Types
@@ -128,11 +128,11 @@ export interface AppFooterProps {
  * Standard navigation links structure
  */
 export const STANDARD_NAV_LINKS: NavigationLink[] = [
-  {label: 'nav.home', to: '/', order: 1},
-  {label: 'nav.projects', to: '/projects', order: 2},
-  {label: 'nav.about', to: '/about', order: 3},
-  {label: 'nav.blog', to: '/blog', order: 4},
-  {label: 'nav.contact', to: '/contact', order: 5},
+  { label: 'nav.home', to: '/', order: 1 },
+  { label: 'nav.projects', to: '/projects', order: 2 },
+  { label: 'nav.about', to: '/about', order: 3 },
+  { label: 'nav.blog', to: '/blog', order: 4 },
+  { label: 'nav.contact', to: '/contact', order: 5 },
 ] as const
 
 /**

@@ -5,7 +5,7 @@
  * from first ~150 characters of content
  */
 
-import type {BlogPost, CaseStudy} from '~/types/content'
+import type { BlogPost, CaseStudy } from '~/types/content'
 
 // Type for parsed AST nodes from Nuxt Content
 interface ContentNode {
@@ -15,7 +15,10 @@ interface ContentNode {
   children?: ContentNode[]
 }
 
-export function useExcerpt(post: BlogPost | CaseStudy, maxLength: number = 150): string {
+export function useExcerpt(
+  post: BlogPost | CaseStudy,
+  maxLength: number = 150,
+): string {
   // Use frontmatter excerpt if provided
   if (post.excerpt && post.excerpt.trim().length > 0) {
     return post.excerpt.trim()

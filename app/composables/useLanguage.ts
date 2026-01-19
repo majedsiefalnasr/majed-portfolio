@@ -5,10 +5,10 @@
  * Wraps @nuxtjs/i18n's useI18n() for enhanced type safety.
  */
 
-import type {Locale, TextDirection, UseLanguageReturn} from '../types/layout'
+import type { Locale, TextDirection, UseLanguageReturn } from '../types/layout'
 
 export function useLanguage(): UseLanguageReturn {
-  const {locale: i18nLocale, t: i18nT} = useI18n()
+  const { locale: i18nLocale, t: i18nT } = useI18n()
   const switchLocalePath = useSwitchLocalePath()
   const router = useRouter()
 
@@ -28,7 +28,9 @@ export function useLanguage(): UseLanguageReturn {
    */
   async function setLocale(newLocale: Locale): Promise<void> {
     if (!['en', 'ar'].includes(newLocale)) {
-      console.warn(`[useLanguage] Invalid locale "${newLocale}". Staying on current locale.`)
+      console.warn(
+        `[useLanguage] Invalid locale "${newLocale}". Staying on current locale.`,
+      )
       return
     }
 

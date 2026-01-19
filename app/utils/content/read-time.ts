@@ -11,8 +11,8 @@
  * - Strips frontmatter and markdown syntax
  */
 
-import {LRUCache} from 'lru-cache'
-import type {ParsedContentv2 as ParsedContent} from '@nuxt/content'
+import { LRUCache } from 'lru-cache'
+import type { ParsedContentv2 as ParsedContent } from '@nuxt/content'
 
 interface ContentNode {
   type?: string
@@ -37,7 +37,9 @@ const readTimeCache = new LRUCache<string, number>({
   ttl: 1000 * 60 * 60,
 })
 
-function getCacheKey(content: string | ParsedContent | undefined): string | null {
+function getCacheKey(
+  content: string | ParsedContent | undefined,
+): string | null {
   if (!content) return null
 
   if (typeof content === 'string') {
@@ -53,7 +55,7 @@ function getCacheKey(content: string | ParsedContent | undefined): string | null
 
 export function calculateReadTime(
   content: string | ParsedContent | undefined,
-  options: ReadTimeOptions = {}
+  options: ReadTimeOptions = {},
 ): number {
   if (!content) return 1
 
@@ -63,7 +65,7 @@ export function calculateReadTime(
     return cached !== undefined ? cached : 1
   }
 
-  const opts = {...DEFAULT_OPTIONS, ...options}
+  const opts = { ...DEFAULT_OPTIONS, ...options }
   let text = ''
 
   if (typeof content === 'string') {
@@ -90,7 +92,7 @@ export function calculateReadTime(
     .replace(/\s+/g, ' ')
     .trim()
 
-  const words = plainText.split(/\s+/).filter(word => word.length > 0)
+  const words = plainText.split(/\s+/).filter((word) => word.length > 0)
   let wordCount = words.length
 
   const codeBlockMatches = text.match(/```[\s\S]*?```|`[^`]+`/g) || []
@@ -99,7 +101,7 @@ export function calculateReadTime(
     .replace(/```/g, ' ')
     .replace(/`/g, ' ')
     .split(/\s+/)
-    .filter(word => word.length > 0).length
+    .filter((word) => word.length > 0).length
 
   wordCount += Math.floor(codeWords * (opts.codeWeight - 1))
 

@@ -1,5 +1,8 @@
-import {describe, it, expect, beforeEach} from 'vitest'
-import {calculateReadTime, clearReadTimeCache} from '../app/utils/content/read-time'
+import { describe, it, expect, beforeEach } from 'vitest'
+import {
+  calculateReadTime,
+  clearReadTimeCache,
+} from '../app/utils/content/read-time'
 
 describe('calculateReadTime', () => {
   beforeEach(() => {
@@ -24,7 +27,7 @@ describe('calculateReadTime', () => {
   it('strips markdown syntax', () => {
     const text = '# Heading\n\nThis is **bold** text with *italics* and `code`.'
     const plainText = text.replace(/[#*_`]/g, '')
-    const words = plainText.split(/\s+/).filter(w => w.length > 0)
+    const words = plainText.split(/\s+/).filter((w) => w.length > 0)
     expect(calculateReadTime(text)).toBe(Math.ceil(words.length / 200))
   })
 
@@ -45,7 +48,7 @@ describe('calculateReadTime', () => {
 
   it('accepts custom options', () => {
     const text = 'word '.repeat(200)
-    const result = calculateReadTime(text, {wpm: 100})
+    const result = calculateReadTime(text, { wpm: 100 })
     expect(result).toBe(2)
   })
 
@@ -57,7 +60,7 @@ describe('calculateReadTime', () => {
 
   it('keeps frontmatter when disabled', () => {
     const text = '---\n'.repeat(200)
-    const result = calculateReadTime(text, {stripFrontmatter: false})
+    const result = calculateReadTime(text, { stripFrontmatter: false })
     expect(result).toBeGreaterThanOrEqual(1)
   })
 })

@@ -1,4 +1,5 @@
-import {asSitemapUrl, defineSitemapEventHandler} from '#imports'
+import { asSitemapUrl, defineSitemapEventHandler } from '#imports'
+import type { CaseStudy } from '../../../types/content'
 
 /**
  * Dynamic sitemap source for case studies
@@ -9,16 +10,18 @@ import {asSitemapUrl, defineSitemapEventHandler} from '#imports'
  * @see US1 Search Engine Discovery
  */
 
-export default defineSitemapEventHandler(async event => {
+export default defineSitemapEventHandler(async (event) => {
   // Query all case studies from content directory
   const caseStudies = await queryCollection(event, 'caseStudies').all()
 
   // Filter out draft content
   const publishedCaseStudies = caseStudies.filter(
-    (caseStudy: any) => !caseStudy.path?.includes('/_draft') && !caseStudy.stem?.includes('_draft')
+    (caseStudy: CaseStudy) =>
+      !caseStudy.path?.includes('/_draft') &&
+      !caseStudy.stem?.includes('_draft'),
   )
 
-  return publishedCaseStudies.map((caseStudy: any) => {
+  return publishedCaseStudies.map((caseStudy: CaseStudy) => {
     // Build alternatives from sameAs
     const alternatives = []
     if (caseStudy.lang) {

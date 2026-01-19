@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Prettier Configuration Contract",
+  "description": "Prettier configuration for consistent code formatting",
+  "type": "object",
+  "properties": {
+    "semi": {
+      "type": "boolean",
+      "enum": [false]
+    },
+    "singleQuote": {
+      "type": "boolean",
+      "enum": [true]
+    },
+    "tabWidth": {
+      "type": "number",
+      "enum": [2]
+    },
+    "plugins": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["@prettier/plugin-tailwindcss"]
+      }
+    }
+  },
+  "required": ["semi", "singleQuote", "tabWidth"]
+}

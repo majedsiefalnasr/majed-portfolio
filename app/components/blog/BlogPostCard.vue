@@ -1,17 +1,17 @@
 <script setup lang="ts">
-  import Icon from '@/components/ui/Icon.vue'
-  import type {BlogPostCardProps} from '~/types/content'
-  import {calculateReadTime} from '~/utils/content/read-time'
+import Icon from '@/components/ui/Icon.vue'
+import type { BlogPostCardProps } from '~/types/content'
+import { calculateReadTime } from '~/utils/content/read-time'
 
-  const props = withDefaults(defineProps<BlogPostCardProps>(), {
-    showExcerpt: true,
-    showTags: true,
-  })
+const props = withDefaults(defineProps<BlogPostCardProps>(), {
+  showExcerpt: true,
+  showTags: true,
+})
 
-  const readTime = computed(() => calculateReadTime(props.post.body))
+const readTime = computed(() => calculateReadTime(props.post.body))
 
-  // Get excerpt
-  const excerpt = computed(() => useExcerpt(props.post))
+// Get excerpt
+const excerpt = computed(() => useExcerpt(props.post))
 </script>
 
 <template>
@@ -22,13 +22,14 @@
         <NuxtImg
           :src="post.featuredImage"
           :alt="post.title"
-          class="w-full h-48 object-cover"
-          loading="lazy" />
+          class="h-48 w-full object-cover"
+          loading="lazy"
+        />
       </div>
 
       <CardContent class="pt-6">
         <!-- Post title -->
-        <h3 class="text-xl font-semibold mb-3 text-foreground">
+        <h3 class="text-foreground mb-3 text-xl font-semibold">
           {{ post.title }}
         </h3>
 
@@ -38,10 +39,14 @@
           :read-time="readTime"
           :tags="showTags ? post.tags : undefined"
           :author="post.author"
-          class="mb-3" />
+          class="mb-3"
+        />
 
         <!-- Excerpt -->
-        <p v-if="showExcerpt && excerpt" class="text-muted-foreground line-clamp-3">
+        <p
+          v-if="showExcerpt && excerpt"
+          class="text-muted-foreground line-clamp-3"
+        >
           {{ excerpt }}
         </p>
 
