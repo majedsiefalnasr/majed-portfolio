@@ -1,0 +1,31 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ESLint Configuration Contract",
+  "description": "ESLint configuration for Nuxt 4 TypeScript Vue project",
+  "type": "object",
+  "properties": {
+    "extends": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["@nuxt/eslint-config"]
+      },
+      "minItems": 1
+    },
+    "rules": {
+      "type": "object",
+      "properties": {
+        "@typescript-eslint/no-unused-vars": {
+          "type": "string",
+          "enum": ["error"]
+        },
+        "vue/multi-word-component-names": {
+          "type": "string",
+          "enum": ["off"]
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "required": ["extends"]
+}

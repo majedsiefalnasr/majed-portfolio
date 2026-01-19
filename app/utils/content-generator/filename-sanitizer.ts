@@ -56,7 +56,7 @@ export function resolveFilePath(options: {
   date: string
   lang: 'en' | 'ar'
 }): string {
-  const {contentType, slug, date, lang} = options
+  const { contentType, slug, date, lang } = options
 
   // Extract year from date (YYYY-MM-DD format)
   const year = date.split('-')[0]
@@ -92,10 +92,10 @@ export async function checkDuplicateSlug(options: {
   slug: string
   contentType: 'blog' | 'case-study'
   workspaceRoot: string
-}): Promise<{exists: boolean; filePath?: string}> {
-  const {slug, contentType, workspaceRoot} = options
-  const {promises: fs} = await import('fs')
-  const {default: path} = await import('path')
+}): Promise<{ exists: boolean; filePath?: string }> {
+  const { slug, contentType, workspaceRoot } = options
+  const { promises: fs } = await import('fs')
+  const { default: path } = await import('path')
 
   const searchPatterns = [slug, `_draft-${slug}`]
 
@@ -142,7 +142,7 @@ export async function checkDuplicateSlug(options: {
       }
     } catch {
       // Blog directory doesn't exist yet
-      return {exists: false}
+      return { exists: false }
     }
   } else {
     // Search case studies directory
@@ -178,9 +178,9 @@ export async function checkDuplicateSlug(options: {
       }
     } catch {
       // Case studies directory doesn't exist yet
-      return {exists: false}
+      return { exists: false }
     }
   }
 
-  return {exists: false}
+  return { exists: false }
 }

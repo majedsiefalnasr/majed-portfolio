@@ -4,8 +4,8 @@
  * Fetches adjacent content items for navigation securely and efficiently
  */
 
-import {queryCollection} from '#imports'
-import type {ContentCollection, ContentNavItem} from '~/types/content'
+import { queryCollection } from '#imports'
+import type { ContentCollection, ContentNavItem } from '~/types/content'
 
 interface NavigationContext {
   path: string
@@ -15,9 +15,9 @@ interface NavigationContext {
 
 export function useContentNavigation(
   currentContent: NavigationContext,
-  collection: ContentCollection = 'blog'
+  collection: ContentCollection = 'blog',
 ) {
-  const {path, date, lang} = currentContent
+  const { path, date, lang } = currentContent
 
   return useAsyncData(`nav-${path}`, async () => {
     // Helper to build queries

@@ -7,7 +7,13 @@ const props = defineProps<CardProps>()
 </script>
 
 <template>
-  <div :class="['rounded-xl border bg-card text-card-foreground shadow', props.class].filter(Boolean).join(' ')">
+  <div
+    :class="
+      ['bg-card text-card-foreground rounded-xl border shadow', props.class]
+        .filter(Boolean)
+        .join(' ')
+    "
+  >
     <slot />
   </div>
 </template>

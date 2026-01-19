@@ -3,6 +3,7 @@
 Auto-generated from all feature plans. Last updated: 2026-01-12
 
 ## Active Technologies
+
 - TypeScript (strict mode enabled per constitution) (002-ui-design-system)
 - Browser localStorage for theme preference persistence; composables for reactive state managemen (002-ui-design-system)
 - TypeScript 5.6+ (strict mode enabled per constitution) (001-content-engine)
@@ -16,6 +17,7 @@ Auto-generated from all feature plans. Last updated: 2026-01-12
 - N/A (static site, content in markdown files) (006-shadcn-vue-migration)
 - TypeScript 5.6.3 (Nuxt 4.2.2 / Vue 3.5.26) + Nuxt 4, Nuxt Content v3, Nuxt Image, Nuxt i18n, Nuxt SEO, Tailwind CSS, Zod (001-code-cleanup-performance)
 - File-based Markdown content in content/ (Nuxt Content v3) (001-code-cleanup-performance)
+- TypeScript (strict mode), Vue 3, Nuxt 4 + ESLint, Prettier, Husky, lint-staged (002-code-cleanup-linting)
 
 - TypeScript (strict mode) with Vue 3 Composition API (001-global-setup)
 
@@ -35,10 +37,10 @@ npm test && npm run lint
 TypeScript (strict mode) with Vue 3 Composition API: Follow standard conventions
 
 ## Recent Changes
+
+- 002-code-cleanup-linting: Added TypeScript (strict mode), Vue 3, Nuxt 4 + ESLint, Prettier, Husky, lint-staged
 - 001-code-cleanup-performance: Added TypeScript 5.6.3 (Nuxt 4.2.2 / Vue 3.5.26) + Nuxt 4, Nuxt Content v3, Nuxt Image, Nuxt i18n, Nuxt SEO, Tailwind CSS, Zod
 - 006-shadcn-vue-migration: Added TypeScript (strict mode), Vue 3, Nuxt 4 + shadcn-vue (CLI-based), Radix Icons, Tailwind CSS, Nuxt Content v3, @nuxtjs/i18n
-- 005-seo-optimization: Added TypeScript 5.6+ (strict mode) with Vue 3.5+ Composition API
-
 
 <!-- MANUAL ADDITIONS START -->
 <!-- MANUAL ADDITIONS END -->

@@ -10,21 +10,14 @@
  * Uses Nuxt Content v3 queryCollection API with path-based querying.
  */
 
-interface ContentItem {
-  path?: string
-  _path?: string
-}
-
 interface UseContentLocaleReturn {
   currentLocale: Ref<'en' | 'ar'>
   getContentPath: (slug: string) => string
-  queryContentByLocale: <T extends ContentItem = ContentItem>(
-    collection: 'blog' | 'caseStudies'
-  ) => unknown
+  queryContentByLocale: (collection: 'blog' | 'caseStudies') => unknown
 }
 
 export function useContentLocale(): UseContentLocaleReturn {
-  const {locale} = useI18n()
+  const { locale } = useI18n()
   const currentLocale = computed(() => locale.value as 'en' | 'ar')
 
   /**
@@ -48,9 +41,7 @@ export function useContentLocale(): UseContentLocaleReturn {
    * @param collection - Content collection name ('blog' or 'caseStudies')
    * @returns Promise resolving to locale-filtered content array
    */
-  const queryContentByLocale = <T extends ContentItem = ContentItem>(
-    collection: 'blog' | 'caseStudies'
-  ) => {
+  const queryContentByLocale = (collection: 'blog' | 'caseStudies') => {
     return queryCollection(collection)
       .where('lang', '=', currentLocale.value)
       .where('stem', 'NOT LIKE', '\\_%')

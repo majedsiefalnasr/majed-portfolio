@@ -1,55 +1,55 @@
 <script setup lang="ts">
-  import type {BlogPost} from '~/types/content'
+import type { BlogPost } from '~/types/content'
 
-  const {queryContentByLocale} = useContentLocale()
-  const {locale} = useI18n()
+const { queryContentByLocale } = useContentLocale()
+const { locale } = useI18n()
 
-  // Route + initial tag (for debugging and filtering visibility)
-  const route = useRoute()
-  const initialTag = route.query.tag as string | undefined
+// Route + initial tag (for debugging and filtering visibility)
+const route = useRoute()
+const initialTag = route.query.tag as string | undefined
 
-  // Fetch locale-specific blog posts using queryCollection (Nuxt Content v3)
-  // Key includes locale to ensure content refetches when language changes
-  const {data: posts} = await useAsyncData(
-    () => `blog-posts-${locale.value}`,
-    async () => {
-      try {
-        const result = await queryContentByLocale<BlogPost>('blog')
+// Fetch locale-specific blog posts using queryCollection (Nuxt Content v3)
+// Key includes locale to ensure content refetches when language changes
+const { data: posts } = await useAsyncData(
+  () => `blog-posts-${locale.value}`,
+  async () => {
+    try {
+      const result = await queryContentByLocale<BlogPost>('blog')
 
-        // Sort by date (newest first)
-        const sorted = (result || []).sort((a: BlogPost, b: BlogPost) => {
-          return new Date(b.date).getTime() - new Date(a.date).getTime()
-        })
+      // Sort by date (newest first)
+      const sorted = (result || []).sort((a: BlogPost, b: BlogPost) => {
+        return new Date(b.date).getTime() - new Date(a.date).getTime()
+      })
 
-        return sorted ?? []
-      } catch (error) {
-        console.error('Error fetching blog posts:', error)
-        // Silently handle errors and return empty array
-        return []
-      }
-    },
-    {watch: [locale]}
-  )
+      return sorted ?? []
+    } catch (error) {
+      console.error('Error fetching blog posts:', error)
+      // Silently handle errors and return empty array
+      return []
+    }
+  },
+  { watch: [locale] },
+)
 
-  // SEO meta tags
-  const {t} = useI18n()
+// SEO meta tags
+const { t } = useI18n()
 
-  useSEO({
-    title: t('blog.title', 'Blog'),
-    description: t(
-      'blog.description',
-      'Read articles about web development, design, and technology'
-    ),
-    ogType: 'website',
-  })
+useSEO({
+  title: t('blog.title', 'Blog'),
+  description: t(
+    'blog.description',
+    'Read articles about web development, design, and technology',
+  ),
+  ogType: 'website',
+})
 </script>
 
 <template>
-  <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+  <div class="container mx-auto px-4 py-12 sm:px-6 lg:px-8">
     <!-- Header -->
     <div class="mb-12">
-      <h1 class="text-4xl font-bold text-foreground mb-4">Blog</h1>
-      <p class="text-lg text-muted-foreground">
+      <h1 class="text-foreground mb-4 text-4xl font-bold">Blog</h1>
+      <p class="text-muted-foreground text-lg">
         Articles about web development, design, and technology
       </p>
     </div>

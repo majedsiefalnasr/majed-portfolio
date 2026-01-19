@@ -471,7 +471,7 @@ Structure:
 ## Introduction
 [2-3 paragraphs introducing the topic]
 
-## Main Content  
+## Main Content
 [Well-structured content with H2/H3 headings]
 
 ## Conclusion

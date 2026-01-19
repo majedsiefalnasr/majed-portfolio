@@ -6,7 +6,7 @@
  *
  */
 
-import type {SEOMetadata} from '~/types/seo'
+import type { SEOMetadata } from '~/types/seo'
 import {
   buildLinkTags,
   buildMetaTags,
@@ -53,7 +53,10 @@ export function useSEO(metadata: SEOMetadata) {
   // Truncate title and description if needed
   const processedMetadata: SEOMetadata = {
     ...metadata,
-    title: metadata.title.length > 60 ? truncateTitle(metadata.title) : metadata.title,
+    title:
+      metadata.title.length > 60
+        ? truncateTitle(metadata.title)
+        : metadata.title,
     description:
       metadata.description.length > 160
         ? truncateDescription(metadata.description)
@@ -68,7 +71,7 @@ export function useSEO(metadata: SEOMetadata) {
 
   // Handle titleTemplate separately if needed
   if (processedMetadata.titleTemplate !== undefined) {
-    useSeoMeta({titleTemplate: processedMetadata.titleTemplate as string})
+    useSeoMeta({ titleTemplate: processedMetadata.titleTemplate as string })
   }
 
   // Build and set link tags for canonical and hreflang
@@ -119,14 +122,15 @@ export function useContentSEO(
   options?: {
     ogType?: 'website' | 'article' | 'profile'
     canonical?: string
-    alternateLinks?: Array<{hreflang: string; href: string}>
-  }
+    alternateLinks?: Array<{ hreflang: string; href: string }>
+  },
 ) {
   // Resolve title (priority: seo.title > title)
   const title = content.seo?.title || content.title
 
   // Resolve description (priority: seo.description > excerpt > description)
-  const description = content.seo?.description || content.excerpt || content.description || ''
+  const description =
+    content.seo?.description || content.excerpt || content.description || ''
 
   // Resolve OG image (priority: seo.ogImage > featuredImage > default)
   const ogImage = content.seo?.ogImage || content.featuredImage
@@ -141,16 +145,20 @@ export function useContentSEO(
   let alternateLinks = options?.alternateLinks
   if (!alternateLinks && content.sameAs && content._path) {
     const config = useRuntimeConfig()
-    const siteUrl = (config.public?.siteUrl as string | undefined) || 'https://majedsiefalnasr.dev'
+    const siteUrl =
+      (config.public?.siteUrl as string | undefined) ||
+      'https://majedsiefalnasr.dev'
 
     alternateLinks = [
-      {hreflang: content.lang || 'en', href: `${siteUrl}${content._path}`},
+      { hreflang: content.lang || 'en', href: `${siteUrl}${content._path}` },
       ...(content.sameAs
-        .map(path => {
+        .map((path) => {
           const langMatch = path.match(/\/(en|ar)\//)
-          return langMatch ? {hreflang: langMatch[1] as string, href: `${siteUrl}${path}`} : null
+          return langMatch
+            ? { hreflang: langMatch[1] as string, href: `${siteUrl}${path}` }
+            : null
         })
-        .filter(Boolean) as Array<{hreflang: string; href: string}>),
+        .filter(Boolean) as Array<{ hreflang: string; href: string }>),
     ]
   }
 
@@ -186,7 +194,9 @@ export function useHomepageSEO(options?: {
   keywords?: string[]
 }) {
   const config = useRuntimeConfig()
-  const siteUrl = (config.public?.siteUrl as string | undefined) || 'https://majedsiefalnasr.dev'
+  const siteUrl =
+    (config.public?.siteUrl as string | undefined) ||
+    'https://majedsiefalnasr.dev'
 
   const defaultTitle = options?.name || 'Majed Sief Alnasr'
   const defaultTagline = options?.tagline || 'CX & Product Designer'

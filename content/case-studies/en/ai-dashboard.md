@@ -110,8 +110,8 @@ The platform uses WebSockets to push live metrics to connected clients:
 
 ```javascript
 // Real-time event handler
-io.on('connection', socket => {
-  socket.on('subscribe:metrics', metric => {
+io.on('connection', (socket) => {
+  socket.on('subscribe:metrics', (metric) => {
     socket.emit('metrics:update', getLatestData(metric))
   })
 })

@@ -4,7 +4,9 @@
  * Manages tag filtering state and syncs with URL query params
  */
 
-export function useContentFilter<T extends {tags?: string[]}>(items: Ref<T[]> | ComputedRef<T[]>) {
+export function useContentFilter<T extends { tags?: string[] }>(
+  items: Ref<T[]> | ComputedRef<T[]>,
+) {
   const route = useRoute()
   const router = useRouter()
 
@@ -17,9 +19,9 @@ export function useContentFilter<T extends {tags?: string[]}>(items: Ref<T[]> | 
   const availableTags = computed(() => {
     const allItems = unref(items)
     const tagSet = new Set<string>()
-    allItems.forEach(item => {
+    allItems.forEach((item) => {
       if (item.tags) {
-        item.tags.forEach(tag => tagSet.add(tag))
+        item.tags.forEach((tag) => tagSet.add(tag))
       }
     })
     return Array.from(tagSet).sort()
@@ -29,9 +31,9 @@ export function useContentFilter<T extends {tags?: string[]}>(items: Ref<T[]> | 
   const tagCounts = computed(() => {
     const allItems = unref(items)
     const counts: Record<string, number> = {}
-    allItems.forEach(item => {
+    allItems.forEach((item) => {
       if (item.tags) {
-        item.tags.forEach(tag => {
+        item.tags.forEach((tag) => {
           counts[tag] = (counts[tag] || 0) + 1
         })
       }
@@ -45,7 +47,7 @@ export function useContentFilter<T extends {tags?: string[]}>(items: Ref<T[]> | 
     if (!selectedTag.value) {
       return allItems
     }
-    return allItems.filter(item => item.tags?.includes(selectedTag.value!))
+    return allItems.filter((item) => item.tags?.includes(selectedTag.value!))
   })
 
   // Select a tag (toggle if same tag clicked)
@@ -53,13 +55,13 @@ export function useContentFilter<T extends {tags?: string[]}>(items: Ref<T[]> | 
     // Toggle if clicking the same tag
     if (selectedTag.value === tag) {
       selectedTag.value = null
-      router.push({query: {}})
+      router.push({ query: {} })
     } else {
       selectedTag.value = tag
       if (tag) {
-        router.push({query: {tag}})
+        router.push({ query: { tag } })
       } else {
-        router.push({query: {}})
+        router.push({ query: {} })
       }
     }
   }
@@ -67,15 +69,15 @@ export function useContentFilter<T extends {tags?: string[]}>(items: Ref<T[]> | 
   // Clear filter
   const clearFilter = () => {
     selectedTag.value = null
-    router.push({query: {}})
+    router.push({ query: {} })
   }
 
   // Watch route changes to update filter
   watch(
     () => route.query.tag,
-    newTag => {
+    (newTag) => {
       selectedTag.value = (newTag as string) || null
-    }
+    },
   )
 
   return {

@@ -5,7 +5,7 @@
  * Handles title, description, Open Graph, and Twitter Card tags.
  */
 
-import type {SEOMetadata} from '~/types/seo'
+import type { SEOMetadata } from '~/types/seo'
 
 const DEFAULT_IMAGE = '/images/og/default.png'
 
@@ -17,7 +17,7 @@ const DEFAULT_IMAGE = '/images/og/default.png'
  */
 export function buildMetaTags(metadata: SEOMetadata) {
   const config = useRuntimeConfig().public
-  const {title, description, lang = 'en'} = metadata
+  const { title, description, lang = 'en' } = metadata
 
   // Build absolute URLs for images
   const ogImageUrl = metadata.ogImage
@@ -29,7 +29,9 @@ export function buildMetaTags(metadata: SEOMetadata) {
     : ogImageUrl
 
   // Build canonical URL
-  const canonicalUrl = metadata.canonical ? buildAbsoluteUrl(metadata.canonical) : undefined
+  const canonicalUrl = metadata.canonical
+    ? buildAbsoluteUrl(metadata.canonical)
+    : undefined
 
   return {
     // Basic meta tags
@@ -48,7 +50,8 @@ export function buildMetaTags(metadata: SEOMetadata) {
     // Twitter Card tags
     twitterCard: metadata.twitterCard || 'summary_large_image',
     twitterTitle: metadata.twitterTitle || metadata.ogTitle || title,
-    twitterDescription: metadata.twitterDescription || metadata.ogDescription || description,
+    twitterDescription:
+      metadata.twitterDescription || metadata.ogDescription || description,
     twitterImage: twitterImageUrl,
     twitterSite: config.twitterHandle,
     twitterCreator: config.twitterHandle,
@@ -66,7 +69,7 @@ export function buildMetaTags(metadata: SEOMetadata) {
  * @returns Array of link tag objects compatible with useHead()
  */
 export function buildLinkTags(metadata: SEOMetadata) {
-  const links: Array<{rel: string; href: string; hreflang?: string}> = []
+  const links: Array<{ rel: string; href: string; hreflang?: string }> = []
 
   // Canonical URL
   if (metadata.canonical) {
@@ -78,7 +81,7 @@ export function buildLinkTags(metadata: SEOMetadata) {
 
   // Alternate language links (hreflang)
   if (metadata.alternateLinks && metadata.alternateLinks.length > 0) {
-    metadata.alternateLinks.forEach(alternate => {
+    metadata.alternateLinks.forEach((alternate) => {
       links.push({
         rel: 'alternate',
         hreflang: alternate.hreflang,

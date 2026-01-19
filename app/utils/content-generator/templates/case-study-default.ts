@@ -4,7 +4,7 @@
  * Standard structure for project case studies
  */
 
-import type {ContentTemplate} from '../template-schema'
+import type { ContentTemplate } from '../template-schema'
 
 export const caseStudyDefaultTemplate: ContentTemplate = {
   id: 'case-study-default',
@@ -17,8 +17,9 @@ export const caseStudyDefaultTemplate: ContentTemplate = {
       id: 'overview',
       name: 'Overview',
       required: true,
-      placeholder: '## Overview\n\n[Brief introduction to the project, client, and your role]',
-      wordCount: {min: 150, max: 300},
+      placeholder:
+        '## Overview\n\n[Brief introduction to the project, client, and your role]',
+      wordCount: { min: 150, max: 300 },
       prompt:
         'Write a brief overview introducing the project, the client/company, and your specific role',
     },
@@ -28,7 +29,7 @@ export const caseStudyDefaultTemplate: ContentTemplate = {
       required: true,
       placeholder:
         '## Challenge\n\n[Describe the problem, constraints, and requirements in detail]',
-      wordCount: {min: 250, max: 500},
+      wordCount: { min: 250, max: 500 },
       prompt:
         'Describe the business problem or challenge, including context, constraints, and specific requirements',
     },
@@ -38,7 +39,7 @@ export const caseStudyDefaultTemplate: ContentTemplate = {
       required: true,
       placeholder:
         '## Solution\n\n[Explain your approach, technologies used, and implementation details]',
-      wordCount: {min: 400, max: 800},
+      wordCount: { min: 400, max: 800 },
       prompt:
         'Explain your solution approach, technical decisions, architecture, and implementation details',
     },
@@ -46,8 +47,9 @@ export const caseStudyDefaultTemplate: ContentTemplate = {
       id: 'results',
       name: 'Results',
       required: true,
-      placeholder: '## Results\n\n[Measurable outcomes, metrics, and impact of the solution]',
-      wordCount: {min: 200, max: 400},
+      placeholder:
+        '## Results\n\n[Measurable outcomes, metrics, and impact of the solution]',
+      wordCount: { min: 200, max: 400 },
       prompt:
         'Describe measurable outcomes, performance metrics, business impact, and user feedback',
     },
@@ -55,8 +57,9 @@ export const caseStudyDefaultTemplate: ContentTemplate = {
       id: 'technologies',
       name: 'Technologies Used',
       required: false,
-      placeholder: '## Technologies Used\n\n- Technology 1\n- Technology 2\n- Technology 3',
-      wordCount: {min: 50, max: 150},
+      placeholder:
+        '## Technologies Used\n\n- Technology 1\n- Technology 2\n- Technology 3',
+      wordCount: { min: 50, max: 150 },
       prompt:
         'List and briefly describe the key technologies, frameworks, and tools used in the project',
     },

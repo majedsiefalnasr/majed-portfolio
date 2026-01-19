@@ -5,8 +5,8 @@
  * Ensures all images meet SEO and performance requirements.
  */
 
-import type {ImageMetadata} from '~/types/seo'
-import {validateImageSEO, validateOGImageDimensions} from './validators'
+import type { ImageMetadata } from '~/types/seo'
+import { validateImageSEO, validateOGImageDimensions } from './validators'
 
 /**
  * Default OG image configuration
@@ -22,10 +22,10 @@ export const DEFAULT_OG_IMAGE = {
  * Recommended image dimensions for different contexts
  */
 export const IMAGE_SIZES = {
-  ogImage: {width: 1200, height: 630}, // Open Graph (Facebook, LinkedIn)
-  twitterCard: {width: 1200, height: 630}, // Twitter large card
-  twitterSummary: {width: 120, height: 120}, // Twitter summary card
-  favicon: {width: 512, height: 512},
+  ogImage: { width: 1200, height: 630 }, // Open Graph (Facebook, LinkedIn)
+  twitterCard: { width: 1200, height: 630 }, // Twitter large card
+  twitterSummary: { width: 120, height: 120 }, // Twitter summary card
+  favicon: { width: 512, height: 512 },
 } as const
 
 /**
@@ -40,7 +40,11 @@ export function resolveOGImage(options: {
   featuredImage?: string
   defaultImage?: string
 }): string {
-  const {seoOgImage, featuredImage, defaultImage = DEFAULT_OG_IMAGE.path} = options
+  const {
+    seoOgImage,
+    featuredImage,
+    defaultImage = DEFAULT_OG_IMAGE.path,
+  } = options
 
   // Priority 1: Custom SEO OG image (highest priority)
   if (seoOgImage) {
@@ -70,7 +74,7 @@ export function buildImageMetadata(
     width?: number
     height?: number
     format?: 'jpeg' | 'png' | 'webp'
-  }
+  },
 ): ImageMetadata {
   const metadata: ImageMetadata = {
     src,
@@ -121,7 +125,7 @@ export function validateOGImage(width: number, height: number) {
  */
 export function generateSrcSet(
   baseSrc: string,
-  sizes: number[] = [640, 750, 828, 1080, 1200, 1920]
+  sizes: number[] = [640, 750, 828, 1080, 1200, 1920],
 ): string {
   // Extract file extension and base path
   const lastDot = baseSrc.lastIndexOf('.')
@@ -129,7 +133,7 @@ export function generateSrcSet(
   const base = lastDot > -1 ? baseSrc.substring(0, lastDot) : baseSrc
 
   return sizes
-    .map(size => {
+    .map((size) => {
       // Nuxt Image convention: base-{width}.ext
       return `${base}-${size}${ext} ${size}w`
     })
@@ -143,7 +147,9 @@ export function generateSrcSet(
  * @param supportsWebP - Whether browser supports WebP
  * @returns Recommended image format
  */
-export function getOptimalImageFormat(supportsWebP: boolean = true): 'webp' | 'jpeg' | 'png' {
+export function getOptimalImageFormat(
+  supportsWebP: boolean = true,
+): 'webp' | 'jpeg' | 'png' {
   // WebP provides best compression with quality
   if (supportsWebP) {
     return 'webp'
@@ -160,12 +166,17 @@ export function getOptimalImageFormat(supportsWebP: boolean = true): 'webp' | 'j
  * @param src - Image source (URL or path)
  * @returns Promise with image dimensions
  */
-export async function getImageDimensions(src: string): Promise<{width: number; height: number}> {
+export async function getImageDimensions(
+  src: string,
+): Promise<{ width: number; height: number }> {
   return new Promise((resolve, reject) => {
     if (typeof window === 'undefined') {
       // Server-side: cannot determine dimensions without file system access
       // Return default dimensions
-      resolve({width: DEFAULT_OG_IMAGE.width, height: DEFAULT_OG_IMAGE.height})
+      resolve({
+        width: DEFAULT_OG_IMAGE.width,
+        height: DEFAULT_OG_IMAGE.height,
+      })
       return
     }
 
@@ -213,7 +224,7 @@ export function generateAltTextFromFilename(filename: string): string {
   // Capitalize first letter of each word
   return readable
     .split(' ')
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(' ')
 }
 
@@ -240,6 +251,8 @@ export function optimizeImageForSEO(image: {
     decoding: 'async' as const,
     // Prevent layout shift
     style:
-      image.width && image.height ? `aspect-ratio: ${image.width} / ${image.height}` : undefined,
+      image.width && image.height
+        ? `aspect-ratio: ${image.width} / ${image.height}`
+        : undefined,
   }
 }

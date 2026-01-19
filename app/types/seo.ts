@@ -81,7 +81,14 @@ export interface ImageMetadata {
 export interface SitemapEntry {
   loc: string // URL location (absolute)
   lastmod?: string // Last modification date (ISO 8601)
-  changefreq?: 'always' | 'hourly' | 'daily' | 'weekly' | 'monthly' | 'yearly' | 'never'
+  changefreq?:
+    | 'always'
+    | 'hourly'
+    | 'daily'
+    | 'weekly'
+    | 'monthly'
+    | 'yearly'
+    | 'never'
   priority?: number // Priority 0.0 to 1.0
   alternateLinks?: AlternateLink[] // Alternate language versions
 }

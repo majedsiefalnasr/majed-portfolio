@@ -4,7 +4,7 @@
  * Defines the structure for custom content templates
  */
 
-import {z} from 'zod'
+import { z } from 'zod'
 
 /**
  * Section definition in a template
@@ -77,7 +77,9 @@ export function validateTemplate(template: unknown): {
   if (!result.success) {
     return {
       isValid: false,
-      errors: result.error.issues.map(err => `${err.path.join('.')}: ${err.message}`),
+      errors: result.error.issues.map(
+        (err) => `${err.path.join('.')}: ${err.message}`,
+      ),
     }
   }
 
@@ -86,7 +88,7 @@ export function validateTemplate(template: unknown): {
 
   // Check for duplicate section IDs
   const sectionIds = new Set<string>()
-  result.data.sections.forEach(section => {
+  result.data.sections.forEach((section) => {
     if (sectionIds.has(section.id)) {
       errors.push(`Duplicate section ID: ${section.id}`)
     }
@@ -94,7 +96,7 @@ export function validateTemplate(template: unknown): {
   })
 
   if (errors.length > 0) {
-    return {isValid: false, errors}
+    return { isValid: false, errors }
   }
 
   return {

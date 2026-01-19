@@ -1,5 +1,5 @@
-import {promises as fs} from 'fs'
-import {join} from 'path'
+import { promises as fs } from 'fs'
+import { join } from 'path'
 
 /**
  * Generate prerender routes from content directory

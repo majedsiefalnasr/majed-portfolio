@@ -4,12 +4,13 @@
  * Standard three-section structure for technical blog posts
  */
 
-import type {ContentTemplate} from '../template-schema'
+import type { ContentTemplate } from '../template-schema'
 
 export const blogDefaultTemplate: ContentTemplate = {
   id: 'blog-default',
   name: 'Default Blog Post',
-  description: 'Standard blog post with introduction, main content, and conclusion',
+  description:
+    'Standard blog post with introduction, main content, and conclusion',
   contentType: 'blog',
 
   sections: [
@@ -19,7 +20,7 @@ export const blogDefaultTemplate: ContentTemplate = {
       required: true,
       placeholder:
         '## Introduction\n\n[Write your introduction here - introduce the topic and why it matters]',
-      wordCount: {min: 150, max: 300},
+      wordCount: { min: 150, max: 300 },
       prompt:
         'Write an engaging introduction that hooks the reader and explains why this topic is important',
     },
@@ -29,7 +30,7 @@ export const blogDefaultTemplate: ContentTemplate = {
       required: true,
       placeholder:
         '## Main Content\n\n[Write your main content here with proper headings (H2, H3)]',
-      wordCount: {min: 500, max: 1500},
+      wordCount: { min: 500, max: 1500 },
       prompt:
         'Write comprehensive main content covering all key points with proper structure and examples',
     },
@@ -37,9 +38,11 @@ export const blogDefaultTemplate: ContentTemplate = {
       id: 'conclusion',
       name: 'Conclusion',
       required: true,
-      placeholder: '## Conclusion\n\n[Summarize key takeaways and provide actionable next steps]',
-      wordCount: {min: 100, max: 200},
-      prompt: 'Write a conclusion that summarizes the key points and provides actionable takeaways',
+      placeholder:
+        '## Conclusion\n\n[Summarize key takeaways and provide actionable next steps]',
+      wordCount: { min: 100, max: 200 },
+      prompt:
+        'Write a conclusion that summarizes the key points and provides actionable takeaways',
     },
   ],
 

@@ -1,4 +1,5 @@
-import {asSitemapUrl, defineSitemapEventHandler} from '#imports'
+import { asSitemapUrl, defineSitemapEventHandler } from '#imports'
+import type { BlogPost } from '../../../types/content'
 
 /**
  * Dynamic sitemap source for blog posts
@@ -9,16 +10,17 @@ import {asSitemapUrl, defineSitemapEventHandler} from '#imports'
  * @see US1 Search Engine Discovery
  */
 
-export default defineSitemapEventHandler(async event => {
+export default defineSitemapEventHandler(async (event) => {
   // Query all blog posts from content directory
   const posts = await queryCollection(event, 'blog').all()
 
   // Filter out draft content
   const publishedPosts = posts.filter(
-    (post: any) => !post.path?.includes('/_draft') && !post.stem?.includes('_draft')
+    (post: BlogPost) =>
+      !post.path?.includes('/_draft') && !post.stem?.includes('_draft'),
   )
 
-  return publishedPosts.map((post: any) => {
+  return publishedPosts.map((post: BlogPost) => {
     // Build alternatives from sameAs
     const alternatives = []
     if (post.lang) {

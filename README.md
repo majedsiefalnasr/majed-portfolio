@@ -23,6 +23,59 @@ A modern, bilingual portfolio website showcasing technical blog posts and case s
 - **Runtime**: [Bun](https://bun.sh/) 1.3.5
 - **Validation**: [Zod](https://zod.dev/) for runtime type checking
 
+## Code Quality
+
+This project maintains high code quality standards with automated linting, formatting, and clean code practices.
+
+### Linting & Formatting
+
+```bash
+# Check for linting errors
+bun run lint
+
+# Fix auto-fixable linting issues
+bun run lint:fix
+
+# Format code
+bun run format
+
+# Check formatting
+bun run format:check
+```
+
+### Clean Code Guidelines
+
+- **TypeScript Strict Mode**: All code uses strict TypeScript with no `any` types
+- **Complexity Limit**: Functions should not exceed complexity score of 10
+- **Line Length**: Code lines should not exceed 100 characters
+- **Magic Numbers**: Avoid magic numbers; use named constants
+- **Unused Variables**: Prefix unused variables with `_` or remove them
+- **Component Naming**: Use PascalCase for Vue components
+- **Import Organization**: Group imports by external, internal, types
+
+### Pre-commit Hooks
+
+Pre-commit hooks automatically run linting and formatting on staged files using Husky and lint-staged. Commits are blocked if quality checks fail.
+
+### Troubleshooting
+
+**Pre-commit hook fails:**
+
+- Run `bun run lint:fix` to auto-fix issues
+- Run `bun run format` to format code
+- Stage and commit again
+
+**ESLint errors:**
+
+- `@typescript-eslint/no-unused-vars`: Prefix unused variables with `_` or remove them
+- `@typescript-eslint/no-explicit-any`: Replace `any` with specific types
+- `complexity`: Break down complex functions into smaller ones
+
+**Prettier issues:**
+
+- Run `bun run format` to apply consistent formatting
+- Check `.prettierignore` for excluded files
+
 ## Quick Start
 
 ### Prerequisites

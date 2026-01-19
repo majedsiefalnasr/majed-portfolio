@@ -4,7 +4,7 @@
  * Generate YAML frontmatter for blog posts and case studies.
  */
 
-import type {BlogPostMetadata, CaseStudyMetadata} from './schemas'
+import type { BlogPostMetadata, CaseStudyMetadata } from './schemas'
 
 /**
  * Build YAML frontmatter from metadata object
@@ -37,7 +37,7 @@ import type {BlogPostMetadata, CaseStudyMetadata} from './schemas'
  * // ---
  */
 export function buildFrontmatter(
-  metadata: Partial<BlogPostMetadata> | Partial<CaseStudyMetadata>
+  metadata: Partial<BlogPostMetadata> | Partial<CaseStudyMetadata>,
 ): string {
   const lines: string[] = ['---']
 
@@ -70,7 +70,9 @@ export function buildFrontmatter(
   }
 
   if ('tags' in metadata && metadata.tags && metadata.tags.length > 0) {
-    const tagsList = metadata.tags.map(tag => `'${escapeYaml(tag)}'`).join(', ')
+    const tagsList = metadata.tags
+      .map((tag) => `'${escapeYaml(tag)}'`)
+      .join(', ')
     lines.push(`tags: [${tagsList}]`)
   }
 
@@ -96,7 +98,7 @@ export function buildFrontmatter(
 
   // Handle testimonial (case studies only)
   if ('testimonial' in metadata && metadata.testimonial) {
-    const {quote, author, position} = metadata.testimonial
+    const { quote, author, position } = metadata.testimonial
     lines.push('testimonial:')
     lines.push(`  quote: '${escapeYaml(quote)}'`)
     lines.push(`  author: '${escapeYaml(author)}'`)
@@ -104,9 +106,13 @@ export function buildFrontmatter(
   }
 
   // Handle metrics array (case studies only)
-  if ('metrics' in metadata && metadata.metrics && metadata.metrics.length > 0) {
+  if (
+    'metrics' in metadata &&
+    metadata.metrics &&
+    metadata.metrics.length > 0
+  ) {
     lines.push('metrics:')
-    metadata.metrics.forEach(metric => {
+    metadata.metrics.forEach((metric) => {
       lines.push(`  - label: '${escapeYaml(metric.label)}'`)
       lines.push(`    value: '${escapeYaml(metric.value)}'`)
     })
