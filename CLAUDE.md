@@ -1,4 +1,4 @@
-# GitHub Copilot Instructions
+# Claude Code Instructions
 
 **All instructions are consolidated in `AGENTS.md` at the project root.**
 
